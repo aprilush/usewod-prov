@@ -14,25 +14,45 @@ h1, h2, h3 {
   background-color: #92AAC2;
 }
 
+table, td {
+  padding: 0px 5px 0px 5px;
+}
+
 div.button {
   float: left;
-  width: 60px;
-  height: 60px;
-  margin: 10px;
-  border: 1px;
+  width: 50px;
+  height: 50px;
+  margin: 5px;
+  border: 0px;
   border-radius: 15px 15px;
-  box-shadow: inset 0 0 1em #92AAC2;
-}
-div.selected {
-  box-shadow: inset 0 0 1em #5CCCCC;
-  background-color: #005555;
+  box-shadow: inset 0 0 0.5em #92AAC2;
 }
 div.button input {
-  /*display: none;  */
   vertical-align: center;
-  padding: 14px 14px 14px 14px;
+  padding: 9px 9px 9px 9px;
   width: 32px;
   height: 32px;
+}
+
+div.data {
+  float: left;
+  width: 50px;
+  height: 50px;
+  margin: 5px;
+  border: 0px;
+  border-radius: 5px 5px;
+  box-shadow: inset 0 0 0em #92AAC2;
+}
+div.data input {
+  vertical-align: center;
+  padding: 1px 1px 1px 1px;
+  width: 48px;
+  height: 48px;
+}
+
+div.selected {
+  box-shadow: inset 0 0 0.5em #5CCCCC;
+  background-color: #005555;
 }
 
 div.clear-both {
