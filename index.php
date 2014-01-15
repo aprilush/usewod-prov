@@ -53,10 +53,57 @@
         <p>Paragraph from the workshop proposal, or some text from Markus.</p>
         <p>The special theme of the workshop: building a USEWOD Web Observatory to track the distribution of research based on the USEWOD data set.</p>
 
-
         <h2><a id="workspace"></a>Workspace</h2>
         <table width="100%">
+
+<?php
+
+include_once("/var/www/html/usewod-prov/arc2/ARC2.php");
+
+$config = array(
+  /* db */
+  'db_host' => 'localhost',
+  'db_name' => 'usewod',
+  'db_user' => 'root',
+  'db_pwd' => 'root',
+  /* store */
+  'store_name' => 'usewod-prov'
+);
+
+$store = ARC2::getStore($config);
+if (!$store->isSetUp()) {
+  $store->setUp();
+}
+
+if (isset($_POST['username'])) 
+{
+  $username = $_POST['username'];
+}
+else
+{
+
+?>
           <tr>
+            <td>
+              <h3>Please choose a username (session id: <?php $session_id ?> )</h3>
+              <form action="index.php" method="post">
+                <input type="text" name="username" /><input type="submit" />
+              </form>
+            </td>
+          </tr>
+<?php
+
+}
+
+function load_new_data() 
+{
+  
+}
+
+
+?>
+
+<!--           <tr>
             <td width="40%">
               <div class='button' id='refresh'><input type='image' src="img/view-refresh.png" /></div>
               <div class='button' id='addds'><input type='image' src="img/edit-table-insert-row-big-plus.png" /></div>
@@ -92,8 +139,9 @@
               <h3>New links</h3>
             </td>
           </tr>
-        </table></p>
+ -->
 
+        </table></p>
       </div> <!-- content -->
 
 			<div id="footer">
