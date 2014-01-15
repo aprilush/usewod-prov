@@ -58,3 +58,9 @@ div.selected {
 div.clear-both {
   clear: both;
 }
+
+.hidden {
+  visibility: hidden;
+  height: 0px;
+  display: None;
+}
