@@ -97,13 +97,39 @@ else
 
 function load_new_data() 
 {
-  
+  // how many objects are shown? 
+  // what are the types of the objects shown? 
+  // do we have / set a smart alg for picking objects from the db?
 }
 
+function add_paper_from_bib($bib)
+{
+
+}
+
+function add_paper_from_fields($title, $authors, $year, $venue)
+{
+
+}
+
+function add_person_from_foaf($foaf_url)
+{
+
+}
+
+function add_person_from_fields($fn, $ln, $img_url, $foaf_url)
+{
+
+}
+
+function add_dataset_from_fields($dsname, $year, $logo)
+{
+
+}
 
 ?>
-
-<!--           <tr>
+ 
+<!--          <tr>
             <td width="40%">
               <div class='button' id='refresh'><input type='image' src="img/view-refresh.png" /></div>
               <div class='button' id='addds'><input type='image' src="img/edit-table-insert-row-big-plus.png" /></div>
