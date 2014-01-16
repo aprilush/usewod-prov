@@ -8,6 +8,39 @@ if ( isset($_POST['username']) )
   setcookie( 'username', $username, time()+60*60*24*5 );
 }
 
+if ( isset($_POST['ds-name']) && 
+    isset($_POST['ds-v']) && 
+    isset($_POST['ds-url']) && 
+    isset($_POST['ds-img']) && 
+    isset($_POST['ds-about']) ) {
+  add_dataset_from_fields($_POST['ds-name'], $_POST['ds-v'], $_POST['ds-url'], $_POST['ds-img'], $_POST['ds-size'], $_POST['ds-format'], $_POST['ds-about'], $username);
+}
+
+if ( isset($_POST['pub-title']) && 
+    isset($_POST['pub-author']) && 
+    isset($_POST['pub-venue']) && 
+    isset($_POST['pub-year']) && 
+    isset($_POST['pub-img']) ) {
+  add_paper_from_fields($_POST['pub-title'], $_POST['pub-author'], $_POST['pub-venue'], $_POST['pub-year'], $_POST['pub-img'], $username);
+}
+
+$ds_ids = array();
+$datasets = array();
+$pub_ids = array();
+$publications = array();
+if ( isset($_POST['ds_ids']) || isset($_POST['pub_ids']) ) {
+  if ( isset($_POST['ds_ids']) ) {
+    $ds_ids = $_POST['ds_ids'];
+    $datasets = load_datasets();
+  }
+  if ( isset($_POST['pub_ids']) ) {
+    $pub_ids = $_POST['pub_ids'];
+    $publications = load_publications();
+  }
+} else {
+  load_new_data();
+}
+
 ?>
 
 <?xml version="1.0" encoding="UTF-8"?>
@@ -32,7 +65,8 @@ if ( isset($_POST['username']) )
     <link rel="dct:creator" href="http://aprilush.ro/card#laura" />
     <link rel="stylesheet" href="//code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
     <script src="http://code.jquery.com/jquery-1.10.1.js"></script>
-    <script src="//code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    <script src="https://www.google.com/jsapi"></script>
     <script src="usewod-prov.js" type="text/javascript"></script>
   </head>
     <body typeof="sioc:Site" about="">
@@ -106,7 +140,6 @@ else {
               </form>
               <div class='button' id='addds'><input type='image' src="img/edit-table-insert-row-big-plus.png" /></div>
               <div class='button' id='addpub'><input type='image' src="img/document-new.png" /></div>
-<!--               <div class='button' id='addperson'><input type='image' src="img/user-group-new.png" /></div> -->
               <div class='clear-both'></div>
             </td>
             <td>
@@ -119,20 +152,18 @@ else {
           <tr>
             <td>
               <h3>Datasets</h3>
-<!--               <div class='data' id='refresh'><input type='image' src="img/table-usewod2011-48.png" title="USEWOD 2011 Dataset" /></div>
-              <div class='data' id='refresh'><input type='image' src="img/table-usewod2012-48.png" title="USEWOD 2012 Dataset" /></div>
-              <div class='data' id='refresh'><input type='image' src="img/table-2013-48.png" title="USEWOD 2013 Dataset" /></div>
-              <div class='data' id='refresh'><input type='image' src="img/table-2014-48.png" title="USEWOD 2014 Dataset" /></div> -->
+
+<?php
+                $len = count($datasets);
+                for ($d=0; $d < $len; $d++) 
+                { 
+                  $ds = $datasets[$d];
+                  echo '<div class="data" id="'.$ds["id"].'"><input type="image" src="'.$ds["img"].'" title="'.$ds["name"].'" /></div>' ;
+                }
+?>
               <div class='clear-both'></div>        
               <h3>Publications</h3>
-<!--               <div class='data' id='addperson'><input type='image' src="img/c.png" /></div>
-              <div class='data' id='load'><input type='image' src="img/d.png" /></div> -->
               <div class='clear-both'></div>        
-<!--               <h3>People</h3>
-              <div class='data' id='addpub'><input type='image' src="http://people.cs.kuleuven.be/~bettina.berendt/bettina2.png" title="Bettina Berendt" /></div>
-              <div class='data' id='addpub'><input type='image' src="http://www.cs.vu.nl/~laurah/images/me_in_atacama.jpg" title="Laura Hollink" /></div>
-              <div class='data' id='addpub'><input type='image' src="https://lh5.googleusercontent.com/-DgE9PJxCjl4/UipM0qKaseI/AAAAAAAAAJE/q9WyOjCme38/w414-h415-no/20130822_095104_resized.jpg" title="Markus Luczak-Roesch" /></div>
-              <div class='clear-both'></div> -->
             </td>
             <td rowspan="3">
               <h3>New links</h3>
@@ -141,36 +172,26 @@ else {
 
           <tr class="hidden" id="newds">
             <td>
-              <p><h3>Adding a new dataset</h3>
-                <form action="index.php" method="post">
-                <label for="ds-id">Name (dataset id)</label><br/>
-                <input type="text" name="ds-id" id="ds-id" /><br/>
+              <form action="index.php" method="post"><p>
+                <h3>Adding a new dataset<div class="rightdata" id="ds-img-div"></div></h3>
+                <label for="ds-name">Name</label><br/>
+                <input type="text" name="ds-name" id="ds-name" onblur="imgSearchForDataset()" /><br/>
                 <label for="ds-v">Version (or date)</label></br>
                 <input type="text" name="ds-v" id="ds-v" /><br/>
                 <label for="ds-url">Location (url)</label><br/>
                 <input type="text" name="ds-url" id="ds-url" /><br/>
-                <label for="ds-img">Logo (url)</label><br/>
-                <input type="text" name="ds-img" id="ds-img" /><br/>
-                <label for="ds-size">Size (mb)</label><br/>
-                <input type="text" name="ds-size" id="ds-size" /><br/>
-                <label for="ds-format">Format</label><br/>
-                <select name="ds-format" id="ds-format">
-                  <option value="csv">CSV</option>
-                  <option value="json-ld">JSON-LD</option>
-                  <option value="other">add more.. </option>
-                </select><br/>
                 <label for="ds-about">Description</label><br/>
                 <textarea rows="3" name="ds-about" id="ds-about"></textarea><br/>
                 <input type="submit" value="Add dataset"/>
-              </form></p>
+              </p></form>
             </td>
           </tr>
           <tr class="hidden" id="newpub">
             <td>
-              <p><h3>Adding a new publication</h3>
-                <form action="index.php" method="post">
+              <form action="index.php" method="post"><p>
+                <h3>Adding a new publication<div class="rightdata" id="pub-img-div"></div></h3>
                 <label for="pub-title">Title</label><br/>
-                <input type="text" name="pub-title" id="pub-title" /><br/>
+                <input type="text" name="pub-title" id="pub-title" onblur="imgSearchForPaper()" /><br/>
                 <label for="pub-author">Authors (each on a new line, "firstname lastname")</label></br>
                 <textarea rows="3" name="pub-author" id="pub-author" ></textarea><br/>
                 <script>
@@ -195,20 +216,14 @@ else {
                       }
                     });
                 </script>
-                <label for="pub-year">Year</label><br/>
-                <input type="text" name="pub-year" id="pub-year" /><br/>
-                <label for="pub-img">Logo (url)</label><br/>
-                <input type="text" name="pub-img" id="pub-img" /><br/>
                 <label for="pub-venue">Publication venue</label><br/>
                 <input type="text" name="pub-venue" id="pub-venue" /><br/>
+                <label for="pub-year">Year</label><br/>
+                <input type="text" name="pub-year" id="pub-year" /><br/>
                 <input type="submit" value="Add publication"/>
-              </form></p>
+              </p></form>
             </td>
           </tr>
-<!--           <tr class="hidden" id="newperson">
-            <td>
-            </td>
-          </tr> -->
 <?php
 
 }
