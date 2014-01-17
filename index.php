@@ -44,8 +44,6 @@ if ( isset($_POST['ds_ids']) || isset($_POST['pub_ids']) ) {
 load_datasets();
 load_publications();
 
-var_dump($datasets);
-
 ?>
 
 <?xml version="1.0" encoding="UTF-8"?>

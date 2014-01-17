@@ -97,7 +97,8 @@ function load_datasets()
   global $store;
 
   $len = count($ds_ids);
-  echo $len;
+  if ($len == 0) { return ; }
+  
   $ds_q = 'DESCRIBE ';
   for ($i=0; $i < $len; $i++) { 
     $id = $ds_ids[$i];
@@ -128,6 +129,8 @@ function load_publications()
   global $store;
 
   $len = count($pub_ids);
+  if ($len == 0) { return ; }
+
   $pub_q = 'DESCRIBE ';
   for ($i=0; $i < $len; $i++) { 
     $id = $pub_ids[$i];

@@ -49,13 +49,14 @@ function imgSearchForDataset() {
   imgSearcher.execute(title);
 }
 
-function copy_data(el) {
-    var cl = el.clone().removeClass("selected");
-    cl.attr("id", el.attr("id"));
-    return cl;
-};
 
 $(function() {
+
+  function copy_data(el) {
+      var cl = el.clone().removeClass("selected");
+      cl.attr("id", el.attr("id"));
+      return cl;
+  };
 
   $(document).on("click", function(event) {
     var div = $(event.target).closest("div");
@@ -78,7 +79,7 @@ $(function() {
       } else {
         var id = div.attr("id");
         console.log(id);
-        $("#workspace").remove("div[id='"+id+"']");
+        $("#workspace > div[id='"+id+"']").remove();
       }
     } else if (div.hasClass("ws")) {
       // this happens in the workspace
