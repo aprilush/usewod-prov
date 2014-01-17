@@ -8,38 +8,41 @@ if ( isset($_POST['username']) )
   setcookie( 'username', $username, time()+60*60*24*5 );
 }
 
+$ds_ids = array();
+$datasets = array();
+$pub_ids = array();
+$publications = array();
+
 if ( isset($_POST['ds-name']) && 
     isset($_POST['ds-v']) && 
     isset($_POST['ds-url']) && 
     isset($_POST['ds-img']) && 
     isset($_POST['ds-about']) ) {
-  add_dataset_from_fields($_POST['ds-name'], $_POST['ds-v'], $_POST['ds-url'], $_POST['ds-img'], $_POST['ds-size'], $_POST['ds-format'], $_POST['ds-about'], $username);
+  add_dataset_from_fields($_POST['ds-name'], $_POST['ds-v'], $_POST['ds-url'], $_POST['ds-img'], $_POST['ds-size'], $_POST['ds-format'], $_POST['ds-about']);
 }
 
 if ( isset($_POST['pub-title']) && 
     isset($_POST['pub-author']) && 
     isset($_POST['pub-venue']) && 
     isset($_POST['pub-year']) && 
+    isset($_POST['pub-url']) && 
     isset($_POST['pub-img']) ) {
-  add_paper_from_fields($_POST['pub-title'], $_POST['pub-author'], $_POST['pub-venue'], $_POST['pub-year'], $_POST['pub-img'], $username);
+  add_paper_from_fields($_POST['pub-title'], $_POST['pub-author'], $_POST['pub-venue'], $_POST['pub-year'], $_POST['pub-url'], $_POST['pub-img']);
 }
 
-$ds_ids = array();
-$datasets = array();
-$pub_ids = array();
-$publications = array();
 if ( isset($_POST['ds_ids']) || isset($_POST['pub_ids']) ) {
   if ( isset($_POST['ds_ids']) ) {
     $ds_ids = $_POST['ds_ids'];
-    $datasets = load_datasets();
   }
   if ( isset($_POST['pub_ids']) ) {
     $pub_ids = $_POST['pub_ids'];
-    $publications = load_publications();
   }
 } else {
   load_new_data();
 }
+
+load_datasets();
+load_publications();
 
 ?>
 
@@ -104,10 +107,8 @@ if ( isset($_POST['ds_ids']) || isset($_POST['pub_ids']) ) {
         <p>The special theme of the workshop: building a USEWOD Web Observatory to track the distribution of research based on the USEWOD data set.</p>
 
 <?php
-
 if ( !isset($username) && (!isset($_COOKIE['username']) || $_COOKIE['username']==='' ) )   
 {
-
 ?>
           <tr>
             <td>
@@ -117,8 +118,8 @@ if ( !isset($username) && (!isset($_COOKIE['username']) || $_COOKIE['username']=
               </form>
             </td>
           </tr>
-<?php
 
+<?php
 }
 else {
   if (!isset($username))
@@ -126,10 +127,8 @@ else {
     $username = $_COOKIE['username'];
   }
 
-  $names = get_all_people(); 
-
+  $names = get_all_people_names(); 
 ?>
-
         <h2>Workspace (using name: <?php echo $username; ?>)</h2>
         <table width="100%">
  
@@ -152,17 +151,24 @@ else {
           <tr>
             <td>
               <h3>Datasets</h3>
-
 <?php
                 $len = count($datasets);
-                for ($d=0; $d < $len; $d++) 
+                for ($i=0; $i < $len; $i++) 
                 { 
-                  $ds = $datasets[$d];
+                  $ds = $datasets[$i];
                   echo '<div class="data" id="'.$ds["id"].'"><input type="image" src="'.$ds["img"].'" title="'.$ds["name"].'" /></div>' ;
                 }
 ?>
               <div class='clear-both'></div>        
               <h3>Publications</h3>
+<?php
+                $len = count($publications);
+                for ($i=0; $i < $len; $i++) 
+                { 
+                  $pub = $publications[$i];
+                  echo '<div class="data" id="'.$pub["id"].'"><input type="image" src="'.$pub["img"].'" title="'.$pub["title"].'" /></div>' ;
+                }
+?>
               <div class='clear-both'></div>        
             </td>
             <td rowspan="3">
@@ -178,7 +184,7 @@ else {
                 <input type="text" name="ds-name" id="ds-name" onblur="imgSearchForDataset()" /><br/>
                 <label for="ds-v">Version (or date)</label></br>
                 <input type="text" name="ds-v" id="ds-v" /><br/>
-                <label for="ds-url">Location (url)</label><br/>
+                <label for="ds-url">Link (url)</label><br/>
                 <input type="text" name="ds-url" id="ds-url" /><br/>
                 <label for="ds-about">Description</label><br/>
                 <textarea rows="3" name="ds-about" id="ds-about"></textarea><br/>
@@ -194,6 +200,7 @@ else {
                 <input type="text" name="pub-title" id="pub-title" onblur="imgSearchForPaper()" /><br/>
                 <label for="pub-author">Authors (each on a new line, "firstname lastname")</label></br>
                 <textarea rows="3" name="pub-author" id="pub-author" ></textarea><br/>
+                <?php var_dump($names); ?>
                 <script>
                   var people = <?php echo $names; ?>;
                   $( "#pub-author" ).autocomplete({ minLength: 2,
@@ -220,14 +227,14 @@ else {
                 <input type="text" name="pub-venue" id="pub-venue" /><br/>
                 <label for="pub-year">Year</label><br/>
                 <input type="text" name="pub-year" id="pub-year" /><br/>
+                <label for="pub-url">Link (url)</label><br/>
+                <input type="text" name="pub-url" id="pub-url" /><br/>
                 <input type="submit" value="Add publication"/>
               </p></form>
             </td>
           </tr>
 <?php
-
 }
-
 ?>
 
         </table></p>

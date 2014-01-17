@@ -26,42 +26,52 @@ function load_new_data()
   // do we have / set a smart alg for picking objects from the db?
 
   global $ds_ids;
-  global $datasets;
+  // global $datasets;
   global $pub_ids;
-  global $publications;
+  // global $publications;
   global $store;
-
+  // $ds_q = '
+  //   PREFIX schema: <http://schema.org/> 
+  //   SELECT ?id ?name ?img ?url WHERE {
+  //     ?id a schema:Dataset . 
+  //     ?id schema:name ?name .
+  //     ?id schema:url ?url .
+  //     ?id schema:image ?img .
+  //   }
+  // ';
   $ds_q = '
     PREFIX schema: <http://schema.org/> 
-    SELECT ?id ?name ?img ?url WHERE {
+    SELECT ?id WHERE {
       ?id a schema:Dataset . 
-      ?id schema:name ?name .
-      ?id schema:url ?url .
-      ?id schema:image ?img .
     }
   ';
-  
   if ($rows = $store->query($ds_q, 'rows')) 
   {
     foreach ($rows as $row) 
     {
       $ds_ids[] = $row['id'];
-      $datasets[] = array(
-        "id" => $row['id'], 
-        "name" => $row['name'],
-        "url" => $row['url'],
-        "img" => $row['img'], 
-        );
+      // $datasets[] = array(
+      //   "id" => $id, 
+      //   "name" => $row['name'],
+      //   "url" => $row['url'],
+      //   "img" => $row['img'], 
+      //   );
     }
   }
 
+  // $pub_q = '
+  //   PREFIX schema: <http://schema.org/> 
+  //   SELECT ?id ?title ?img ?url WHERE {
+  //     ?id a schema:ScholarlyArticle . 
+  //     ?id schema:name ?title .
+  //     ?id schema:url ?url .
+  //     ?id schema:image ?img .
+  //   }
+  // ';
   $pub_q = '
     PREFIX schema: <http://schema.org/> 
-    SELECT ?id ?title ?img ?url WHERE {
+    SELECT ?id WHERE {
       ?id a schema:ScholarlyArticle . 
-      ?id schema:name ?title .
-      ?id schema:url ?url .
-      ?id schema:image ?img .
     }
   ';
   
@@ -70,12 +80,12 @@ function load_new_data()
     foreach ($rows as $row) 
     {
       $pub_ids[] = $row['id'];
-      $publications[] = array(
-        "id" => $row['id'], 
-        "title" => $row['title'],
-        "url" => $row['url'],
-        "img" => $row['img'], 
-        );
+      // $publications[] = array(
+      //   "id" => $row['id'], 
+      //   "title" => $row['title'],
+      //   "url" => $row['url'],
+      //   "img" => $row['img'], 
+      //   );
     }
   }
 }
@@ -84,31 +94,37 @@ function load_datasets()
 {
   global $ds_ids;
   global $datasets;
+  global $store;
 
   $len = count($ds_ids);
+  $ds_q = '
+    PREFIX schema: <http://schema.org/> 
+    SELECT ?name ?img ?url WHERE { ';
   for ($i=0; $i < $len; $i++) { 
     $id = $ds_ids[$i];
-    $ds_q = '
-      PREFIX schema: <http://schema.org/> 
-      SELECT ?name ?img ?url WHERE {
-        '.$id.' a schema:Dataset . 
-        '.$id.' schema:name ?name .
-        '.$id.' schema:url ?url .
-        '.$id.' schema:image ?img .
-      } 
-    ';
-    if ($rows = $store->query($ds_q, 'rows')) 
+    $ds_q = $ds_q.'{ 
+      <'.$id.'> a schema:Dataset . 
+      <'.$id.'> schema:name ?name .
+      <'.$id.'> schema:url ?url .
+      <'.$id.'> schema:image ?img .
+      } UNION ';
+  }
+  $ds_q = $ds_q.'{} } ';
+  if ($rows = $store->query($ds_q, 'rows')) 
+  {
+    foreach ($rows as $row) 
     {
-      foreach ($rows as $row) 
-      {
-        $datasets[] = array(
-          "id" => $id, 
-          "name" => $row['name'],
-          "url" => $row['url'],
-          "img" => $row['img'], 
-          );
-      }
+      $datasets[] = array(
+        "id" => $row['id'], 
+        "name" => $row['name'],
+        "url" => $row['url'],
+        "img" => $row['img'], 
+        );
     }
+  } 
+  if ($errs = $store->getErrors()) {
+    echo "Error in load_datasets";
+    var_dump($errs);
   }
 }
 
@@ -116,30 +132,32 @@ function load_publications()
 {
   global $pub_ids;
   global $publications;
+  global $store;
 
   $len = count($pub_ids);
+  $pub_q = '
+    PREFIX schema: <http://schema.org/> 
+    SELECT ?title ?img ?url WHERE { ';
   for ($i=0; $i < $len; $i++) { 
     $id = $pub_ids[$i];
-    $pub_q = '
-      PREFIX schema: <http://schema.org/> 
-      SELECT ?title ?img ?url WHERE {
-        '.$id.' a schema:ScholarlyArticle . 
-        '.$id.' schema:name ?title .
-        '.$id.' schema:url ?url .
-        '.$id.' schema:image ?img .
-      } 
-    ';
-    if ($rows = $store->query($pub_q, 'rows')) 
+    $pub_q = $pub_q.'{ 
+        <'.$id.'> a schema:ScholarlyArticle . 
+        <'.$id.'> schema:name ?title .
+        <'.$id.'> schema:url ?url .
+        <'.$id.'> schema:image ?img .
+      } UNION ';
+  }
+  $pub_q = $pub_q.'{} }';
+  if ($rows = $store->query($pub_q, 'rows')) 
+  {
+    foreach ($rows as $row) 
     {
-      foreach ($rows as $row) 
-      {
-        $publications[] = array(
-          "id" => $id, 
-          "title" => $row['title'],
-          "url" => $row['url'],
-          "img" => $row['img'], 
-          );
-      }
+      $publications[] = array(
+        "id" => $row['id'], 
+        "title" => $row['title'],
+        "url" => $row['url'],
+        "img" => $row['img'], 
+        );
     }
   }
 }
@@ -170,7 +188,7 @@ function add_graph_info($gid)
 function add_dataset_from_fields($name, $v, $url, $img, $about)
 {
   global $store;
-  global $datasets;
+  global $ds_ids;
 
   $gid = uniqid("graph_");
   $id = uniqid("dataset_");
@@ -193,27 +211,78 @@ function add_dataset_from_fields($name, $v, $url, $img, $about)
     var_dump($errs);
   }
   add_graph_info($gid);
+  $ds_ids[] = $id;
+}
 
-  if (is_null($datasets)) 
-  { 
-    $datasets = array(); 
+function add_paper_from_fields($title, $authors, $venue, $year, $url, $img)
+{
+  global $store;
+  global $pub_ids;
+  $names = explode("\n",$authors);
+
+  $gid = uniqid("graph_");
+  $id = uniqid("publication_");
+
+  $insert_q = '
+    PREFIX up: <http://data.semanticweb.org/usewod/2014/prov/> 
+    PREFIX schema: <http://schema.org/> 
+    INSERT INTO up:'.$gid.' { 
+      up:'.$id.' a schema:ScholarlyArticle . 
+      up:'.$id.' schema:name '.'"'.$title.'"'.' .
+      up:'.$id.' schema:copyrightYear '.'"'.$year.'"'.' .
+      up:'.$id.' schema:url <'.$url.'> .
+      up:'.$id.' schema:image <'.$img.'> . ';
+  foreach ($names as $name) 
+  {
+    $name = trim($name);
+    $aid = find_author_id($name);
+    if ( !$aid ) 
+    {
+      $aid = uniqid("person_");
+      $insert_q = $insert_q.'
+        up:'.$aid.' a schema:Person .
+        up:'.$aid.' schema:name "'.$name.'" . 
+        up:'.$id.' schema:author up:'.$aid.' . 
+      ';
+    } 
+    else 
+    {
+      $insert_q = $insert_q.'
+        up:'.$id.' schema:author <'.$aid.'> . 
+      ';
+    }
   }
-  $datasets[] = array(
-    "id" => $id, 
-    "name" => $name,
-    "url" => $url,
-    "img" => $img, 
-    );
+  $insert_q = $insert_q.'}';
+
+  $rs = $store->query($insert_q);  
+  if ($errs = $store->getErrors()) 
+  {
+    echo "Error in add_paper_from_fields";
+    var_dump($errs);
+  }
+  add_graph_info($gid);
+  $pub_ids[] = $id;
 }
 
-function add_paper_from_fields($title, $authors, $venue, $year, $img)
+function find_author_id($name)
 {
+  global $store;
 
-}
-
-function add_person($name)
-{
-
+  $name_q = '
+    PREFIX schema: <http://schema.org/> 
+    SELECT ?aid WHERE {
+      ?aid a schema:Person .
+      ?aid schema:name "'.$name.'" .
+    }
+  ';
+  if ($rows = $store->query($name_q, 'rows')) 
+  {
+    if ( count($rows) > 0 ) 
+    {
+      return $rows[0]['aid'];
+    }
+  }
+  return False;
 }
 
 function add_paper_from_bib($bib)
@@ -221,28 +290,28 @@ function add_paper_from_bib($bib)
   //TODO convenience option for people who want to just paste in the bib file of a paper
 }
 
-function get_all_people()
+function get_all_people_names()
 {
   global $store;
 
-  $all_people_q = '
-    PREFIX foaf: <http://xmlns.com/foaf/0.1/> 
+  $all_names_q = '
+    PREFIX schema: <http://schema.org/> 
     SELECT ?name WHERE {
-      ?id a foaf:Person ; foaf:name ?name .
+      ?id a schema:Person ; schema:name ?name .
     }
   ';
   
-  $all_people = '[ ';
-  if ($rows = $store->query($all_people_q, 'rows')) 
+  $all_names = '[ ';
+  if ($rows = $store->query($all_names_q, 'rows')) 
   {
     foreach ($rows as $row) 
     {
-      $all_people = $all_people . '"' . $row['name'] . '",' ;
+      $all_names = $all_names . '"' . $row['name'] . '",' ;
     }
   }
-  $all_people[strlen($all_people)-1] = ']';
+  $all_names[strlen($all_names)-1] = ']';
 
-  return $all_people;
+  return $all_names;
 }
 
 ?>
