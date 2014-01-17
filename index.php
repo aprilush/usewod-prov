@@ -44,6 +44,8 @@ if ( isset($_POST['ds_ids']) || isset($_POST['pub_ids']) ) {
 load_datasets();
 load_publications();
 
+var_dump($datasets);
+
 ?>
 
 <?xml version="1.0" encoding="UTF-8"?>
@@ -173,6 +175,7 @@ else {
             </td>
             <td rowspan="3">
               <h3>New links</h3>
+              <div id="workspace"></div>
             </td>
           </tr>
 

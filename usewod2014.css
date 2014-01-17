@@ -54,6 +54,22 @@ div.data input {
   height: 48px;
 }
 
+div.ws {
+  float: left;
+  width: 50px;
+  height: 50px;
+  margin: 5px;
+  border: 0px;
+  border-radius: 5px 5px;
+  box-shadow: inset 0 0 0em #92AAC2;
+}
+div.ws input {
+  vertical-align: center;
+  padding: 1px 1px 1px 1px;
+  width: 48px;
+  height: 48px;
+}
+
 div.rightdata {
   float: right;
   width: 50px;
@@ -65,14 +81,13 @@ div.rightdata {
 }
 div.rightdata img {
   vertical-align: center;
-  padding: 1px 1px 1px 1px;
-  width: 48px;
-  height: 48px;
+  padding: 3px 3px 3px 3px;
+  width: 44px;
+  height: 44px;
 }
 
 div.selected {
-  box-shadow: inset 0 0 0.5em #5CCCCC;
-  background-color: #005555;
+  box-shadow: -4px -4px 2px #92AAC2;
 }
 
 div.clear-both {

@@ -49,20 +49,39 @@ function imgSearchForDataset() {
   imgSearcher.execute(title);
 }
 
+function copy_data(el) {
+    var cl = el.clone().removeClass("selected");
+    cl.attr("id", el.attr("id"));
+    return cl;
+};
+
 $(function() {
 
   $(document).on("click", function(event) {
     var div = $(event.target).closest("div");
     if (div.hasClass("button")) {
-        if (div.attr("id")=="addds") {
-          $("tr[id='newds']").removeClass("hidden");
-        } else if (div.attr("id")=="addpub") {
-          $("tr[id='newpub']").removeClass("hidden");
-        // } else if (div.attr("id")=="addperson") {
-        //   $("tr[id='newperson']").removeClass("hidden");
-        } else {
-          console.log("click clack on a button");
-        }
+      if (div.attr("id")=="addds") {
+        $("tr[id='newds']").removeClass("hidden");
+      } else if (div.attr("id")=="addpub") {
+        $("tr[id='newpub']").removeClass("hidden");
+      } else {
+        console.log("click clack on a button");
+      }
+    } else if (div.hasClass("data")) {
+      div.toggleClass("selected");
+      if (div.hasClass("selected")) {
+        // add to the right of the workspace
+        var copy = copy_data(div);
+        copy.removeClass("data");
+        copy.addClass("ws");
+        $("#workspace").append(copy);
+      } else {
+        var id = div.attr("id");
+        console.log(id);
+        $("#workspace").remove("div[id='"+id+"']");
+      }
+    } else if (div.hasClass("ws")) {
+      // this happens in the workspace
     } else {
       console.log("click clack");
     }

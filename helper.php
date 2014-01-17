@@ -97,28 +97,21 @@ function load_datasets()
   global $store;
 
   $len = count($ds_ids);
-  $ds_q = '
-    PREFIX schema: <http://schema.org/> 
-    SELECT ?name ?img ?url WHERE { ';
+  echo $len;
+  $ds_q = 'DESCRIBE ';
   for ($i=0; $i < $len; $i++) { 
     $id = $ds_ids[$i];
-    $ds_q = $ds_q.'{ 
-      <'.$id.'> a schema:Dataset . 
-      <'.$id.'> schema:name ?name .
-      <'.$id.'> schema:url ?url .
-      <'.$id.'> schema:image ?img .
-      } UNION ';
+    $ds_q = $ds_q.'<'.$id.'> ';
   }
-  $ds_q = $ds_q.'{} } ';
-  if ($rows = $store->query($ds_q, 'rows')) 
+  if ($rows = $store->query($ds_q)) 
   {
-    foreach ($rows as $row) 
+    foreach ($rows["result"] as $id => $row) 
     {
       $datasets[] = array(
-        "id" => $row['id'], 
-        "name" => $row['name'],
-        "url" => $row['url'],
-        "img" => $row['img'], 
+        "id" => $id, 
+        "name" => $row["http://schema.org/name"][0]["value"],
+        "url" => $row["http://schema.org/url"][0]["value"],
+        "img" => $row["http://schema.org/image"][0]["value"], 
         );
     }
   } 
@@ -135,30 +128,26 @@ function load_publications()
   global $store;
 
   $len = count($pub_ids);
-  $pub_q = '
-    PREFIX schema: <http://schema.org/> 
-    SELECT ?title ?img ?url WHERE { ';
+  $pub_q = 'DESCRIBE ';
   for ($i=0; $i < $len; $i++) { 
     $id = $pub_ids[$i];
-    $pub_q = $pub_q.'{ 
-        <'.$id.'> a schema:ScholarlyArticle . 
-        <'.$id.'> schema:name ?title .
-        <'.$id.'> schema:url ?url .
-        <'.$id.'> schema:image ?img .
-      } UNION ';
+    $pub_q = $pub_q.'<'.$id.'> ';
   }
-  $pub_q = $pub_q.'{} }';
-  if ($rows = $store->query($pub_q, 'rows')) 
+  if ($rows = $store->query($pub_q)) 
   {
-    foreach ($rows as $row) 
-    {
+    foreach ($rows["result"] as $id => $row) 
+    {    
       $publications[] = array(
-        "id" => $row['id'], 
-        "title" => $row['title'],
-        "url" => $row['url'],
-        "img" => $row['img'], 
+        "id" => $id, 
+        "title" => $row["http://schema.org/name"][0]["value"],
+        "url" => $row["http://schema.org/url"][0]["value"],
+        "img" => $row["http://schema.org/image"][0]["value"], 
         );
     }
+  }
+  if ($errs = $store->getErrors()) {
+    echo "Error in load_publications";
+    var_dump($errs);
   }
 }
 
