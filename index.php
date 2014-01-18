@@ -142,8 +142,8 @@ else {
               <div class='clear-both'></div>
             </td>
             <td>
-              <div class='button' id='link'><input type='image' src="img/insert-link.png" /></div>
               <div class='button' id='reset'><input type='image' src="img/edit-clear.png" /></div>
+              <div class='button' id='save'><input type='image' src="img/dialog-ok-apply.png" /></div>
               <div class='clear-both'></div>
             </td>
           </tr>
@@ -156,7 +156,7 @@ else {
                 for ($i=0; $i < $len; $i++) 
                 { 
                   $ds = $datasets[$i];
-                  echo '<div class="data" id="'.$ds["id"].'"><input type="image" src="'.$ds["img"].'" title="'.$ds["name"].'" /></div>' ;
+                  echo '<div class="ds data" id="'.$ds["id"].'"><input type="image" src="'.$ds["img"].'" title="'.$ds["name"].'" /></div>' ;
                 }
 ?>
               <div class='clear-both'></div>        
@@ -166,14 +166,24 @@ else {
                 for ($i=0; $i < $len; $i++) 
                 { 
                   $pub = $publications[$i];
-                  echo '<div class="data" id="'.$pub["id"].'"><input type="image" src="'.$pub["img"].'" title="'.$pub["title"].'" /></div>' ;
+                  echo '<div class="pub data" id="'.$pub["id"].'"><input type="image" src="'.$pub["img"].'" title="'.$pub["title"].'" /></div>' ;
                 }
 ?>
               <div class='clear-both'></div>        
             </td>
             <td rowspan="3">
               <h3>New links</h3>
-              <div id="workspace"></div>
+              <div class="workspace" id="workspace">
+                <table class="main">
+                  <tr>
+                    <td id="obj-left"></td>
+                    <td id="link-selector"></td>
+                    <td id="obj-right"></td>
+                    <td width="60px"><div class='button' id='link'><input type='image' src="img/insert-link.png" /></div></td>
+                  </tr>
+                </table>
+                <div id="temp-rels"></div>
+              </div>
             </td>
           </tr>
 
