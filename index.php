@@ -8,6 +8,13 @@ if ( isset($_POST['username']) )
   setcookie( 'username', $username, time()+60*60*24*5 );
 }
 
+if ( isset($_POST['obj-left']) &&
+    isset($_POST['obj-right']) &&
+    isset($_POST['link']) )
+{
+  add_relation($_POST['obj-left'], $_POST['link'], $_POST['obj-right']);
+}
+
 $ds_ids = array();
 $datasets = array();
 $pub_ids = array();

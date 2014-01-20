@@ -88,16 +88,16 @@ $(function() {
     return sel;
   }
 
-  function create_temp_rel(el1, el2, rel) {
-    console.log(el1);
-    console.log(el2);
-    console.log(rel);
+  // function create_temp_rel(el1, el2, rel) {
+  //   console.log(el1);
+  //   console.log(el2);
+  //   console.log(rel);
     
-    $("#temp-rels").append(copy_data(el1));
-    $("#temp-rels").append("<div class='ws'>"+rel+"</div>");
-    $("#temp-rels").append(copy_data(el2));
-    $("#temp-rels").append("<div class='clear-both'></div>");
-  }
+  //   $("#temp-rels").append(copy_data(el1));
+  //   $("#temp-rels").append("<div class='ws'>"+rel+"</div>");
+  //   $("#temp-rels").append(copy_data(el2));
+  //   $("#temp-rels").append("<div class='clear-both'></div>");
+  // }
 
   $(document).on("click", function(event) {
     var div = $(event.target).closest("div");
@@ -106,8 +106,6 @@ $(function() {
         $("#newds").toggleClass("hidden");
       } else if (div.attr("id")=="addpub") {
         $("#newpub").toggleClass("hidden");
-      } else if (div.attr("id")=="link") {
-        temp_rel_row = create_temp_rel($.obj1copy, $.obj2copy, $("#link-selector > select").val());
       } else if (div.attr("id")=="reset") {
         $("#obj-left").empty();
         $("#link-selector").empty();
@@ -116,27 +114,33 @@ $(function() {
         $.obj2orig.removeClass("selected");
         $.obj1copy = null;
         $.obj2copy = null;
+        $("#link > input").attr("disabled",true);
       } else {
         console.log("click clack on a button");
       }
     } else if (div.hasClass("data")) {
       if (!$.obj1copy) {
         div.addClass("selected");
-        $.obj1copy = copy_data(div);
         $.obj1orig = div;
+        $.obj1copy = copy_data(div);
+        $.obj1copy.append("<input type='hidden' name='obj-left' value='"+div.attr("id")+"' />");
       } else if (!$.obj2copy) {
         div.addClass("selected");
-        $.obj2copy = copy_data(div);
         $.obj2orig = div;
+        $.obj2copy = copy_data(div);
+        $.obj2copy.append("<input type='hidden' name='obj-right' value='"+div.attr("id")+"' />");
+        $("#link > input").attr("disabled",false);
       } else {
         // both objects are filled, shift obj2 to obj1
         div.addClass("selected");
         $.obj1orig.removeClass("selected");
-        $.obj1copy = $.obj2copy;
         $.obj1orig = $.obj2orig;
+        $.obj1copy = copy_data($.obj1orig);
+        $.obj1copy.append("<input type='hidden' name='obj-left' value='"+$.obj1orig.attr("id")+"' />");
         div.addClass("selected");
-        $.obj2copy = copy_data(div);
         $.obj2orig = div;
+        $.obj2copy = copy_data(div);
+        $.obj2copy.append("<input type='hidden' name='obj-right' value='"+div.attr("id")+"' />");
       }
       if ($.obj1copy && $.obj2copy) {
 
@@ -145,8 +149,6 @@ $(function() {
         // also find the possible relations and show them here
         $("#link-selector").html(create_link_selector());
       }
-    } else if (div.hasClass("ws")) {
-      // this happens in the workspace
     } else {
       console.log("click clack");
     }

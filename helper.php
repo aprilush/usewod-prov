@@ -282,6 +282,11 @@ function add_paper_from_bib($bib)
   //TODO convenience option for people who want to just paste in the bib file of a paper
 }
 
+function add_relation($s, $p, $o) 
+{
+  
+}
+
 function get_all_people_names()
 {
   global $store;
