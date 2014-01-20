@@ -284,7 +284,24 @@ function add_paper_from_bib($bib)
 
 function add_relation($s, $p, $o) 
 {
-  
+  global $store;
+
+  $gid = uniqid("graph_");
+
+  $insert_q = '
+    PREFIX up: <http://data.semanticweb.org/usewod/2014/prov/> 
+    INSERT INTO up:'.$gid.' { 
+      <'.$s.'> <'.$p.'> <'.$o.'> .
+    }
+  ';
+
+  $rs = $store->query($insert_q);  
+  if ($errs = $store->getErrors()) 
+  {
+    echo "Error in add_relation";
+    var_dump($errs);
+  }
+  add_graph_info($gid);
 }
 
 function get_all_people_names()

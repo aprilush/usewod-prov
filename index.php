@@ -8,9 +8,9 @@ if ( isset($_POST['username']) )
   setcookie( 'username', $username, time()+60*60*24*5 );
 }
 
-if ( isset($_POST['obj-left']) &&
-    isset($_POST['obj-right']) &&
-    isset($_POST['link']) )
+if ( isset($_POST['obj-left']) && !empty($_POST['obj-left']) &&
+    isset($_POST['obj-right']) && !empty($_POST['obj-right']) &&
+    isset($_POST['link']) && !empty($_POST['link']) )
 {
   add_relation($_POST['obj-left'], $_POST['link'], $_POST['obj-right']);
 }
@@ -20,7 +20,7 @@ $datasets = array();
 $pub_ids = array();
 $publications = array();
 
-if ( isset($_POST['ds-name']) && 
+if ( isset($_POST['ds-name']) && !empty($_POST['ds-name']) && // only the name is mandatory
     isset($_POST['ds-v']) && 
     isset($_POST['ds-url']) && 
     isset($_POST['ds-img']) && 
@@ -28,8 +28,8 @@ if ( isset($_POST['ds-name']) &&
   add_dataset_from_fields($_POST['ds-name'], $_POST['ds-v'], $_POST['ds-url'], $_POST['ds-img'], $_POST['ds-size'], $_POST['ds-format'], $_POST['ds-about']);
 }
 
-if ( isset($_POST['pub-title']) && 
-    isset($_POST['pub-author']) && 
+if ( isset($_POST['pub-title']) && !empty($_POST['pub-title']) && // title and author is mandatory
+    isset($_POST['pub-author']) && !empty($_POST['pub-author']) &&
     isset($_POST['pub-venue']) && 
     isset($_POST['pub-year']) && 
     isset($_POST['pub-url']) && 
@@ -37,11 +37,11 @@ if ( isset($_POST['pub-title']) &&
   add_paper_from_fields($_POST['pub-title'], $_POST['pub-author'], $_POST['pub-venue'], $_POST['pub-year'], $_POST['pub-url'], $_POST['pub-img']);
 }
 
-if ( isset($_POST['ds_ids']) || isset($_POST['pub_ids']) ) {
-  if ( isset($_POST['ds_ids']) ) {
+if (( isset($_POST['ds_ids']) && !empty($_POST['ds_ids']) ) || ( isset($_POST['pub_ids']) && !empty($_POST['pub_ids']) ) ) {
+  if ( isset($_POST['ds_ids']) && !empty($_POST['ds_ids']) ) {
     $ds_ids = $_POST['ds_ids'];
   }
-  if ( isset($_POST['pub_ids']) ) {
+  if ( isset($_POST['pub_ids']) && !empty($_POST['pub_ids']) ) {
     $pub_ids = $_POST['pub_ids'];
   }
 } else {
