@@ -130,10 +130,116 @@ else {
   $names = get_all_people_names(); 
 ?>
         <h2>Workspace (using name: <?php echo $username; ?>)</h2>
+        <form action="index.php" method="post">
         <table width="100%">
- 
+
           <tr>
-            <td width="40%">
+            <td width="50%">
+              <div class='button' id='addds'><img src="img/edit-table-insert-row-big-plus.png" /></div><h3>Datasets</h3>
+              <div class='spacer'>
+<?php
+                $len = count($datasets);
+                for ($i=0; $i < $len; $i++) 
+                { 
+                  $ds = $datasets[$i];
+                  echo '<div class="ds data" id="'.$ds["id"].'"><img src="'.$ds["img"].'" title="'.$ds["name"].'" /></div>' ;
+                }
+?>
+              </div>
+              <div class='clear-both'></div>
+              <div class="hidden" id="newds">
+                <!-- <form action="index.php" method="post"> -->
+                  <div class="button" id=""><input type="image" src="img/list-add.png"/></div>
+                  <div id="ds-img-div"></div>
+                  <h3>Add a new dataset</h3>
+                  <label for="ds-name">Name</label><br/>
+                  <input type="text" name="ds-name" id="ds-name" onblur="imgSearchForDataset()" /><br/>
+                  <label for="ds-v">Version (or date)</label></br>
+                  <input type="text" name="ds-v" id="ds-v" /><br/>
+                  <label for="ds-url">Link (url)</label><br/>
+                  <input type="text" name="ds-url" id="ds-url" /><br/>
+                  <label for="ds-about">Description</label><br/>
+                  <textarea rows="3" name="ds-about" id="ds-about"></textarea><br/>
+                  <!-- <input type="submit" value="Add dataset"/> -->
+                <!-- </form> -->
+              </div>
+            </td>
+            <td width="50%">
+              <div class='button' id='addpub'><img src="img/document-new.png" /></div><h3>Publications</h3>
+              <div class='spacer'>
+<?php
+                $len = count($publications);
+                for ($i=0; $i < $len; $i++) 
+                { 
+                  $pub = $publications[$i];
+                  echo '<div class="pub data" id="'.$pub["id"].'"><img src="'.$pub["img"].'" title="'.$pub["title"].'" /></div>' ;
+                }
+?>
+              </div>
+              <div class='clear-both'></div>
+              <div class="hidden" id="newpub">
+                <!-- <form action="index.php" method="post"> -->
+                  <div class="button" id=""><input type="image" src="img/list-add.png"/></div>
+                  <div id="pub-img-div"></div>
+                  <h3>Add a new publication</h3>
+                  <div class='spacer'>
+                  <label for="pub-title">Title</label><br/>
+                  <input type="text" name="pub-title" id="pub-title" onblur="imgSearchForPaper()" /><br/>
+                  <label for="pub-author">Authors (each on a new line, "firstname lastname")</label></br>
+                  <textarea rows="3" name="pub-author" id="pub-author" ></textarea><br/>
+                  <script>
+                    var people = <?php echo $names; ?>;
+                    $( "#pub-author" ).autocomplete({ minLength: 2,
+                        source: function( request, response ) {
+                          var terms = request.term.split("\n");
+                          var lastTerm = terms[terms.length-1].trim();
+                          var matcher = new RegExp( $.ui.autocomplete.escapeRegex( lastTerm ), "i" );
+                          response( $.grep( people, function( item ){ return matcher.test( item ); }) );
+                        }, 
+                        select: function( event, ui ) {
+                          event.isDefaultPrevented = function() {return true;}
+                          var txt = $("#pub-author").val();
+                          var terms = txt.split("\n");
+                          terms.pop();
+                          terms.push(ui.item.value);
+                          $("#pub-author").val(terms.join('\n'));
+                        },
+                        focus: function( event, ui ) {
+                          event.isDefaultPrevented = function() {return true;}
+                        }
+                      });
+                  </script>
+                  <label for="pub-venue">Publication venue</label><br/>
+                  <input type="text" name="pub-venue" id="pub-venue" /><br/>
+                  <label for="pub-year">Year</label><br/>
+                  <input type="text" name="pub-year" id="pub-year" /><br/>
+                  <label for="pub-url">Link (url)</label><br/>
+                  <input type="text" name="pub-url" id="pub-url" /><br/>
+                  <!-- <input type="submit" value="Add publication"/> -->
+                <!-- </form> -->
+              </div>
+            </td>
+          <tr>
+          <tr>
+            <td colspan="2">
+            <div class='button' id='reset'><img src="img/edit-clear.png" /></div>
+            <div class='button' id='link'><input type="image" src="img/insert-link.png" disabled="true"/></div>
+            <h3>Connections</h3>
+            <div class="workspace">
+              <table>
+                <tr>
+                  <td id="obj-left"></td>
+                  <td id="link-selector"></td>
+                  <td id="obj-right"></td>
+                </tr>
+              </table>
+            </div>
+            </td>
+          </tr>
+
+<!--          <tr>
+            <td>
+              <h3>New data</h3>
               <form action="index.php" method="post">
                 <div class='button' name='refresh'><input type='image' src="img/view-refresh.png" /></div>
               </form>
@@ -141,117 +247,18 @@ else {
               <div class='button' id='addpub'><input type='image' src="img/document-new.png" /></div>
               <div class='clear-both'></div>
             </td>
-            <td>
-              <div class='button' id='reset'><input type='image' src="img/edit-clear.png" /></div>
-              <div class='button' id='save'><input type='image' src="img/dialog-ok-apply.png" /></div>
-              <div class='clear-both'></div>
-            </td>
-          </tr>
+            <td></td>
+          </tr> -->
 
-          <tr>
-            <td>
-              <h3>Datasets</h3>
-<?php
-                $len = count($datasets);
-                for ($i=0; $i < $len; $i++) 
-                { 
-                  $ds = $datasets[$i];
-                  echo '<div class="ds data" id="'.$ds["id"].'"><input type="image" src="'.$ds["img"].'" title="'.$ds["name"].'" /></div>' ;
-                }
-?>
-              <div class='clear-both'></div>        
-              <h3>Publications</h3>
-<?php
-                $len = count($publications);
-                for ($i=0; $i < $len; $i++) 
-                { 
-                  $pub = $publications[$i];
-                  echo '<div class="pub data" id="'.$pub["id"].'"><input type="image" src="'.$pub["img"].'" title="'.$pub["title"].'" /></div>' ;
-                }
-?>
-              <div class='clear-both'></div>        
-            </td>
-            <td rowspan="3">
-              <h3>New links</h3>
-              <div class="workspace" id="workspace">
-                <table class="main">
-                  <tr>
-                    <td id="obj-left"></td>
-                    <td id="link-selector"></td>
-                    <td id="obj-right"></td>
-                    <td width="60px"><div class='button' id='link'><input type='image' src="img/insert-link.png" /></div></td>
-                  </tr>
-                </table>
-                <div id="temp-rels"></div>
-              </div>
-            </td>
-          </tr>
-
-          <tr class="hidden" id="newds">
-            <td>
-              <form action="index.php" method="post"><p>
-                <h3>Adding a new dataset<div class="rightdata" id="ds-img-div"></div></h3>
-                <label for="ds-name">Name</label><br/>
-                <input type="text" name="ds-name" id="ds-name" onblur="imgSearchForDataset()" /><br/>
-                <label for="ds-v">Version (or date)</label></br>
-                <input type="text" name="ds-v" id="ds-v" /><br/>
-                <label for="ds-url">Link (url)</label><br/>
-                <input type="text" name="ds-url" id="ds-url" /><br/>
-                <label for="ds-about">Description</label><br/>
-                <textarea rows="3" name="ds-about" id="ds-about"></textarea><br/>
-                <input type="submit" value="Add dataset"/>
-              </p></form>
-            </td>
-          </tr>
-          <tr class="hidden" id="newpub">
-            <td>
-              <form action="index.php" method="post"><p>
-                <h3>Adding a new publication<div class="rightdata" id="pub-img-div"></div></h3>
-                <label for="pub-title">Title</label><br/>
-                <input type="text" name="pub-title" id="pub-title" onblur="imgSearchForPaper()" /><br/>
-                <label for="pub-author">Authors (each on a new line, "firstname lastname")</label></br>
-                <textarea rows="3" name="pub-author" id="pub-author" ></textarea><br/>
-                <?php var_dump($names); ?>
-                <script>
-                  var people = <?php echo $names; ?>;
-                  $( "#pub-author" ).autocomplete({ minLength: 2,
-                      source: function( request, response ) {
-                        var terms = request.term.split("\n");
-                        var lastTerm = terms[terms.length-1].trim();
-                        var matcher = new RegExp( $.ui.autocomplete.escapeRegex( lastTerm ), "i" );
-                        response( $.grep( people, function( item ){ return matcher.test( item ); }) );
-                      }, 
-                      select: function( event, ui ) {
-                        event.isDefaultPrevented = function() {return true;}
-                        var txt = $("#pub-author").val();
-                        var terms = txt.split("\n");
-                        terms.pop();
-                        terms.push(ui.item.value);
-                        $("#pub-author").val(terms.join('\n'));
-                      },
-                      focus: function( event, ui ) {
-                        event.isDefaultPrevented = function() {return true;}
-                      }
-                    });
-                </script>
-                <label for="pub-venue">Publication venue</label><br/>
-                <input type="text" name="pub-venue" id="pub-venue" /><br/>
-                <label for="pub-year">Year</label><br/>
-                <input type="text" name="pub-year" id="pub-year" /><br/>
-                <label for="pub-url">Link (url)</label><br/>
-                <input type="text" name="pub-url" id="pub-url" /><br/>
-                <input type="submit" value="Add publication"/>
-              </p></form>
-            </td>
-          </tr>
 <?php
 }
 ?>
 
         </table></p>
+        </form>
       </div> <!-- content -->
 
-			<div id="footer">
+      <div id="footer">
 				<div style="text-align: center">
 					For questions and comments e-mail 
 					<a href="mailto:usewod2013-chairs@googlegroups.com">USEWOD Chairs</a><br/>

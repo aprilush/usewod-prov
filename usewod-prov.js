@@ -17,7 +17,7 @@ function imgSearchCompleteForPaper() {
   if (imgSearcher.results && imgSearcher.results.length > 0) {
     console.log("found image with url: ", imgSearcher.results[0].url);
     $("#pub-img-div").empty();
-    $("#pub-img-div").prepend('<img src="'+imgSearcher.results[0].url+'" /><input type="hidden" name="pub-img" value="'+imgSearcher.results[0].url+'" />');
+    $("#pub-img-div").prepend('<div class="button"><img src="'+imgSearcher.results[0].url+'" /><input type="hidden" name="pub-img" value="'+imgSearcher.results[0].url+'" /></div>');
   } else {
     console.log("no image found, searching again");
     imgSearchForPaper();
@@ -35,7 +35,7 @@ function imgSearchCompleteForDataset() {
   if (imgSearcher.results && imgSearcher.results.length > 0) {
     console.log("found image with url: ", imgSearcher.results[0].url);
     $("#ds-img-div").empty();
-    $("#ds-img-div").prepend('<img src="'+imgSearcher.results[0].url+'" /><input type="hidden" name="ds-img" value="'+imgSearcher.results[0].url+'" />');
+    $("#ds-img-div").prepend('<div class="button"><img src="'+imgSearcher.results[0].url+'" /><input type="hidden" name="ds-img" value="'+imgSearcher.results[0].url+'" /></div>');
   } else {
     console.log("no image found, searching again");
     imgSearchForDataset();
@@ -103,11 +103,19 @@ $(function() {
     var div = $(event.target).closest("div");
     if (div.hasClass("button")) {
       if (div.attr("id")=="addds") {
-        $("tr[id='newds']").removeClass("hidden");
+        $("#newds").toggleClass("hidden");
       } else if (div.attr("id")=="addpub") {
-        $("tr[id='newpub']").removeClass("hidden");
+        $("#newpub").toggleClass("hidden");
       } else if (div.attr("id")=="link") {
         temp_rel_row = create_temp_rel($.obj1copy, $.obj2copy, $("#link-selector > select").val());
+      } else if (div.attr("id")=="reset") {
+        $("#obj-left").empty();
+        $("#link-selector").empty();
+        $("#obj-right").empty();
+        $.obj1orig.removeClass("selected");
+        $.obj2orig.removeClass("selected");
+        $.obj1copy = null;
+        $.obj2copy = null;
       } else {
         console.log("click clack on a button");
       }
