@@ -168,12 +168,11 @@ function add_graph_info($gid)
 
   $now = time();
   $ng_q = prefix().'
-    INSERT {
+    INSERT INTO usewod:graph {
       usewod:'.$gid.' dcterms:creator '.'"'.$username.'"'.' .
       usewod:'.$gid.' dcterms:created '.'"'.$now.'"'.' .
     }
   ';
-  // echo $ng_q ;
   $rs = $store->query($ng_q);
   if ($errs = $store->getErrors()) {
     echo "Error in add_graph_info";
