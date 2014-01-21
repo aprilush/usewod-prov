@@ -19,6 +19,15 @@ if (!$store->isSetUp()) {
   $store->setUp();
 }
 
+function prefix() 
+{
+  return '
+    PREFIX usewod: <http://data.usewod.org/> 
+    PREFIX schema: <http://schema.org/> 
+    PREFIX dcterms: <http://purl.org/dc/terms/> 
+  ';
+}
+
 function load_new_data() 
 {
   // how many objects are shown? 
@@ -39,8 +48,7 @@ function load_new_data()
   //     ?id schema:image ?img .
   //   }
   // ';
-  $ds_q = '
-    PREFIX schema: <http://schema.org/> 
+  $ds_q = prefix().'
     SELECT ?id WHERE {
       ?id a schema:Dataset . 
     }
@@ -68,8 +76,7 @@ function load_new_data()
   //     ?id schema:image ?img .
   //   }
   // ';
-  $pub_q = '
-    PREFIX schema: <http://schema.org/> 
+  $pub_q = prefix().'
     SELECT ?id WHERE {
       ?id a schema:ScholarlyArticle . 
     }
@@ -160,12 +167,10 @@ function add_graph_info($gid)
   global $username;
 
   $now = time();
-  $ng_q = '
-    PREFIX up: <http://data.semanticweb.org/usewod/2014/prov/> 
-    PREFIX dcterms: <http://purl.org/dc/terms/> 
-    INSERT INTO up:graphs {
-      up:'.$gid.' dcterms:creator '.'"'.$username.'"'.' .
-      up:'.$gid.' dcterms:created '.'"'.$now.'"'.' .
+  $ng_q = prefix().'
+    INSERT {
+      usewod:'.$gid.' dcterms:creator '.'"'.$username.'"'.' .
+      usewod:'.$gid.' dcterms:created '.'"'.$now.'"'.' .
     }
   ';
   // echo $ng_q ;
@@ -182,18 +187,16 @@ function add_dataset_from_fields($name, $v, $url, $img, $about)
   global $store;
   global $ds_ids;
 
-  $gid = uniqid("graph_");
-  $id = uniqid("dataset_");
-  $insert_q = '
-    PREFIX up: <http://data.semanticweb.org/usewod/2014/prov/> 
-    PREFIX schema: <http://schema.org/> 
-    INSERT INTO up:'.$gid.' { 
-      up:'.$id.' a schema:Dataset . 
-      up:'.$id.' schema:name '.'"'.$name.'"'.' .
-      up:'.$id.' schema:version '.'"'.$v.'"'.' . 
-      up:'.$id.' schema:url <'.$url.'> .
-      up:'.$id.' schema:image <'.$img.'> .
-      up:'.$id.' schema:description '.'"'.$about.'"'.' .
+  $gid = uniqid("graph/");
+  $id = uniqid("dataset/");
+  $insert_q = prefix().'
+    INSERT INTO usewod:'.$gid.' { 
+      usewod:'.$id.' a schema:Dataset . 
+      usewod:'.$id.' schema:name '.'"'.$name.'"'.' .
+      usewod:'.$id.' schema:version '.'"'.$v.'"'.' . 
+      usewod:'.$id.' schema:url <'.$url.'> .
+      usewod:'.$id.' schema:image <'.$img.'> .
+      usewod:'.$id.' schema:description '.'"'.$about.'"'.' .
     }
   ';
   $rs = $store->query($insert_q);  
@@ -212,35 +215,33 @@ function add_paper_from_fields($title, $authors, $venue, $year, $url, $img)
   global $pub_ids;
   $names = explode("\n",$authors);
 
-  $gid = uniqid("graph_");
-  $id = uniqid("publication_");
+  $gid = uniqid("graph/");
+  $id = uniqid("publication/");
 
-  $insert_q = '
-    PREFIX up: <http://data.semanticweb.org/usewod/2014/prov/> 
-    PREFIX schema: <http://schema.org/> 
-    INSERT INTO up:'.$gid.' { 
-      up:'.$id.' a schema:ScholarlyArticle . 
-      up:'.$id.' schema:name '.'"'.$title.'"'.' .
-      up:'.$id.' schema:copyrightYear '.'"'.$year.'"'.' .
-      up:'.$id.' schema:url <'.$url.'> .
-      up:'.$id.' schema:image <'.$img.'> . ';
+  $insert_q = prefix().'
+    INSERT INTO usewod:'.$gid.' { 
+      usewod:'.$id.' a schema:ScholarlyArticle . 
+      usewod:'.$id.' schema:name '.'"'.$title.'"'.' .
+      usewod:'.$id.' schema:copyrightYear '.'"'.$year.'"'.' .
+      usewod:'.$id.' schema:url <'.$url.'> .
+      usewod:'.$id.' schema:image <'.$img.'> . ';
   foreach ($names as $name) 
   {
     $name = trim($name);
     $aid = find_author_id($name);
     if ( !$aid ) 
     {
-      $aid = uniqid("person_");
+      $aid = uniqid("person/");
       $insert_q = $insert_q.'
-        up:'.$aid.' a schema:Person .
-        up:'.$aid.' schema:name "'.$name.'" . 
-        up:'.$id.' schema:author up:'.$aid.' . 
+        usewod:'.$aid.' a schema:Person .
+        usewod:'.$aid.' schema:name "'.$name.'" . 
+        usewod:'.$id.' schema:author usewod:'.$aid.' . 
       ';
     } 
     else 
     {
       $insert_q = $insert_q.'
-        up:'.$id.' schema:author <'.$aid.'> . 
+        usewod:'.$id.' schema:author <'.$aid.'> . 
       ';
     }
   }
@@ -260,8 +261,7 @@ function find_author_id($name)
 {
   global $store;
 
-  $name_q = '
-    PREFIX schema: <http://schema.org/> 
+  $name_q = prefix().'
     SELECT ?aid WHERE {
       ?aid a schema:Person .
       ?aid schema:name "'.$name.'" .
@@ -286,11 +286,10 @@ function add_relation($s, $p, $o)
 {
   global $store;
 
-  $gid = uniqid("graph_");
+  $gid = uniqid("graph/");
 
-  $insert_q = '
-    PREFIX up: <http://data.semanticweb.org/usewod/2014/prov/> 
-    INSERT INTO up:'.$gid.' { 
+  $insert_q = prefix().'
+    INSERT INTO usewod:'.$gid.' { 
       <'.$s.'> <'.$p.'> <'.$o.'> .
     }
   ';
@@ -308,8 +307,7 @@ function get_all_people_names()
 {
   global $store;
 
-  $all_names_q = '
-    PREFIX schema: <http://schema.org/> 
+  $all_names_q = prefix().'
     SELECT ?name WHERE {
       ?id a schema:Person ; schema:name ?name .
     }
