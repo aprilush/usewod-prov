@@ -54,8 +54,8 @@ function imgSearchForDataset() {
 
 $(function() {
 
-  $.obj1orig = null;
-  $.obj1copy = null;
+  $.sourceobjorig = null;
+  $.sourceobjcopy = null;
   $.obj2orig = null;
   $.obj2copy = null;
 

@@ -235,9 +235,9 @@ else {
             <div class="workspace">
               <table>
                 <tr>
-<!--                   <td id="obj-left"></td>
-                  <td id="link-selector"></td>
-                  <td id="obj-right"></td> -->
+                  <td id="source-obj"></td>
+                  <td id="relations"></td>
+                  <td id="target-obj"></td>
                 </tr>
               </table>
             </div>
