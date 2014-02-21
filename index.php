@@ -235,7 +235,7 @@ else {
             <div class="workspace">
               <table>
                 <tr>
-                  <td id="source-obj"></td>
+                  <td id="source-obj" class="source"></td>
                   <td id="relations"></td>
                   <td id="target-obj"></td>
                 </tr>

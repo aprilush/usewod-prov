@@ -109,3 +109,7 @@ div.workspace td {
 div.spacer {
   margin-top: 20px;
 }
+
+td.source {
+  width: 30%;
+}
