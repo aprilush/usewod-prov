@@ -1,0 +1,140 @@
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix schema: <http://schema.org/> .
+@prefix usewod: <http://data.usewod.org/resource/> .
+@prefix usewodds: <http://data.usewod.org/dataset/> .
+@prefix usewodpub: <http://data.usewod.org/publication/> .
+@prefix usewodp: <http://data.usewod.org/person/> .
+
+usewod:bundle_aprilush_0 { 
+	usewod:aprilush 
+		a prov:Agent , schema:Person ; 
+		schema:name "aprilush" . 
+
+	usewod:qgen_0
+		a prov:Generation ;
+		prov:atTime "2014-02-18T18:25:00.000Z"^^xsd:dateTime . 
+
+	usewod:bundle_aprilush_0 
+		a prov:Entity , prov:Bundle ;
+		prov:qualifiedGeneration usewod:qgen_0 ;
+		prov:wasAttributedTo usewod:aprilush . 
+} 
+
+usewod:bundle_aprilush_1 { 
+
+	usewod:qgen_1
+		a prov:Generation ;
+		prov:atTime "2014-02-18T18:25:03.000Z"^^xsd:dateTime . 
+
+	usewod:bundle_aprilush_1 
+		a prov:Entity , prov:Bundle ;
+		prov:qualifiedGeneration usewod:qgen_1 ;
+		prov:wasAttributedTo usewod:aprilush . 
+
+	usewodds:my_dataset 
+		a prov:Entity , schema:Dataset ; 
+		schema:version "1.0" ; 
+		schema:name "My Fancy Dataset" ; 
+		schema:description "Dataset created for my paper titled Blah, presented at USEWOD2014 workshop at the ESWC2014." ; 
+		schema:image <http://fancy.org/images/my_dataset.png> ; 
+		schema:distribution usewod:mydatsetdownload .  
+	usewod:mydatasetdownload
+		a schema:DataDownload ;
+		schema:url <http://fancy.org/my_dataset> .
+}
+
+usewod:bundle_aprilush_2 {
+	
+	usewod:qgen_2
+		a prov:Generation ;
+		prov:atTime "2014-02-18T19:11:10.000Z"^^xsd:dateTime . 
+
+	usewod:bundle_aprilush_2 
+		a prov:Entity, prov:Bundle ; 
+		prov:qualifiedGeneration usewod:qgen_2 ;
+		prov:wasAttributedTo usewod:aprilush . 
+
+	usewodp:laura_dragan
+		a prov:Agent, schema:Person ;
+		schema:name "Laura Dragan" .
+
+	usewodp:markus_luczak_roesch 
+		a prov:Agent, schema:Person ;
+		schema:name "Markus Luczak-Roesch" .
+
+	usewodpub:my_paper 
+		a prov:Entity , schema:ScholarlyArticle ; 
+		schema:name "My Fancy Paper" ; 
+		schema:author usewodp:laura_dragan, usewodp:markus_luczak_roesch ;
+		schema:copyrightYear "2013" ; 
+		schema:url <http://fancy.org/publications/my_paper.pdf> ;
+		schema:image <http://fancy.org/images/my_paper.png> ;
+		prov:wasAttributedTo usewodp:laura_dragan, usewodp:markus_luczak_roesch .
+}
+
+usewod:bundle_aprilush_3 {
+	
+	usewod:qgen_3
+		a prov:Generation ;
+		prov:atTime "2014-02-18T19:45:35.000Z"^^xsd:dateTime . 
+
+	usewod:bundle_aprilush_3 
+		a prov:Entity, prov:Bundle ; 
+		prov:qualifiedGeneration usewod:qgen_3 ;
+		prov:wasAttributedTo usewod:aprilush . 
+
+	usewodp:max_van_kleek 
+		a prov:Agent, schema:Person ;
+		schema:name "Max Van Kleek" .
+
+	usewodpub:my_other_paper 
+		a prov:Entity , schema:ScholarlyArticle ; 
+		schema:name "My Other Fancy Paper" ; 
+		schema:author usewodp:laura_dragan, usewodp:max_van_kleek ;
+		schema:copyrightYear "2013" ; 
+		schema:url <http://fancy.org/publications/my_other_paper.pdf> ;
+		schema:image <http://fancy.org/images/my_other_paper.png> ;
+		prov:wasAttributedTo usewodp:laura_dragan, usewodp:max_van_kleek .
+}
+
+usewod:bundle_aprilush_4 {
+	
+	usewod:qgen_4
+		a prov:Generation ;
+		prov:atTime "2014-02-18T19:49:01.000Z"^^xsd:dateTime . 
+
+	usewod:bundle_aprilush_4 
+		a prov:Entity, prov:Bundle ; 
+		prov:qualifiedGeneration usewod:qgen_4 ;
+		prov:wasAttributedTo usewod:aprilush . 
+
+	usewod:activity_1 
+		a prov:Activity ; 
+		prov:used usewodds:my_dataset .
+
+	usewodpub:my_paper 
+		prov:wasGeneratedBy usewod:activity_1 ;
+		prov:wasDerivedFrom usewodds:my_dataset .
+
+}
+
+usewod:bundle_aprilush_5 {
+	
+	usewod:qgen_5
+		a prov:Generation ;
+		prov:atTime "2014-02-18T19:59:55.000Z"^^xsd:dateTime . 
+
+	usewod:bundle_aprilush_5 
+		a prov:Entity, prov:Bundle ; 
+		prov:qualifiedGeneration usewod:qgen_5 ;
+		prov:wasAttributedTo usewod:aprilush . 
+
+	usewod:activity_2 
+		a prov:Activity ; 
+		prov:used usewodds:my_dataset .
+
+	usewodpub:my_other_paper 
+		prov:wasGeneratedBy usewod:activity_2 ;
+		prov:wasDerivedFrom usewodds:my_dataset .
+}

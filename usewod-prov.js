@@ -26,7 +26,8 @@ function imgSearchCompleteForPaper() {
 
 function imgSearchForPaper() {
   if (!set) { setSearcher(); }
-  var title = $("#pub-title").val();
+  var title = $("#pub-title").val().trim();
+  if (title.length == 0) return;
   imgSearcher.setSearchCompleteCallback(this, imgSearchCompleteForPaper, null);
   imgSearcher.execute(title);
 }
@@ -44,7 +45,8 @@ function imgSearchCompleteForDataset() {
 
 function imgSearchForDataset() {
   if (!set) { setSearcher(); }
-  var title = $("#ds-name").val();
+  var title = $("#ds-name").val().trim();
+  if (title.length == 0) return;
   imgSearcher.setSearchCompleteCallback(this, imgSearchCompleteForDataset, null);
   imgSearcher.execute(title);
 }
@@ -58,9 +60,9 @@ $(function() {
   $.obj2copy = null;
 
   // how do we make this into proper provenance?
-  $.allLinksPubPub = ["cites", "contradicts", "extends"];
-  $.allLinksPubDs = ["uses", "describes", "evaluates", "analyses"];
-  $.allLinksDsPub = ["contains"];
+  $.allLinksPubPub = ["cites", "is cited by"];
+  $.allLinksPubDs = ["uses", "describes", "evaluates", "analyses", "compares"];
+  $.allLinksDsPub = ["is used in", "is described in", "is evaluated in", "is analysed in", "is compared in"];
   $.allLinksDsDs = ["extends", "includes", "overlaps", "isTransformation"];
 
   function copy_data(el) {

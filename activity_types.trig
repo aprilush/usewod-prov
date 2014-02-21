@@ -1,0 +1,120 @@
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix schema: <http://schema.org/> .
+@prefix usewod: <http://data.usewod.org/resource/> .
+@prefix usewodds: <http://data.usewod.org/dataset/> .
+@prefix usewodpub: <http://data.usewod.org/publication/> .
+@prefix usewodp: <http://data.usewod.org/person/> .
+
+{
+	usewod:aprilush 
+		a prov:Agent , schema:Person ; 
+		schema:name "aprilush" . 
+}
+
+#usewod:bundle_aprilush_6 { 
+
+	# usewod:referenced
+#	usewodpub:analysis_paper prov:wasDerivedFrom usewodpub:description_paper .
+
+#	usewod:qgen_6
+#		a prov:Generation ;
+#		prov:atTime "2014-02-18T18:25:03.000Z"^^xsd:dateTime . 
+#	usewod:bundle_aprilush_6 
+#		a prov:Entity , prov:Bundle ;
+#		prov:qualifiedGeneration usewod:qgen_6 ;
+#		prov:wasAttributedTo usewod:aprilush . 
+#}
+
+usewod:bundle_aprilush_7 { 
+	usewodds:dataset_a a prov:Entity, schema:Dataset .
+	usewodpub:analysis_paper a prov:Entity, schema:ScholarlyArticle .
+
+	usewod:analysis_activity 
+		a prov:Activity ;
+		prov:used usewodds:dataset_a .
+	usewodpub:analysis_paper prov:wasGeneratedBy usewod:analysis_activity .
+
+	usewod:qgen_7
+		a prov:Generation ;
+		prov:atTime "2014-02-18T18:25:03.000Z"^^xsd:dateTime . 
+	usewod:bundle_aprilush_7 
+		a prov:Entity , prov:Bundle ;
+		prov:qualifiedGeneration usewod:qgen_7 ;
+		prov:wasAttributedTo usewod:aprilush . 
+}
+
+usewod:bundle_aprilush_8 { 
+	usewodds:dataset_d a prov:Entity, schema:Dataset .
+	usewodpub:description_paper a prov:Entity, schema:ScholarlyArticle .
+
+	usewod:description_activity 
+		a prov:Activity ;
+		prov:used usewodds:dataset_d .
+	usewodpub:description_paper prov:wasGeneratedBy usewod:description_activity .
+
+	usewod:qgen_8
+		a prov:Generation ;
+		prov:atTime "2014-02-18T18:25:03.000Z"^^xsd:dateTime . 
+	usewod:bundle_aprilush_8 
+		a prov:Entity , prov:Bundle ;
+		prov:qualifiedGeneration usewod:qgen_8 ;
+		prov:wasAttributedTo usewod:aprilush . 
+}
+
+usewod:bundle_aprilush_9 { 
+	usewodds:dataset_u a prov:Entity, schema:Dataset .
+	usewodpub:usage_paper a prov:Entity, schema:ScholarlyArticle .
+
+	usewod:usage_activity 
+		a prov:Activity ;
+		prov:used usewodds:dataset_u .
+	usewodpub:usage_paper prov:wasGeneratedBy usewod:usage_activity .
+
+	usewod:qgen_9
+		a prov:Generation ;
+		prov:atTime "2014-02-18T18:25:03.000Z"^^xsd:dateTime . 
+	usewod:bundle_aprilush_9 
+		a prov:Entity , prov:Bundle ;
+		prov:qualifiedGeneration usewod:qgen_9 ;
+		prov:wasAttributedTo usewod:aprilush . 
+}
+
+usewod:bundle_aprilush_10 { 
+	usewodds:dataset_e a prov:Entity, schema:Dataset .
+	usewodpub:evaluation_paper a prov:Entity, schema:ScholarlyArticle .
+
+	usewod:evaluation_activity 
+		a prov:Activity ;
+		prov:used usewodds:dataset_e .
+	usewodpub:evaluation_paper prov:wasGeneratedBy usewod:evaluation_activity .
+
+	usewod:qgen_10
+		a prov:Generation ;
+		prov:atTime "2014-02-18T18:25:03.000Z"^^xsd:dateTime . 
+	usewod:bundle_aprilush_10 
+		a prov:Entity , prov:Bundle ;
+		prov:qualifiedGeneration usewod:qgen_10 ;
+		prov:wasAttributedTo usewod:aprilush . 
+}
+
+usewod:bundle_aprilush_11 { 
+	usewodds:dataset_c1 a prov:Entity, schema:Dataset .
+	usewodds:dataset_c2 a prov:Entity, schema:Dataset .
+	usewodpub:comparison_paper a prov:Entity, schema:ScholarlyArticle .
+
+	usewod:comparison_activity 
+		a prov:Activity ;
+		prov:used usewodds:dataset_c1 ;
+		prov:used usewodds:dataset_c2 .
+	usewodpub:comparison_paper prov:wasGeneratedBy usewod:comparison_activity .
+
+	usewod:qgen_11
+		a prov:Generation ;
+		prov:atTime "2014-02-18T18:25:03.000Z"^^xsd:dateTime . 
+	usewod:bundle_aprilush_11 
+		a prov:Entity , prov:Bundle ;
+		prov:qualifiedGeneration usewod:qgen_11 ;
+		prov:wasAttributedTo usewod:aprilush . 
+}
+

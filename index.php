@@ -142,36 +142,6 @@ else {
 
           <tr>
             <td width="50%">
-              <div class='button' id='addds'><img src="img/edit-table-insert-row-big-plus.png" /></div><h3>Datasets</h3>
-              <div class='spacer'>
-<?php
-                $len = count($datasets);
-                for ($i=0; $i < $len; $i++) 
-                { 
-                  $ds = $datasets[$i];
-                  echo '<div class="ds data" id="'.$ds["id"].'"><img src="'.$ds["img"].'" title="'.$ds["name"].'" /></div>' ;
-                }
-?>
-              </div>
-              <div class='clear-both'></div>
-              <div class="hidden" id="newds">
-                <!-- <form action="index.php" method="post"> -->
-                  <div class="button" id=""><input type="image" src="img/list-add.png"/></div>
-                  <div id="ds-img-div"></div>
-                  <h3>Add a new dataset</h3>
-                  <label for="ds-name">Name</label><br/>
-                  <input type="text" name="ds-name" id="ds-name" onblur="imgSearchForDataset()" /><br/>
-                  <label for="ds-v">Version (or date)</label></br>
-                  <input type="text" name="ds-v" id="ds-v" /><br/>
-                  <label for="ds-url">Link (url)</label><br/>
-                  <input type="text" name="ds-url" id="ds-url" /><br/>
-                  <label for="ds-about">Description</label><br/>
-                  <textarea rows="3" name="ds-about" id="ds-about"></textarea><br/>
-                  <!-- <input type="submit" value="Add dataset"/> -->
-                <!-- </form> -->
-              </div>
-            </td>
-            <td width="50%">
               <div class='button' id='addpub'><img src="img/document-new.png" /></div><h3>Publications</h3>
               <div class='spacer'>
 <?php
@@ -226,6 +196,36 @@ else {
                 <!-- </form> -->
               </div>
             </td>
+            <td width="50%">
+              <div class='button' id='addds'><img src="img/edit-table-insert-row-big-plus.png" /></div><h3>Datasets</h3>
+              <div class='spacer'>
+<?php
+                $len = count($datasets);
+                for ($i=0; $i < $len; $i++) 
+                { 
+                  $ds = $datasets[$i];
+                  echo '<div class="ds data" id="'.$ds["id"].'"><img src="'.$ds["img"].'" title="'.$ds["name"].'" /></div>' ;
+                }
+?>
+              </div>
+              <div class='clear-both'></div>
+              <div class="hidden" id="newds">
+                <!-- <form action="index.php" method="post"> -->
+                  <div class="button" id=""><input type="image" src="img/list-add.png"/></div>
+                  <div id="ds-img-div"></div>
+                  <h3>Add a new dataset</h3>
+                  <label for="ds-name">Name</label><br/>
+                  <input type="text" name="ds-name" id="ds-name" onblur="imgSearchForDataset()" /><br/>
+                  <label for="ds-v">Version (or date)</label></br>
+                  <input type="text" name="ds-v" id="ds-v" /><br/>
+                  <label for="ds-url">Link (url)</label><br/>
+                  <input type="text" name="ds-url" id="ds-url" /><br/>
+                  <label for="ds-about">Description</label><br/>
+                  <textarea rows="3" name="ds-about" id="ds-about"></textarea><br/>
+                  <!-- <input type="submit" value="Add dataset"/> -->
+                <!-- </form> -->
+              </div>
+            </td>
           <tr>
           <tr>
             <td colspan="2">
@@ -235,9 +235,9 @@ else {
             <div class="workspace">
               <table>
                 <tr>
-                  <td id="obj-left"></td>
+<!--                   <td id="obj-left"></td>
                   <td id="link-selector"></td>
-                  <td id="obj-right"></td>
+                  <td id="obj-right"></td> -->
                 </tr>
               </table>
             </div>
