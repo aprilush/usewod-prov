@@ -74,12 +74,8 @@ load_publications();
     <link rel="stylesheet" href="usewod2014.css"/>
     <link rel="dct:creator" href="http://aprilush.ro/card#laura" />
     <link rel="stylesheet" href="//code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
-    <script src="http://code.jquery.com/jquery-1.10.1.js"></script>
-    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-    <script src="https://www.google.com/jsapi"></script>
-    <script src="usewod-prov.js" type="text/javascript"></script>
   </head>
-    <body typeof="sioc:Site" about="">
+    <body typeof="sioc:Site" about="" ng-app="usewod-prov">
     <div id="container">
       <span rel="foaf:primaryTopic" resource="http://data.semanticweb.org/workshop/usewod/2014" />
       <div id="content">
@@ -139,7 +135,6 @@ else {
         <h2>Workspace (using name: <?php echo $username; ?>)</h2>
         <form action="index.php" method="post">
         <table width="100%">
-
           <tr>
             <td width="50%">
               <div class='button' id='addpub'><img src="img/document-new.png" /></div><h3>Publications</h3>
@@ -277,5 +272,10 @@ else {
 			  </div>
       </div> <!-- footer -->
 	  </div> <!-- container -->
+    <script src="http://code.jquery.com/jquery-1.10.1.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+    <script src="https://www.google.com/jsapi"></script>
+    <script src="usewod-prov.js" type="text/javascript"></script>
 	</body>
 </html>

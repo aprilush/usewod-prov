@@ -19,7 +19,7 @@
 		<link rel="stylesheet" href="usewod2014.css"/>
 		<link rel="dct:creator" href="http://aprilush.ro/card#laura" />
 	</head>
-		<body typeof="sioc:Site" about="">
+	<body typeof="sioc:Site" about="">
 		<div id="container">
 			<span rel="foaf:primaryTopic" resource="http://data.semanticweb.org/workshop/usewod/2014" />
 			<div id="content">
@@ -53,46 +53,64 @@
         <p>Paragraph from the workshop proposal, or some text from Markus.</p>
         <p>The special theme of the workshop: building a USEWOD Web Observatory to track the distribution of research based on the USEWOD data set.</p>
 
+        <div ng-app="usewod" ng-controller="prov">
 
-        <h2><a id="workspace"></a>Workspace</h2>
+        <div ng-hide="loggedin">
+        <h2>Please choose a username</h2>
+        <form ng-submit="setUsername()"><p><input type="text" name="username" ng-model="username"/></p></form>
+      	</div>
+
+      	<div ng-show="loggedin">
+        <h2>Workspace (using name: {{username}})</h2>
         <table width="100%">
           <tr>
-            <td width="40%">
-              <div class='button' id='refresh'><input type='image' src="img/view-refresh.png" /></div>
-              <div class='button' id='addds'><input type='image' src="img/edit-table-insert-row-big-plus.png" /></div>
-              <div class='button' id='addpub'><input type='image' src="img/document-new.png" /></div>
-              <div class='button' id='addperson'><input type='image' src="img/user-group-new.png" /></div>
+            <td width="50%">
+              <div class='button' id='addpub'><input type="image" src="img/document-new.png" /></div><h3>Publications</h3>
+              <div class='spacer'>
+								<div ng-repeat="pub in publications" class="publication data" id="{{pub.id}}"><img ng-src="{{pub.img}}" title="{{pub.title}}" />
+								</div>
+              </div>
               <div class='clear-both'></div>
+              <div class="hidden" id="newpub">
+                  <div class="button"><input type="image" src="img/list-add.png" ng-click="addPublication()"/></div>
+                  <div class="button" ng-show="pubImg"><img name="pub-img" ng-src="{{pubImg}}" /></div>
+                  <h3>Add a new publication</h3>
+                  <label for="pub-title">Title</label><br/>
+                  <input type="text" name="pub-title" id="pub-title" ng-model="pubTitle" ng-blur="imgSearchForPaper()" /><br/>
+                  <label for="pub-author">Authors (each on a new line, "firstname lastname")</label></br>
+                  <textarea rows="3" name="pub-author" id="pub-author" ng-model="pubAuthor"></textarea><br/>
+                  <label for="pub-venue">Publication venue</label><br/>
+                  <input type="text" name="pub-venue" id="pub-venue" ng-model="pubVenue" /><br/>
+                  <label for="pub-year">Year</label><br/>
+                  <input type="text" name="pub-year" id="pub-year" ng-model="pubYear" /><br/>
+                  <label for="pub-url">Link (url)</label><br/>
+                  <input type="text" name="pub-url" id="pub-url" ng-model="pubUrl" /><br/>
+              </div>
             </td>
-            <td>
-              <div class='button' id='connect'><input type='image' src="img/insert-link.png" /></div>
-              <div class='button' id='reset'><input type='image' src="img/edit-clear.png" /></div>
+            <td width="50%">
+              <div class='button' id='addds'><input type="image" src="img/edit-table-insert-row-big-plus.png" /></div><h3>Datasets</h3>
+              <div class='spacer'>
+								<div ng-repeat="ds in datasets" class="dataset data" id="{{ds.id}}"><img ng-src="{{ds.img}}" title="{{ds.name}}" /></div> 
+              </div>
               <div class='clear-both'></div>
+              <div class="hidden" id="newds">
+                  <div class="button" id=""><input type="image" src="img/list-add.png"/></div>
+                  <div class="button" ng-show="dsImg"><img name="ds-img" ng-src="{{dsImg}}" /></div>
+                  <h3>Add a new dataset</h3>
+                  <label for="ds-name">Name</label><br/>
+                  <input type="text" name="ds-name" id="ds-name" ng-model="dsName" ng-blur="imgSearchForDataset()" /><br/>
+                  <label for="ds-v">Version (or date)</label></br>
+                  <input type="text" name="ds-v" id="ds-v" ng-model="dsV" /><br/>
+                  <label for="ds-url">Link (url)</label><br/>
+                  <input type="text" name="ds-url" id="ds-url" ng-model="dsUrl" /><br/>
+                  <label for="ds-about">Description</label><br/>
+                  <textarea rows="3" name="ds-about" id="ds-about" ng-model="dsAbout" ></textarea><br/>
+              </div>
             </td>
-          </tr>
           <tr>
-            <td>
-              <h3>Datasets</h3>
-              <div class='data' id='refresh'><input type='image' src="img/table-usewod2011-48.png" title="USEWOD 2011 Dataset" /></div>
-              <div class='data' id='refresh'><input type='image' src="img/table-usewod2012-48.png" title="USEWOD 2012 Dataset" /></div>
-              <div class='data' id='refresh'><input type='image' src="img/table-2013-48.png" title="USEWOD 2013 Dataset" /></div>
-              <div class='data' id='refresh'><input type='image' src="img/table-2014-48.png" title="USEWOD 2014 Dataset" /></div>
-              <div class='clear-both'></div>        
-              <h3>Publications</h3>
-              <div class='data' id='addperson'><input type='image' src="img/c.png" /></div>
-              <div class='data' id='load'><input type='image' src="img/d.png" /></div>
-              <div class='clear-both'></div>        
-              <h3>People</h3>
-              <div class='data' id='addpub'><input type='image' src="http://people.cs.kuleuven.be/~bettina.berendt/bettina2.png" title="Bettina Berendt" /></div>
-              <div class='data' id='addpub'><input type='image' src="http://www.cs.vu.nl/~laurah/images/me_in_atacama.jpg" title="Laura Hollink" /></div>
-              <div class='data' id='addpub'><input type='image' src="https://lh5.googleusercontent.com/-DgE9PJxCjl4/UipM0qKaseI/AAAAAAAAAJE/q9WyOjCme38/w414-h415-no/20130822_095104_resized.jpg" title="Markus Luczak-Roesch" /></div>
-              <div class='clear-both'></div>
-            </td>
-            <td>
-              <h3>New links</h3>
-            </td>
-          </tr>
-        </table></p>
+        </table>
+    		</div>
+    		</div>
 
       </div> <!-- content -->
 
@@ -108,5 +126,12 @@
 			  </div>
       </div> <!-- footer -->
 	  </div> <!-- container -->
+	
+		<script src="http://code.jquery.com/jquery-1.10.1.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    <script src="https://www.google.com/jsapi"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular.min.js"></script>
+    <script src="usewod-prov.js" type="text/javascript"></script>
 	</body>
 </html>
+

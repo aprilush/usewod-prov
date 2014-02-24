@@ -1,56 +1,81 @@
 google.load('search', '1');
 
-var imgSearcher;
-var set = false;
+var usewodModule = angular.module('usewod', []);
 
-function setSearcher() {
-  imgSearcher = new google.search.ImageSearch();
-  imgSearcher.setRestriction(google.search.ImageSearch.RESTRICT_FILETYPE, google.search.ImageSearch.FILETYPE_PNG);
-  imgSearcher.setRestriction(google.search.ImageSearch.RESTRICT_IMAGESIZE, google.search.ImageSearch.IMAGESIZE_MEDIUM);
-  imgSearcher.setRestriction(google.search.Search.RESTRICT_SAFESEARCH, google.search.Search.SAFESEARCH_ON);
-  imgSearcher.setNoHtmlGeneration();
-  imgSearcher.setResultSetSize(1);
-  set = true;
-}
+usewodModule.controller('prov', function($scope, $sce) {
+  $scope.publications = [];
+  $scope.datasets = [];
+  var imgSearcher;
 
-function imgSearchCompleteForPaper() {
-  if (imgSearcher.results && imgSearcher.results.length > 0) {
-    console.log("found image with url: ", imgSearcher.results[0].url);
-    $("#pub-img-div").empty();
-    $("#pub-img-div").prepend('<div class="button"><img src="'+imgSearcher.results[0].url+'" /><input type="hidden" name="pub-img" value="'+imgSearcher.results[0].url+'" /></div>');
-  } else {
-    console.log("no image found, searching again");
-    imgSearchForPaper();
+  $scope.setUsername = function() {
+    console.log($scope.username);
+    $scope.loggedin = true;
   }
-}
 
-function imgSearchForPaper() {
-  if (!set) { setSearcher(); }
-  var title = $("#pub-title").val().trim();
-  if (title.length == 0) return;
-  imgSearcher.setSearchCompleteCallback(this, imgSearchCompleteForPaper, null);
-  imgSearcher.execute(title);
-}
-
-function imgSearchCompleteForDataset() {
-  if (imgSearcher.results && imgSearcher.results.length > 0) {
-    console.log("found image with url: ", imgSearcher.results[0].url);
-    $("#ds-img-div").empty();
-    $("#ds-img-div").prepend('<div class="button"><img src="'+imgSearcher.results[0].url+'" /><input type="hidden" name="ds-img" value="'+imgSearcher.results[0].url+'" /></div>');
-  } else {
-    console.log("no image found, searching again");
-    imgSearchForDataset();
+  var setSearcher = function() {
+    imgSearcher = new google.search.ImageSearch();
+    imgSearcher.setRestriction(google.search.ImageSearch.RESTRICT_FILETYPE, google.search.ImageSearch.FILETYPE_PNG);
+    imgSearcher.setRestriction(google.search.ImageSearch.RESTRICT_IMAGESIZE, google.search.ImageSearch.IMAGESIZE_MEDIUM);
+    imgSearcher.setRestriction(google.search.Search.RESTRICT_SAFESEARCH, google.search.Search.SAFESEARCH_ON);
+    imgSearcher.setNoHtmlGeneration();
+    imgSearcher.setResultSetSize(1);
   }
-}
 
-function imgSearchForDataset() {
-  if (!set) { setSearcher(); }
-  var title = $("#ds-name").val().trim();
-  if (title.length == 0) return;
-  imgSearcher.setSearchCompleteCallback(this, imgSearchCompleteForDataset, null);
-  imgSearcher.execute(title);
-}
+  var imgSearchCompleteForPaper = function() {
+    if (imgSearcher.results && imgSearcher.results.length > 0) {
+      console.log("found image with url: ", imgSearcher.results[0].url);
+      $scope.$apply( function() {
+        $scope.pubImg = $sce.getTrustedUrl($sce.trustAsUrl(imgSearcher.results[0].url))
+      });
+      console.log($scope.pubImg);
+    } else {
+      console.log("no image found, searching again");
+      $scope.imgSearchForPaper();
+    }
+  }
 
+  $scope.imgSearchForPaper = function() {
+    if (!imgSearcher) { setSearcher(); }
+    var title = $scope.pubTitle;
+    if (title.length == 0) return;
+    imgSearcher.setSearchCompleteCallback(this, imgSearchCompleteForPaper, null);
+    imgSearcher.execute(title);
+  }
+
+  var imgSearchCompleteForDataset = function() {
+    if (imgSearcher.results && imgSearcher.results.length > 0) {
+      console.log("found image with url: ", imgSearcher.results[0].url);
+      $scope.$apply( function() {
+        $scope.dsImg = $sce.getTrustedUrl($sce.trustAsUrl(imgSearcher.results[0].url))
+      });
+      console.log($scope.pubImg);
+    } else {
+      console.log("no image found, searching again");
+      $scope.imgSearchForDataset();
+    }
+  }
+
+  $scope.imgSearchForDataset = function() {
+    if (!imgSearcher) { setSearcher(); }
+    var title = $scope.dsName;
+    if (title.length == 0) return;
+    imgSearcher.setSearchCompleteCallback(this, imgSearchCompleteForDataset, null);
+    imgSearcher.execute(title);
+  }
+
+  $scope.addPublication = function() {
+    console.log("Adding a new paper! ");
+    var data = {"pub-title":$scope.pubTitle, "pub-author":$scope.pubAuthor, "pub-venue":$scope.pubVenue, "pub-year":$scope.pubYear, "pub-url":$scope.pubUrl, "pub-img":$scope.pubImg};
+    var suc = function(respData, status, jqXHR) {
+      console.log("received: ", respData, status, jqXHR);
+    };
+    $.post("addpublication.php", data, suc, "json");
+  }
+
+  $scope.addDataset = function() {
+    console.log("Adding a new dataset! ");
+  }
+});
 
 $(function() {
 
