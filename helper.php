@@ -19,10 +19,12 @@ if (!$store->isSetUp()) {
   $store->setUp();
 }
 
+$usewod_url = 'http://data.usewod.org/';
+
 function prefix() 
 {
   return '
-    PREFIX usewod: <http://data.usewod.org/> 
+    PREFIX usewod: <'.$usewod_url.'> 
     PREFIX schema: <http://schema.org/> 
     PREFIX dcterms: <http://purl.org/dc/terms/> 
   ';

@@ -3,8 +3,6 @@ google.load('search', '1');
 var usewodModule = angular.module('usewod', []);
 
 usewodModule.controller('prov', function($scope, $sce) {
-  $scope.publications = [];
-  $scope.datasets = [];
   var imgSearcher;
 
   $scope.setUsername = function() {
@@ -74,7 +72,26 @@ usewodModule.controller('prov', function($scope, $sce) {
 
   $scope.addDataset = function() {
     console.log("Adding a new dataset! ");
+    var data = {"ds-name":$scope.dsName, "ds-v":$scope.dsV, "ds-url":$scope.dsUrl, "ds-img":$scope.dsImg, "ds-about":$scope.dsAbout};
+    var suc = function(respData, status, jqXHR) {
+      console.log("received: ", respData, status, jqXHR);
+    };
+    $.post("adddataset.php", data, suc, "json");
   }
+
+  var loadData = function() {
+    console.log("started loading data");
+    $scope.publications = [];
+    $scope.datasets = [];
+    
+    console.log("finished loading data");
+  }
+
+  $scope.$watch('loggedin', function() { 
+    if ($scope.loggedin) {
+      loadData();
+    }
+  });
 });
 
 $(function() {
