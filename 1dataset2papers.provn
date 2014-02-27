@@ -1,0 +1,90 @@
+document
+	prefix usewod <http://data.usewod.org/resource/>
+
+	bundle usewod:bundle_aprilush_0
+		prefix schema <http://schema.org/>
+		prefix usewod <http://data.usewod.org/resource/>
+
+		agent(usewod:aprilush, [schema:name="Laura Dragan", prov:type="schema:Person", schema:email="aprilush@mail.com"])
+
+		entity(usewod:bundle_aprilush_0, [prov:type='prov:Bundle'])
+		wasAttributedTo(usewod:bundle_aprilush_0, usewod:aprilush)
+		wasGeneratedBy(usewod:bundle_aprilush_0, -, 2014-02-18T18:20:08+00:00)
+	endBundle
+
+	bundle usewod:bundle_aprilush_1
+		prefix schema <http://schema.org/>
+		prefix usewod <http://data.usewod.org/resource/>
+		prefix usewodds <http://data.usewod.org/dataset/>
+
+		entity(usewodds:my_dataset, [prov:type='schema:Dataset'])
+
+		entity(usewod:bundle_aprilush_1, [prov:type='prov:Bundle'])
+		wasAttributedTo(usewod:bundle_aprilush_1, usewod:aprilush)
+		wasGeneratedBy(usewod:bundle_aprilush_1, -, 2014-02-18T18:25:03+00:00)
+	endBundle
+
+	bundle usewod:bundle_aprilush_2
+		prefix schema <http://schema.org/>
+		prefix usewod <http://data.usewod.org/resource/>
+		prefix usewodpub <http://data.usewod.org/publication/>
+		prefix usewodp <http://data.usewod.org/person/>
+
+		agent(usewodp:laura_dragan, [schema:name="Laura Dragan", prov:type='schema:Person'])
+		agent(usewodp:markus_luczak_roesch, [schema:name="Markus Luczak-Roesch", prov:type='schema:Person'])
+		entity(usewodpub:my_paper, [prov:type='schema:ScholarlyArticle', schema:name="My Fancy Paper"])
+		wasAttributedTo(usewodpub:my_paper, usewodp:laura_dragan)
+		wasAttributedTo(usewodpub:my_paper, usewodp:markus_luczak_roesch)
+		
+		entity(usewod:bundle_aprilush_2, [prov:type='prov:Bundle'])
+		wasAttributedTo(usewod:bundle_aprilush_2, usewod:aprilush)
+		wasGeneratedBy(usewod:bundle_aprilush_2, -, 2014-02-18T19:11:10+00:00)
+	endBundle
+
+	bundle usewod:bundle_aprilush_3
+		prefix schema <http://schema.org/>
+		prefix usewod <http://data.usewod.org/resource/>
+		prefix usewodpub <http://data.usewod.org/publication/>
+		prefix usewodp <http://data.usewod.org/person/>
+
+		agent(usewodp:max_van_kleek, [prov:type='schema:Person', schema:name="Max Van Kleek"])
+		entity(usewodpub:my_other_paper, [schema:name="My Other Fancy Paper", prov:type='schema:ScholarlyArticle'])
+		wasAttributedTo(usewodpub:my_other_paper, usewodp:laura_dragan)
+		wasAttributedTo(usewodpub:my_other_paper, usewodp:max_van_kleek)
+		
+		entity(usewod:bundle_aprilush_3, [prov:type='prov:Bundle'])
+		wasAttributedTo(usewod:bundle_aprilush_3, usewod:aprilush)
+		wasGeneratedBy(usewod:bundle_aprilush_3, -, 2014-02-18T19:45:35+00:00)
+	endBundle
+
+	bundle usewod:bundle_aprilush_4
+		prefix usewod <http://data.usewod.org/resource/>
+		prefix usewodds <http://data.usewod.org/dataset/>
+		prefix usewodpub <http://data.usewod.org/publication/>
+
+		activity(usewod:activity_1)
+		used(usewod:activity_1, usewodds:my_dataset, -)
+		wasGeneratedBy(usewodpub:my_paper, usewod:activity_1, -)
+		wasDerivedFrom(usewodpub:my_paper, usewodds:my_dataset, -, -, -)
+		
+		entity(usewod:bundle_aprilush_4, [prov:type='prov:Bundle'])
+		wasAttributedTo(usewod:bundle_aprilush_4, usewod:aprilush)
+		wasGeneratedBy(usewod:bundle_aprilush_4, -, 2014-02-18T19:49:01+00:00)
+	endBundle
+
+	bundle usewod:bundle_aprilush_5
+		prefix usewod <http://data.usewod.org/resource/>
+		prefix usewodds <http://data.usewod.org/dataset/>
+		prefix usewodpub <http://data.usewod.org/publication/>
+
+		activity(usewod:activity_2)
+		used(usewod:activity_2, usewodds:my_dataset, -)
+		wasGeneratedBy(usewodpub:my_other_paper, usewod:a  ctivity_2, -)
+		wasDerivedFrom(usewodpub:my_other_paper, usewodds:my_dataset, -, -, -)
+
+		entity(usewod:bundle_aprilush_5, [prov:type='prov:Bundle'])
+		wasAttributedTo(usewod:bundle_aprilush_5, usewod:aprilush)
+		wasGeneratedBy(usewod:bundle_aprilush_5, -, 2014-02-18T19:59:55+00:00)
+	endBundle
+
+endDocument

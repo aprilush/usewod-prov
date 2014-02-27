@@ -3,16 +3,13 @@
 include_once("/var/www/html/usewod-prov/helper.php");
 
 if ( isset($_POST['pub-title']) && !empty($_POST['pub-title']) && // title and author are mandatory
-    isset($_POST['pub-author']) && !empty($_POST['pub-author']) &&
-    isset($_POST['pub-venue']) && 
-    isset($_POST['pub-year']) && 
-    isset($_POST['pub-url']) && 
-    isset($_POST['pub-img']) ) {
+    isset($_POST['pub-author']) && !empty($_POST['pub-author']) ) {
   add_paper_from_fields($_POST['pub-title'], $_POST['pub-author'], $_POST['pub-venue'], $_POST['pub-year'], $_POST['pub-url'], $_POST['pub-img']);
 }
 
 function add_paper_from_fields($title, $authors, $venue, $year, $url, $img) {
   global $store;
+  global $usewod_url;
   $names = explode("\n",$authors);
   $gid = uniqid("graph/");
   $id = uniqid("publication/");
@@ -53,7 +50,7 @@ function add_paper_from_fields($title, $authors, $venue, $year, $url, $img) {
     return;
   }
   add_graph_info($gid);
-  echo "{'id':'usewod:".$id."'}";
+  echo "{'added':[{'id':'".$usewod_url.$id."'}]";
 }
 
 function find_author_id($name)

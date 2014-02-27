@@ -1,0 +1,35 @@
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix schema: <http://schema.org/> .
+@prefix usewod: <http://data.usewod.org/> .
+
+usewod:usewod
+	a prov:Entity, schema:Dataset ;
+	schema:name "USEWOD" ;
+	schema:image <> .
+
+usewod:usewod2011
+	a prov:Entity, schema:Dataset ;
+	schema:name "USEWOD2011" ;
+	schema:url <http://data.semanticweb.org/usewod/2011/challenge.html> ;
+	prov:specializationOf usewod:usewod .
+
+usewod:usewod2012
+	a prov:Entity, schema:Dataset ;
+	schema:name "USEWOD2012" ;
+	schema:url <http://data.semanticweb.org/usewod/2012/challenge.html> ;
+	prov:specializationOf usewod:usewod ;
+	prov:wasRevisionOf usewod:usewod2011 .
+
+usewod:usewod2013
+	a prov:Entity, schema:Dataset ;
+	schema:name "USEWOD2013" ;
+	schema:url <http://data.semanticweb.org/usewod/2013/challenge.html> ;
+	prov:specializationOf usewod:usewod ;
+	prov:wasRevisionOf usewod:usewod2012 .	
+
+usewod:usewod2014
+	a prov:Entity, schema:Dataset ;
+	schema:name "USEWOD2014" ;
+	schema:url <http://usewod.org/data-sets.html> ;
+	prov:specializationOf usewod:usewod .
