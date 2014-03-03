@@ -1,7 +1,44 @@
 google.load('search', '1');
 
 var usewodModule = angular.module('usewod', []);
-
+usewodModule.directive('draggable', function() {
+  return {
+    restrict:'A', 
+    require: '?ngModel',
+    link: function(scope, element, attrs) {
+      console.log("data: ", attrs['data']);
+      console.log("draggable model (link)");
+      element.draggable({
+        revert:true, 
+        helper: 'clone',
+        start: function(event, ui) {
+          console.log("started dragging"); 
+        },
+        // stop: function(event, ui) {
+        //   console.log("stoped dragging"); 
+        // }
+      });
+    }
+  }
+});
+usewodModule.directive('droppable', function() {
+  return {
+    restrict:'A', 
+    require: '?ngModel',
+    link: function(scope, element, attrs) {
+      console.log("data: ", attrs['data']);
+      console.log("droppable model (link)");
+      element.droppable({
+        accept: ".data",
+        hoverClass: "drop-hover",
+        drop:function(event,ui) {
+          console.log("dropped something", element, ui);
+          $(this).append($(ui.draggable.clone())); 
+        }
+      });
+    }
+  }
+});
 usewodModule.controller('prov', function($scope, $sce) {
   var imgSearcher;
 
@@ -156,17 +193,28 @@ usewodModule.controller('prov', function($scope, $sce) {
 
 $(function() {
 
-  $(".datapub").draggable("option", "cursor", "move" );
-  $(".datapub").draggable("option", "helper", "clone" );
-  $(".datapub").draggable("option", "opacity", 0.5 );
-  // $(".data > img").draggable("option", "cursor", "zoom-in" );
-  // $(".data,.publication").draggable("option", "scope", "publication");
-  // $(".data,.dataset").draggable("option", "scope", "dataset");
-  $(".rel").droppable({
-    drop: function() {
-      alert( "dropped" );
-    }
-  });
+  // $(".datapub").draggable({
+  //   appendTo: "body",
+  //   cursor: "move",
+  //   helper: 'clone',
+  //   revert: "invalid",
+  //   opacity: 0.5,
+  //   start: function( event, ui ) {
+  //     console.log("starting drag", ui, event);
+  //     // parent_div_data = $(this).parent().attr("id");
+  //   }
+  // });
+  // // $(".data > img").draggable("option", "cursor", "zoom-in" );
+  // // $(".data,.publication").draggable("option", "scope", "publication");
+  // // $(".data,.dataset").draggable("option", "scope", "dataset");
+  // $(".rel").droppable({
+  //   tolerance: "intersect",
+  //   accept: ".datapub",
+  //   drop: function(event, ui) {                       
+  //     console.log("dropped something", ui, event);
+  //     // $(this).append($(ui.draggable)).clone();               
+  //   }
+  // });
 
 
   // $.sourceobjorig = null;

@@ -67,7 +67,7 @@
             <td width="50%">
               <div class='button' id='addpub'><input type="image" src="img/document-new.png" /></div><h3>Publications</h3>
               <div class='spacer'>
-                <div ng-repeat="pub in publications" class="publication data" id="{{pub.id}}" ng-click="selectedPub(pub)" draggable="true"><img ng-src="{{pub.img}}" title="{{pub.title}}" class="datapub" /></div>
+                <div ng-repeat="pub in publications" class="publication data" id="{{pub.id}}" ng-click="selectedPub(pub)" draggable data="{{pub}}"><img ng-src="{{pub.img}}" title="{{pub.title}}" /></div>
               </div>
               <div class='clear-both'></div>
               <div class="hidden" id="newpub">
@@ -89,7 +89,7 @@
             <td width="50%">
               <div class='button' id='addds'><input type="image" src="img/edit-table-insert-row-big-plus.png" /></div><h3>Datasets</h3>
               <div class='spacer'>
-								<div ng-repeat="ds in datasets" class="dataset data" id="{{ds.id}}" ng-click="selectedDs(ds)" draggable="true"><img ng-src="{{ds.img}}" title="{{ds.name}}" /></div> 
+								<div ng-repeat="ds in datasets" class="dataset data" id="{{ds.id}}" ng-click="selectedDs(ds)" draggable data="{{ds}}"><img ng-src="{{ds.img}}" title="{{ds.name}}" /></div> 
               </div>
               <div class='clear-both'></div>
               <div class="hidden" id="newds">
@@ -117,9 +117,9 @@
                 <tr>
                   <td id="source-obj" class="source"><a ng-href="{{sourceUrl}}">{{sourceName}}</a></td>
                   <td id="relations">
-                    <div ng-repeat="relp in relationsToPub" droppable="true" class="rel">{{relp}}</div>
+                    <div ng-repeat="relp in relationsToPub" droppable class="rel publication">{{relp}}</div>
                     <br/>
-                    <div ng-repeat="reld in relationsToDs" droppable="true" class="rel">{{reld}}</div>
+                    <div ng-repeat="reld in relationsToDs" droppable class="rel dataset">{{reld}}</div>
                   </td>
                 </tr>
               </table>
