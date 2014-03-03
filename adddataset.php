@@ -13,19 +13,25 @@ function add_dataset_from_fields($name, $v, $url, $img, $about)
 
   $gid = uniqid("graph/");
   $id = uniqid("dataset/");
+  
+  $newds = array("id" => $id, "name" => $name);
   $triples = [' usewod:'.$id.' a schema:Dataset ', 
               ' usewod:'.$id.' schema:name '.'"'.$name.'" ' ];
   if ( isset($v) && !empty($v) ) {
-      $triples[] = ' usewod:'.$id.' schema:version '.'"'.$v.'" ';
+    $newdds["version"] = $v;  
+    $triples[] = ' usewod:'.$id.' schema:version '.'"'.$v.'" ';
   }
   if ( isset($url) && !empty($url) ) {
-      $triples[] = ' usewod:'.$id.' schema:url <'.$url.'> ';
+    $newds["url"] = $url;
+    $triples[] = ' usewod:'.$id.' schema:url <'.$url.'> ';
   }
   if ( isset($img) && !empty($img) ) {
-      $triples[] = ' usewod:'.$id.' schema:image <'.$img.'> ';
+    $newds["img"] = $img;
+    $triples[] = ' usewod:'.$id.' schema:image <'.$img.'> ';
   }
   if ( isset($about) && !empty($about) ) {
-      $triples[] = ' usewod:'.$id.' schema:description '.'"'.$about.'" ';
+    $newds["about"] = $about;
+    $triples[] = ' usewod:'.$id.' schema:description '.'"'.$about.'" ';
   }
 
   $insert_q = prefix().'INSERT INTO usewod:'.$gid.' { '. implode(" . ", $triples) .'}';
@@ -37,7 +43,8 @@ function add_dataset_from_fields($name, $v, $url, $img, $about)
     return;
   }
   add_graph_info($gid);
-  echo "{ '".$usewod_url.$id."': { 'name': } }";
+  $rez = array("added" => $newds);
+  echo json_encode($rez);
 }
 
 ?>

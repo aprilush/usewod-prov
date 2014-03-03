@@ -14,13 +14,23 @@ function add_paper_from_fields($title, $authors, $venue, $year, $url, $img) {
   $gid = uniqid("graph/");
   $id = uniqid("publication/");
 
-  $insert_q = prefix().'
-    INSERT INTO usewod:'.$gid.' { 
-      usewod:'.$id.' a schema:ScholarlyArticle . 
-      usewod:'.$id.' schema:name '.'"'.$title.'"'.' .
-      usewod:'.$id.' schema:copyrightYear '.'"'.$year.'"'.' .
-      usewod:'.$id.' schema:url <'.$url.'> .
-      usewod:'.$id.' schema:image <'.$img.'> . ';
+  $newpub = array("id" => $usewod_url.$id, "title" => $title);
+  $triples = [' usewod:'.$id.' a schema:ScholarlyArticle ', 
+              ' usewod:'.$id.' schema:name '.'"'.$title.'" ' ];
+  if ( isset($year) && !empty($year) ) {
+    $newpub["year"]=$year;
+    $triples[] = ' usewod:'.$id.' schema:copyrightYear '.'"'.$year.'" ';
+  }
+  if ( isset($url) && !empty($url) ) {
+    $newpub["url"] = $url;
+    $triples[] = ' usewod:'.$id.' schema:url <'.$url.'> ';
+  }
+  if ( isset($img) && !empty($img) ) {
+    $newpub["img"] = $img;
+    $triples[] = ' usewod:'.$id.' schema:image <'.$img.'> ';
+  }
+
+  $authors = array();
   foreach ($names as $name) 
   {
     $name = trim($name);
@@ -28,20 +38,19 @@ function add_paper_from_fields($title, $authors, $venue, $year, $url, $img) {
     if ( !$aid ) 
     {
       $aid = uniqid("person/");
-      $insert_q = $insert_q.'
-        usewod:'.$aid.' a schema:Person .
-        usewod:'.$aid.' schema:name "'.$name.'" . 
-        usewod:'.$id.' schema:author usewod:'.$aid.' . 
-      ';
+      $triples[] = ' usewod:'.$aid.' a schema:Person ';
+      $triples[] = ' usewod:'.$aid.' schema:name "'.$name. '" '; 
+      $triples[] = ' usewod:'.$id.' schema:author usewod:'.$aid.' '; 
     } 
     else 
     {
-      $insert_q = $insert_q.'
-        usewod:'.$id.' schema:author <'.$aid.'> . 
-      ';
+      $triples[] = ' usewod:'.$id.' schema:author <'.$aid.'> '; 
     }
+    $authors[] = array("id" => $aid, "name" => $name);
   }
-  $insert_q = $insert_q.'}';
+  $newpub["authors"] = $authors;
+
+  $insert_q = prefix().'INSERT INTO usewod:'.$gid.' { '. implode(" . ", $triples) .'}';
 
   $rs = $store->query($insert_q);  
   if ($errs = $store->getErrors()) 
@@ -50,7 +59,8 @@ function add_paper_from_fields($title, $authors, $venue, $year, $url, $img) {
     return;
   }
   add_graph_info($gid);
-  echo "{'added':[{'id':'".$usewod_url.$id."'}]";
+  $rez = array("added" => $newpub);
+  echo json_encode($rez);
 }
 
 function find_author_id($name)

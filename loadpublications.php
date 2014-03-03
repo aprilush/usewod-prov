@@ -2,7 +2,7 @@
 
 include_once("/var/www/html/usewod-prov/helper.php");
 
-load_publications(get_ids());
+echo load_publications(get_ids());
 
 function get_ids() {
   global $store;
@@ -28,7 +28,7 @@ function load_publications($pub_ids) {
   $publications = [];
 
   $len = count($pub_ids);
-  if ($len == 0) { return ; }
+  if ($len == 0) { return "{'publications':[]}"; }
 
   $pub_q = 'DESCRIBE ';
   for ($i=0; $i < $len; $i++) { 
@@ -48,11 +48,12 @@ function load_publications($pub_ids) {
     }
   }
   if ($errs = $store->getErrors()) {
-    echo "Error in load_publications";
-    var_dump($errs);
+    echo "{ 'error' : 'Error in load_publications', 'returned':".var_dump($errs)." }";
+    return;
   }
 
-  return var_dump($publications);
+  $rez = array("publications" => $publications);
+  return json_encode($rez);
 }
 
 ?>

@@ -8,8 +8,8 @@ $config = array(
   /* db */
   'db_host' => 'localhost',
   'db_name' => 'usewod',
-  'db_user' => 'root',
-  'db_pwd' => 'root',
+  'db_user' => 'usewod',
+  'db_pwd' => 'usewod',
   /* store */
   'store_name' => 'usewodprov'
 );
@@ -19,10 +19,11 @@ if (!$store->isSetUp()) {
   $store->setUp();
 }
 
-$usewod_url = 'http://data.usewod.org/';
+$usewod_url = "http://data.usewod.org/";
 
 function prefix() 
 {
+  global $usewod_url;
   return '
     PREFIX usewod: <'.$usewod_url.'> 
     PREFIX schema: <http://schema.org/> 

@@ -66,6 +66,17 @@ usewodModule.controller('prov', function($scope, $sce) {
     var data = {"pub-title":$scope.pubTitle, "pub-author":$scope.pubAuthor, "pub-venue":$scope.pubVenue, "pub-year":$scope.pubYear, "pub-url":$scope.pubUrl, "pub-img":$scope.pubImg};
     var suc = function(respData, status, jqXHR) {
       console.log("received: ", respData, status, jqXHR);
+      $("#newpub").toggleClass("hidden");
+      $scope.$apply( function() {
+        $scope.publications.push(respData["added"]);
+        $scope.pubTitle = undefined;
+        $scope.pubAuthor = undefined;
+        $scope.pubVenue = undefined;
+        $scope.pubYear = undefined;
+        $scope.pubUrl = undefined;
+        $scope.pubImg = undefined;
+        // console.log($scope.publications);
+      });
     };
     $.post("addpublication.php", data, suc, "json");
   }
@@ -75,6 +86,16 @@ usewodModule.controller('prov', function($scope, $sce) {
     var data = {"ds-name":$scope.dsName, "ds-v":$scope.dsV, "ds-url":$scope.dsUrl, "ds-img":$scope.dsImg, "ds-about":$scope.dsAbout};
     var suc = function(respData, status, jqXHR) {
       console.log("received: ", respData, status, jqXHR);
+      $("#newds").toggleClass("hidden");
+      $scope.$apply( function() {
+        $scope.datasets.push(respData["added"]);
+        $scope.dsName = undefined;
+        $scope.dsV = undefined;
+        $scope.dsUrl = undefined;
+        $scope.dsImg = undefined;
+        $scope.dsAbout = undefined;
+        // console.log($scope.datasets);
+      });
     };
     $.post("adddataset.php", data, suc, "json");
   }
@@ -83,8 +104,47 @@ usewodModule.controller('prov', function($scope, $sce) {
     console.log("started loading data");
     $scope.publications = [];
     $scope.datasets = [];
-    
-    console.log("finished loading data");
+    var sucpub = function(data) {
+      console.log("received publications : ", data);
+      $scope.$apply( function() {
+        $scope.publications = data["publications"];
+      });
+    };
+    $.get("loadpublications.php", sucpub, "json");
+    var sucds = function(data) {
+      console.log("received datasets : ", data);
+      $scope.$apply( function() {
+        $scope.datasets = data["datasets"];
+      });
+    };
+    $.get("loaddatasets.php", sucds, "json");
+    console.log("finished loading data", $scope.publications, $scope.datasets);
+  }
+
+  $scope.selectedPub = function(pub) {
+    if (!$scope.sourceObject) {
+      $scope.sourceObject = pub;
+      $scope.sourceName = pub.title;
+      $scope.sourceImg = pub.img;
+      $scope.sourceUrl = pub.url;
+      $scope.relationsToPub = ["cites", "is cited by"];
+      $scope.relationsToDs = ["uses", "describes", "evaluates", "analyses", "compares"];
+    } else {
+
+    }
+  }
+
+  $scope.selectedDs = function(ds) {
+    if (!$scope.sourceObject) {
+      $scope.sourceObject = ds;
+      $scope.sourceName = ds.name;
+      $scope.sourceImg = ds.img;
+      $scope.sourceUrl = ds.url;
+      $scope.relationsToPub = ["is used in", "is described in", "is evaluated in", "is analysed in", "is compared in"];
+      $scope.relationsToDs = ["extends", "includes", "overlaps", "is transformation of"];
+    } else {
+
+    }
   }
 
   $scope.$watch('loggedin', function() { 
@@ -96,49 +156,62 @@ usewodModule.controller('prov', function($scope, $sce) {
 
 $(function() {
 
-  $.sourceobjorig = null;
-  $.sourceobjcopy = null;
-  $.obj2orig = null;
-  $.obj2copy = null;
+  $(".datapub").draggable("option", "cursor", "move" );
+  $(".datapub").draggable("option", "helper", "clone" );
+  $(".datapub").draggable("option", "opacity", 0.5 );
+  // $(".data > img").draggable("option", "cursor", "zoom-in" );
+  // $(".data,.publication").draggable("option", "scope", "publication");
+  // $(".data,.dataset").draggable("option", "scope", "dataset");
+  $(".rel").droppable({
+    drop: function() {
+      alert( "dropped" );
+    }
+  });
+
+
+  // $.sourceobjorig = null;
+  // $.sourceobjcopy = null;
+  // $.obj2orig = null;
+  // $.obj2copy = null;
 
   // how do we make this into proper provenance?
-  $.allLinksPubPub = ["cites", "is cited by"];
-  $.allLinksPubDs = ["uses", "describes", "evaluates", "analyses", "compares"];
-  $.allLinksDsPub = ["is used in", "is described in", "is evaluated in", "is analysed in", "is compared in"];
-  $.allLinksDsDs = ["extends", "includes", "overlaps", "isTransformation"];
+  // $.allLinksPubPub = ["cites", "is cited by"];
+  // $.allLinksPubDs = ["uses", "describes", "evaluates", "analyses", "compares"];
+  // $.allLinksDsPub = ["is used in", "is described in", "is evaluated in", "is analysed in", "is compared in"];
+  // $.allLinksDsDs = ["extends", "includes", "overlaps", "isTransformation"];
 
-  function copy_data(el) {
-      var cl = el.clone().removeClass("selected").removeClass("data").addClass("ws");
-      cl.attr("id", el.attr("id"));
-      return cl;
-  };
+  // function copy_data(el) {
+  //     var cl = el.clone().removeClass("selected").removeClass("data").addClass("ws");
+  //     cl.attr("id", el.attr("id"));
+  //     return cl;
+  // };
 
-  function create_links_drop_zones() {
-    var ls;
-    if ($.obj1copy.hasClass("pub") && $.obj2copy.hasClass("pub")) {
-      ls = $.allLinksPubPub;
-    } else if ($.obj1copy.hasClass("pub") && $.obj2copy.hasClass("ds")) {
-      ls = $.allLinksPubDs;
-    } else if ($.obj1copy.hasClass("ds") && $.obj2copy.hasClass("pub")) {
-      ls = $.allLinksDsPub;
-    } else if ($.obj1copy.hasClass("ds") && $.obj2copy.hasClass("ds")) {
-      ls = $.allLinksDsDs;
-    }
-    var sel = "<select name='link'>";
-    for (l in ls) {
-      sel = sel+ "<option value='"+ls[l]+"'>"+ls[l]+"</option>";
-    }
-    sel = sel+"</select>";
-    return sel;
-  };
+  // function create_links_drop_zones() {
+  //   var ls;
+  //   if ($.obj1copy.hasClass("pub") && $.obj2copy.hasClass("pub")) {
+  //     ls = $.allLinksPubPub;
+  //   } else if ($.obj1copy.hasClass("pub") && $.obj2copy.hasClass("ds")) {
+  //     ls = $.allLinksPubDs;
+  //   } else if ($.obj1copy.hasClass("ds") && $.obj2copy.hasClass("pub")) {
+  //     ls = $.allLinksDsPub;
+  //   } else if ($.obj1copy.hasClass("ds") && $.obj2copy.hasClass("ds")) {
+  //     ls = $.allLinksDsDs;
+  //   }
+  //   var sel = "<select name='link'>";
+  //   for (l in ls) {
+  //     sel = sel+ "<option value='"+ls[l]+"'>"+ls[l]+"</option>";
+  //   }
+  //   sel = sel+"</select>";
+  //   return sel;
+  // };
 
-  function create_source() {
-    var d = $("#source-obj").empty().append($.sourceobjcopy);
-    var title = $.sourceobjcopy.children("img:first-of-type").attr("title");
-    console.log("got title: ", title);
-    d.append("<strong>"+title+"</strong>").append("<input type='hidden' name='source-obj' value='"+$.sourceobjcopy.attr("id")+"' />");
-    return d;
-  }
+  // function create_source() {
+  //   var d = $("#source-obj").empty().append($.sourceobjcopy);
+  //   var title = $.sourceobjcopy.children("img:first-of-type").attr("title");
+  //   console.log("got title: ", title);
+  //   d.append("<strong>"+title+"</strong>").append("<input type='hidden' name='source-obj' value='"+$.sourceobjcopy.attr("id")+"' />");
+  //   return d;
+  // }
 
   // function create_temp_rel(el1, el2, rel) {
   //   console.log(el1);
@@ -170,18 +243,18 @@ $(function() {
       } else {
         console.log("click clack on a button");
       }
-    } else if (div.hasClass("data")) {
-      if (!$.sourceobjcopy) {
-        div.addClass("selected");
-        $.sourceobjorig = div;
-        $.sourceobjcopy = copy_data(div);
+    // } else if (div.hasClass("data")) {
+    //   if (!$.sourceobjcopy) {
+    //     div.addClass("selected");
+    //     $.sourceobjorig = div;
+    //     $.sourceobjcopy = copy_data(div);
       // } else if (!$.obj2copy) {
       //   div.addClass("selected");
       //   $.obj2orig = div;
       //   $.obj2copy = copy_data(div);
       //   $.obj2copy.append("<input type='hidden' name='obj-right' value='"+div.attr("id")+"' />");
       //   $("#link > input").attr("disabled",false);
-      } else {
+      // } else {
         // both objects are filled, shift obj2 to obj1
         // div.addClass("selected");
         // $.obj1orig.removeClass("selected");
@@ -192,14 +265,14 @@ $(function() {
         // $.obj2orig = div;
         // $.obj2copy = copy_data(div);
         // $.obj2copy.append("<input type='hidden' name='obj-right' value='"+div.attr("id")+"' />");
-      }
-      if ($.sourceobjcopy) {
+      // }
+      // if ($.sourceobjcopy) {
 
-        create_source();
+      //   create_source();
         // $("#obj-right").empty().append($.obj2copy);
         // also find the possible relations and show them here
         // $("#link-selector").html(create_link_selector());
-      }
+      // }
     } else {
       console.log("click clack");
     }
