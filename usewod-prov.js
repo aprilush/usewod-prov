@@ -26,16 +26,44 @@ usewodModule.directive('droppable', function() {
     restrict:'A', 
     require: '?ngModel',
     link: function(scope, element, attrs) {
-      console.log("data: ", attrs['data']);
-      console.log("droppable model (link)");
-      element.droppable({
-        accept: ".data",
-        hoverClass: "drop-hover",
-        drop:function(event,ui) {
-          console.log("dropped something", element, ui);
-          $(this).append($(ui.draggable.clone())); 
-        }
-      });
+      var rel = angular.fromJson(attrs["data"]);
+      if (element.hasClass("publication")) {
+        element.droppable({
+          accept: ".publication",
+          hoverClass: "drop-hover",
+          drop:function(event,ui) {
+            // console.log("dropped something");
+            var obj = angular.fromJson(ui.draggable.attr("data"));
+            angular.forEach(scope.relationsToPub, function(val) {
+              if (val["label"]==rel["label"]) {
+                if (val["objects"].map(function(o){return o["id"]}).indexOf(obj["id"]) < 0) { 
+                  scope.$apply( function() {
+                    val["objects"].push(obj); // check first if it's already added
+                  });
+                }
+              } 
+            }); 
+          }
+        });        
+      } else if (element.hasClass("dataset")) {
+        element.droppable({
+          accept: ".dataset",
+          hoverClass: "drop-hover",
+          drop:function(event,ui) {
+            // console.log("dropped something");
+            var obj = angular.fromJson(ui.draggable.attr("data"));
+            angular.forEach(scope.relationsToDs, function(val) {
+              if (val["label"]==rel["label"]) {
+                if (val["objects"].map(function(o){return o["id"]}).indexOf(obj["id"]) < 0) {
+                  scope.$apply( function() {
+                    val["objects"].push(obj); // check first if it's already added
+                  });
+                }
+              } 
+            }); 
+          }
+        });        
+      } 
     }
   }
 });
@@ -164,8 +192,8 @@ usewodModule.controller('prov', function($scope, $sce) {
       $scope.sourceName = pub.title;
       $scope.sourceImg = pub.img;
       $scope.sourceUrl = pub.url;
-      $scope.relationsToPub = ["cites", "is cited by"];
-      $scope.relationsToDs = ["uses", "describes", "evaluates", "analyses", "compares"];
+      $scope.relationsToPub = [{"label":"cites", "objects":[]}, {"label":"is cited by", "objects":[]}];
+      $scope.relationsToDs = [{"label":"uses", "objects":[]}, {"label":"describes", "objects":[]}, {"label":"evaluates", "objects":[]}, {"label":"analyses", "objects":[]}, {"label":"compares", "objects":[]}];
     } else {
 
     }
@@ -177,8 +205,8 @@ usewodModule.controller('prov', function($scope, $sce) {
       $scope.sourceName = ds.name;
       $scope.sourceImg = ds.img;
       $scope.sourceUrl = ds.url;
-      $scope.relationsToPub = ["is used in", "is described in", "is evaluated in", "is analysed in", "is compared in"];
-      $scope.relationsToDs = ["extends", "includes", "overlaps", "is transformation of"];
+      $scope.relationsToPub = [{"label":"is used in", "objects":[]}, {"label":"is described in", "objects":[]}, {"label":"is evaluated in", "objects":[]}, {"label":"is analysed in", "objects":[]}, {"label":"is compared in", "objects":[]}];
+      $scope.relationsToDs = [{"label":"extends", "objects":[]}, {"label":"includes", "objects":[]}, {"label":"overlaps", "objects":[]}, {"label":"is transformation of", "objects":[]}];
     } else {
 
     }
@@ -279,18 +307,7 @@ $(function() {
         $("#newds").toggleClass("hidden");
       } else if (div.attr("id")=="addpub") {
         $("#newpub").toggleClass("hidden");
-      } else if (div.attr("id")=="reset") {
-        // $("#obj-left").empty();
-        // $("#link-selector").empty();
-        // $("#obj-right").empty();
-        // $.obj1orig.removeClass("selected");
-        // $.obj2orig.removeClass("selected");
-        // $.obj1copy = null;
-        // $.obj2copy = null;
-        // $("#link > input").attr("disabled",true);
-      } else {
-        console.log("click clack on a button");
-      }
+      } 
     // } else if (div.hasClass("data")) {
     //   if (!$.sourceobjcopy) {
     //     div.addClass("selected");
@@ -321,8 +338,6 @@ $(function() {
         // also find the possible relations and show them here
         // $("#link-selector").html(create_link_selector());
       // }
-    } else {
-      console.log("click clack");
     }
   });
 

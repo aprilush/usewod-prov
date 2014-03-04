@@ -109,17 +109,17 @@
           <tr>
           <tr>
             <td colspan="2">
-            <div class='button' id='reset'><img src="img/edit-clear.png" /></div>
-            <div class='button' id='link'><input type="image" src="img/insert-link.png" disabled="true"/></div>
+            <div class='button' id='reset'><input type="image" src="img/edit-clear.png" ng-click="resetWorkspace()" /></div>
+            <div class='button' id='link'><input type="image" src="img/insert-link.png" ng-click="saveLinks()" /></div>
             <h3>Connections</h3>
             <div class="workspace">
               <table>
                 <tr>
                   <td id="source-obj" class="source"><a ng-href="{{sourceUrl}}">{{sourceName}}</a></td>
                   <td id="relations">
-                    <div ng-repeat="relp in relationsToPub" droppable class="rel publication">{{relp}}</div>
+                    <div ng-repeat="relp in relationsToPub" droppable class="rel publication" data="{{relp}}">{{relp.label}}<span ng-repeat="obj in relp.objects" class="publication object" id="{{obj.id}}" data="{{obj}}"><img ng-src="{{obj.img}}" title="{{obj.title}}" /></span></div>
                     <br/>
-                    <div ng-repeat="reld in relationsToDs" droppable class="rel dataset">{{reld}}</div>
+                    <div ng-repeat="reld in relationsToDs" droppable class="rel dataset" data="{{reld}}">{{reld.label}}<span ng-repeat="obj in reld.objects" class="dataset object" id="{{obj.id}}" data="{{obj}}"><img ng-src="{{obj.img}}" title="{{obj.name}}" /></span></div>
                   </td>
                 </tr>
               </table>
