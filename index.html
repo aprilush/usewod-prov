@@ -67,7 +67,7 @@
             <td width="50%">
               <div class='button' id='addpub'><input type="image" src="img/document-new.png" /></div><h3>Publications</h3>
               <div class='spacer'>
-                <div ng-repeat="pub in publications" class="publication data" id="{{pub.id}}" ng-click="selectedPub(pub)" draggable data="{{pub}}"><img ng-src="{{pub.img}}" title="{{pub.title}}" /></div>
+                <div ng-repeat="pub in publications" class="publication data" id="{{pub.id}}" ng-click="selectedSource(pub, 'p')" draggable data="{{pub}}"><img ng-src="{{pub.img}}" title="{{pub.title}}" /></div>
               </div>
               <div class='clear-both'></div>
               <div class="hidden" id="newpub">
@@ -89,7 +89,7 @@
             <td width="50%">
               <div class='button' id='addds'><input type="image" src="img/edit-table-insert-row-big-plus.png" /></div><h3>Datasets</h3>
               <div class='spacer'>
-								<div ng-repeat="ds in datasets" class="dataset data" id="{{ds.id}}" ng-click="selectedDs(ds)" draggable data="{{ds}}"><img ng-src="{{ds.img}}" title="{{ds.name}}" /></div> 
+								<div ng-repeat="ds in datasets" class="dataset data" id="{{ds.id}}" ng-click="selectedSource(ds, 'd')" draggable data="{{ds}}"><img ng-src="{{ds.img}}" title="{{ds.name}}" /></div> 
               </div>
               <div class='clear-both'></div>
               <div class="hidden" id="newds">
@@ -115,7 +115,7 @@
             <div class="workspace">
               <table>
                 <tr>
-                  <td id="source-obj" class="source"><a ng-href="{{sourceUrl}}">{{sourceName}}</a></td>
+                  <td id="source-obj" class="source"><a ng-href="{{sourceObject.url}}">{{sourceObject.name}}</a><br/><img ng-show="sourceObject.img" ng-src="{{sourceObject.img}}" /></td>
                   <td id="relations">
                     <div ng-repeat="relp in relationsToPub" droppable class="rel publication" data="{{relp}}">{{relp.label}}<span ng-repeat="obj in relp.objects" class="publication object" id="{{obj.id}}" data="{{obj}}"><img ng-src="{{obj.img}}" title="{{obj.title}}" /></span></div>
                     <br/>

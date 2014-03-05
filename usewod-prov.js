@@ -6,14 +6,13 @@ usewodModule.directive('draggable', function() {
     restrict:'A', 
     require: '?ngModel',
     link: function(scope, element, attrs) {
-      console.log("data: ", attrs['data']);
-      console.log("draggable model (link)");
+      // console.log("data: ", attrs['data']);
       element.draggable({
         revert:true, 
         helper: 'clone',
-        start: function(event, ui) {
-          console.log("started dragging"); 
-        },
+        // start: function(event, ui) {
+        //   console.log("started dragging"); 
+        // },
         // stop: function(event, ui) {
         //   console.log("stoped dragging"); 
         // }
@@ -128,7 +127,7 @@ usewodModule.controller('prov', function($scope, $sce) {
 
   $scope.addPublication = function() {
     console.log("Adding a new paper! ");
-    var data = {"pub-title":$scope.pubTitle, "pub-author":$scope.pubAuthor, "pub-venue":$scope.pubVenue, "pub-year":$scope.pubYear, "pub-url":$scope.pubUrl, "pub-img":$scope.pubImg};
+    var data = {"user":$scope.username,"pub-title":$scope.pubTitle, "pub-author":$scope.pubAuthor, "pub-venue":$scope.pubVenue, "pub-year":$scope.pubYear, "pub-url":$scope.pubUrl, "pub-img":$scope.pubImg};
     var suc = function(respData, status, jqXHR) {
       console.log("received: ", respData, status, jqXHR);
       $("#newpub").toggleClass("hidden");
@@ -148,7 +147,7 @@ usewodModule.controller('prov', function($scope, $sce) {
 
   $scope.addDataset = function() {
     console.log("Adding a new dataset! ");
-    var data = {"ds-name":$scope.dsName, "ds-v":$scope.dsV, "ds-url":$scope.dsUrl, "ds-img":$scope.dsImg, "ds-about":$scope.dsAbout};
+    var data = {"user":$scope.username,"ds-name":$scope.dsName, "ds-v":$scope.dsV, "ds-url":$scope.dsUrl, "ds-img":$scope.dsImg, "ds-about":$scope.dsAbout};
     var suc = function(respData, status, jqXHR) {
       console.log("received: ", respData, status, jqXHR);
       $("#newds").toggleClass("hidden");
@@ -186,30 +185,37 @@ usewodModule.controller('prov', function($scope, $sce) {
     console.log("finished loading data", $scope.publications, $scope.datasets);
   }
 
-  $scope.selectedPub = function(pub) {
+  $scope.selectedSource = function(obj, objtype) {
     if (!$scope.sourceObject) {
-      $scope.sourceObject = pub;
-      $scope.sourceName = pub.title;
-      $scope.sourceImg = pub.img;
-      $scope.sourceUrl = pub.url;
-      $scope.relationsToPub = [{"label":"cites", "objects":[]}, {"label":"is cited by", "objects":[]}];
-      $scope.relationsToDs = [{"label":"uses", "objects":[]}, {"label":"describes", "objects":[]}, {"label":"evaluates", "objects":[]}, {"label":"analyses", "objects":[]}, {"label":"compares", "objects":[]}];
-    } else {
-
+      $scope.sourceObject = obj;
+      $scope.sourceObject.type = objtype;
+      if (objtype == "p") {
+        $scope.sourceObject.name = obj.title;
+        $scope.relationsToPub = [{"label":"cites", "objects":[]}];
+        $scope.relationsToDs = [{"label":"mentions", "objects":[]}, {"label":"describes", "objects":[]}, {"label":"evaluates", "objects":[]}, {"label":"analyses", "objects":[]}, {"label":"compares", "objects":[]}];
+      } else if (objtype == "d") {
+        $scope.relationsToPub = [{"label":"is mentioned in", "objects":[]}, {"label":"is described in", "objects":[]}, {"label":"is evaluated in", "objects":[]}, {"label":"is analysed in", "objects":[]}, {"label":"is compared in", "objects":[]}];
+        $scope.relationsToDs = [{"label":"extends", "objects":[]}, {"label":"includes", "objects":[]}, {"label":"overlaps", "objects":[]}, {"label":"is transformation of", "objects":[]}];
+      }
     }
   }
 
-  $scope.selectedDs = function(ds) {
-    if (!$scope.sourceObject) {
-      $scope.sourceObject = ds;
-      $scope.sourceName = ds.name;
-      $scope.sourceImg = ds.img;
-      $scope.sourceUrl = ds.url;
-      $scope.relationsToPub = [{"label":"is used in", "objects":[]}, {"label":"is described in", "objects":[]}, {"label":"is evaluated in", "objects":[]}, {"label":"is analysed in", "objects":[]}, {"label":"is compared in", "objects":[]}];
-      $scope.relationsToDs = [{"label":"extends", "objects":[]}, {"label":"includes", "objects":[]}, {"label":"overlaps", "objects":[]}, {"label":"is transformation of", "objects":[]}];
-    } else {
+  $scope.resetWorkspace = function() {
+    $scope.sourceObject = undefined;
+    $scope.relationsToPub = [];
+    $scope.relationsToDs = [];
+  }
 
-    }
+  $scope.saveLinks = function() {
+    console.log("Saving links! ");
+    var data = {"source":$scope.sourceObject, "relations":{"pub":$scope.relationsToPub, "ds":$scope.relationsToDs}, "user":$scope.username};
+    var suc = function(respData, status, jqXHR) {
+      console.log("received: ", respData, status, jqXHR);
+      // $scope.$apply( function() {
+      //   $scope.resetWorkspace();
+      // });
+    };
+    $.post("addrelations.php", data, suc, "json");
   }
 
   $scope.$watch('loggedin', function() { 

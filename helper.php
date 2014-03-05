@@ -8,8 +8,8 @@ $config = array(
   /* db */
   'db_host' => 'localhost',
   'db_name' => 'usewod',
-  'db_user' => 'usewod',
-  'db_pwd' => 'usewod',
+  'db_user' => 'root',
+  'db_pwd' => 'root',
   /* store */
   'store_name' => 'usewodprov'
 );
@@ -28,13 +28,13 @@ function prefix()
     PREFIX usewod: <'.$usewod_url.'> 
     PREFIX schema: <http://schema.org/> 
     PREFIX dcterms: <http://purl.org/dc/terms/> 
+    PREFIX prov: <http://www.w3.org/ns/prov#>
   ';
 }
 
-function add_graph_info($gid) 
+function add_graph_info($gid, $username) 
 {
   global $store;
-  global $username;
 
   $now = time();
   $ng_q = prefix().'

@@ -2,11 +2,14 @@
 
 include_once("/var/www/html/usewod-prov/helper.php");
 
-if ( isset($_POST['ds-name']) && !empty($_POST['ds-name']) ) { // only the name is mandatory
-  add_dataset_from_fields($_POST['ds-name'], $_POST['ds-v'], $_POST['ds-url'], $_POST['ds-img'], $_POST['ds-size'], $_POST['ds-format'], $_POST['ds-about']);
+if ( isset($_POST['user']) && !empty($_POST['user']) ) {
+  $username = $_POST['user'];
+  if ( isset($_POST['ds-name']) && !empty($_POST['ds-name']) ) { // only the name is mandatory
+    add_dataset_from_fields($username, $_POST['ds-name'], $_POST['ds-v'], $_POST['ds-url'], $_POST['ds-img'], $_POST['ds-size'], $_POST['ds-format'], $_POST['ds-about']);
+  }
 }
 
-function add_dataset_from_fields($name, $v, $url, $img, $about)
+function add_dataset_from_fields($username, $name, $v, $url, $img, $about)
 {
   global $store;
   global $usewod_url;
@@ -15,7 +18,7 @@ function add_dataset_from_fields($name, $v, $url, $img, $about)
   $id = uniqid("dataset/");
   
   $newds = array("id" => $id, "name" => $name);
-  $triples = [' usewod:'.$id.' a schema:Dataset ', 
+  $triples = [' usewod:'.$id.' a schema:Dataset, prov:Entity ', 
               ' usewod:'.$id.' schema:name '.'"'.$name.'" ' ];
   if ( isset($v) && !empty($v) ) {
     $newdds["version"] = $v;  
@@ -42,7 +45,7 @@ function add_dataset_from_fields($name, $v, $url, $img, $about)
     echo "{ 'error' : 'Error in add_dataset_from_fields', 'returned':".var_dump($errs)." }";
     return;
   }
-  add_graph_info($gid);
+  add_graph_info($gid, $username);
   $rez = array("added" => $newds);
   echo json_encode($rez);
 }

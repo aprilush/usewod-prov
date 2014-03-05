@@ -1,13 +1,15 @@
 <?php
 
 include_once("/var/www/html/usewod-prov/helper.php");
-
-if ( isset($_POST['pub-title']) && !empty($_POST['pub-title']) && // title and author are mandatory
-    isset($_POST['pub-author']) && !empty($_POST['pub-author']) ) {
-  add_paper_from_fields($_POST['pub-title'], $_POST['pub-author'], $_POST['pub-venue'], $_POST['pub-year'], $_POST['pub-url'], $_POST['pub-img']);
+if ( isset($_POST['user']) && !empty($_POST['user']) ) {
+  $username = $_POST['user'];
+  if ( isset($_POST['pub-title']) && !empty($_POST['pub-title']) && // title and author are mandatory
+      isset($_POST['pub-author']) && !empty($_POST['pub-author']) ) {
+    add_paper_from_fields($username, $_POST['pub-title'], $_POST['pub-author'], $_POST['pub-venue'], $_POST['pub-year'], $_POST['pub-url'], $_POST['pub-img']);
+  }
 }
 
-function add_paper_from_fields($title, $authors, $venue, $year, $url, $img) {
+function add_paper_from_fields($username, $title, $authors, $venue, $year, $url, $img) {
   global $store;
   global $usewod_url;
   $names = explode("\n",$authors);
@@ -15,7 +17,7 @@ function add_paper_from_fields($title, $authors, $venue, $year, $url, $img) {
   $id = uniqid("publication/");
 
   $newpub = array("id" => $usewod_url.$id, "title" => $title);
-  $triples = [' usewod:'.$id.' a schema:ScholarlyArticle ', 
+  $triples = [' usewod:'.$id.' a schema:ScholarlyArticle, prov:Entity ', 
               ' usewod:'.$id.' schema:name '.'"'.$title.'" ' ];
   if ( isset($year) && !empty($year) ) {
     $newpub["year"]=$year;
@@ -58,7 +60,7 @@ function add_paper_from_fields($title, $authors, $venue, $year, $url, $img) {
     echo "{ 'error' : 'Error in add_paper_from_fields', 'returned':".var_dump($errs)." }";
     return;
   }
-  add_graph_info($gid);
+  add_graph_info($gid, $username);
   $rez = array("added" => $newpub);
   echo json_encode($rez);
 }
