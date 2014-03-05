@@ -10,12 +10,6 @@ usewodModule.directive('draggable', function() {
       element.draggable({
         revert:true, 
         helper: 'clone',
-        // start: function(event, ui) {
-        //   console.log("started dragging"); 
-        // },
-        // stop: function(event, ui) {
-        //   console.log("stoped dragging"); 
-        // }
       });
     }
   }
@@ -133,6 +127,7 @@ usewodModule.controller('prov', function($scope, $sce) {
       $("#newpub").toggleClass("hidden");
       $scope.$apply( function() {
         $scope.publications.push(respData["added"]);
+        $scope.statusMessage = "Successfully saved publication '"+$scope.pubTitle+"'.";
         $scope.pubTitle = undefined;
         $scope.pubAuthor = undefined;
         $scope.pubVenue = undefined;
@@ -153,6 +148,7 @@ usewodModule.controller('prov', function($scope, $sce) {
       $("#newds").toggleClass("hidden");
       $scope.$apply( function() {
         $scope.datasets.push(respData["added"]);
+        $scope.statusMessage = "Successfully saved dataset '"+$scope.dsName+"'.";
         $scope.dsName = undefined;
         $scope.dsV = undefined;
         $scope.dsUrl = undefined;
@@ -185,6 +181,15 @@ usewodModule.controller('prov', function($scope, $sce) {
     console.log("finished loading data", $scope.publications, $scope.datasets);
   }
 
+  $scope.toggleForm = function(which) {
+    $scope.statusMessage = undefined;
+    if (which == 'pub') {
+      $("#newpub").toggleClass("hidden");
+    } else if (which == 'ds') {
+      $("#newds").toggleClass("hidden");
+    }
+  }
+
   $scope.selectedSource = function(obj, objtype) {
     if (!$scope.sourceObject) {
       $scope.sourceObject = obj;
@@ -198,6 +203,7 @@ usewodModule.controller('prov', function($scope, $sce) {
         $scope.relationsToDs = [{"label":"extends", "objects":[]}, {"label":"includes", "objects":[]}, {"label":"overlaps", "objects":[]}, {"label":"is transformation of", "objects":[]}];
       }
     }
+    $scope.statusMessage = undefined;
   }
 
   $scope.resetWorkspace = function() {
@@ -211,9 +217,16 @@ usewodModule.controller('prov', function($scope, $sce) {
     var data = {"source":$scope.sourceObject, "relations":{"pub":$scope.relationsToPub, "ds":$scope.relationsToDs}, "user":$scope.username};
     var suc = function(respData, status, jqXHR) {
       console.log("received: ", respData, status, jqXHR);
-      // $scope.$apply( function() {
-      //   $scope.resetWorkspace();
-      // });
+      if (status == "success") {
+        $scope.$apply( function() {
+          $scope.statusMessage = "Successfully saved "+respData['result']['result']['t_count']+" triples";
+          $scope.resetWorkspace();
+        });
+      } else {
+        $scope.$apply( function() {
+          $scope.statusMessage = "Save not successful!";
+        });
+      }
     };
     $.post("addrelations.php", data, suc, "json");
   }
@@ -224,127 +237,3 @@ usewodModule.controller('prov', function($scope, $sce) {
     }
   });
 });
-
-$(function() {
-
-  // $(".datapub").draggable({
-  //   appendTo: "body",
-  //   cursor: "move",
-  //   helper: 'clone',
-  //   revert: "invalid",
-  //   opacity: 0.5,
-  //   start: function( event, ui ) {
-  //     console.log("starting drag", ui, event);
-  //     // parent_div_data = $(this).parent().attr("id");
-  //   }
-  // });
-  // // $(".data > img").draggable("option", "cursor", "zoom-in" );
-  // // $(".data,.publication").draggable("option", "scope", "publication");
-  // // $(".data,.dataset").draggable("option", "scope", "dataset");
-  // $(".rel").droppable({
-  //   tolerance: "intersect",
-  //   accept: ".datapub",
-  //   drop: function(event, ui) {                       
-  //     console.log("dropped something", ui, event);
-  //     // $(this).append($(ui.draggable)).clone();               
-  //   }
-  // });
-
-
-  // $.sourceobjorig = null;
-  // $.sourceobjcopy = null;
-  // $.obj2orig = null;
-  // $.obj2copy = null;
-
-  // how do we make this into proper provenance?
-  // $.allLinksPubPub = ["cites", "is cited by"];
-  // $.allLinksPubDs = ["uses", "describes", "evaluates", "analyses", "compares"];
-  // $.allLinksDsPub = ["is used in", "is described in", "is evaluated in", "is analysed in", "is compared in"];
-  // $.allLinksDsDs = ["extends", "includes", "overlaps", "isTransformation"];
-
-  // function copy_data(el) {
-  //     var cl = el.clone().removeClass("selected").removeClass("data").addClass("ws");
-  //     cl.attr("id", el.attr("id"));
-  //     return cl;
-  // };
-
-  // function create_links_drop_zones() {
-  //   var ls;
-  //   if ($.obj1copy.hasClass("pub") && $.obj2copy.hasClass("pub")) {
-  //     ls = $.allLinksPubPub;
-  //   } else if ($.obj1copy.hasClass("pub") && $.obj2copy.hasClass("ds")) {
-  //     ls = $.allLinksPubDs;
-  //   } else if ($.obj1copy.hasClass("ds") && $.obj2copy.hasClass("pub")) {
-  //     ls = $.allLinksDsPub;
-  //   } else if ($.obj1copy.hasClass("ds") && $.obj2copy.hasClass("ds")) {
-  //     ls = $.allLinksDsDs;
-  //   }
-  //   var sel = "<select name='link'>";
-  //   for (l in ls) {
-  //     sel = sel+ "<option value='"+ls[l]+"'>"+ls[l]+"</option>";
-  //   }
-  //   sel = sel+"</select>";
-  //   return sel;
-  // };
-
-  // function create_source() {
-  //   var d = $("#source-obj").empty().append($.sourceobjcopy);
-  //   var title = $.sourceobjcopy.children("img:first-of-type").attr("title");
-  //   console.log("got title: ", title);
-  //   d.append("<strong>"+title+"</strong>").append("<input type='hidden' name='source-obj' value='"+$.sourceobjcopy.attr("id")+"' />");
-  //   return d;
-  // }
-
-  // function create_temp_rel(el1, el2, rel) {
-  //   console.log(el1);
-  //   console.log(el2);
-  //   console.log(rel);
-    
-  //   $("#temp-rels").append(copy_data(el1));
-  //   $("#temp-rels").append("<div class='ws'>"+rel+"</div>");
-  //   $("#temp-rels").append(copy_data(el2));
-  //   $("#temp-rels").append("<div class='clear-both'></div>");
-  // }
-
-  $(document).on("click", function(event) {
-    var div = $(event.target).closest("div");
-    if (div.hasClass("button")) {
-      if (div.attr("id")=="addds") {
-        $("#newds").toggleClass("hidden");
-      } else if (div.attr("id")=="addpub") {
-        $("#newpub").toggleClass("hidden");
-      } 
-    // } else if (div.hasClass("data")) {
-    //   if (!$.sourceobjcopy) {
-    //     div.addClass("selected");
-    //     $.sourceobjorig = div;
-    //     $.sourceobjcopy = copy_data(div);
-      // } else if (!$.obj2copy) {
-      //   div.addClass("selected");
-      //   $.obj2orig = div;
-      //   $.obj2copy = copy_data(div);
-      //   $.obj2copy.append("<input type='hidden' name='obj-right' value='"+div.attr("id")+"' />");
-      //   $("#link > input").attr("disabled",false);
-      // } else {
-        // both objects are filled, shift obj2 to obj1
-        // div.addClass("selected");
-        // $.obj1orig.removeClass("selected");
-        // $.obj1orig = $.obj2orig;
-        // $.obj1copy = copy_data($.obj1orig);
-        // $.obj1copy.append("<input type='hidden' name='obj-left' value='"+$.obj1orig.attr("id")+"' />");
-        // div.addClass("selected");
-        // $.obj2orig = div;
-        // $.obj2copy = copy_data(div);
-        // $.obj2copy.append("<input type='hidden' name='obj-right' value='"+div.attr("id")+"' />");
-      // }
-      // if ($.sourceobjcopy) {
-
-      //   create_source();
-        // $("#obj-right").empty().append($.obj2copy);
-        // also find the possible relations and show them here
-        // $("#link-selector").html(create_link_selector());
-      // }
-    }
-  });
-
-}) 

@@ -144,3 +144,7 @@ td.source img {
   height: 60px;
   font-weight: bold;
 }
+
+span.status {
+  float:right;
+}

@@ -61,11 +61,11 @@
       	</div>
 
       	<div ng-show="loggedin">
-        <h2>Workspace (using name: {{username}})</h2>
+        <h2>Workspace (using name: {{username}})<span class="status" ng-show="statusMessage">{{statusMessage}}</span></h2>
         <table width="100%">
           <tr>
             <td width="50%">
-              <div class='button' id='addpub'><input type="image" src="img/document-new.png" /></div><h3>Publications</h3>
+              <div class='button'><input type="image" src="img/document-new.png" ng-click="toggleForm('pub')" /></div><h3>Publications</h3>
               <div class='spacer'>
                 <div ng-repeat="pub in publications" class="publication data" id="{{pub.id}}" ng-click="selectedSource(pub, 'p')" draggable data="{{pub}}"><img ng-src="{{pub.img}}" title="{{pub.title}}" /></div>
               </div>
@@ -87,7 +87,7 @@
               </div>
             </td>
             <td width="50%">
-              <div class='button' id='addds'><input type="image" src="img/edit-table-insert-row-big-plus.png" /></div><h3>Datasets</h3>
+              <div class='button'><input type="image" src="img/edit-table-insert-row-big-plus.png" ng-click="toggleForm('ds')" /></div><h3>Datasets</h3>
               <div class='spacer'>
 								<div ng-repeat="ds in datasets" class="dataset data" id="{{ds.id}}" ng-click="selectedSource(ds, 'd')" draggable data="{{ds}}"><img ng-src="{{ds.img}}" title="{{ds.name}}" /></div> 
               </div>

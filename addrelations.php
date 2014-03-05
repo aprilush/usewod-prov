@@ -10,10 +10,8 @@ if ( isset($_POST['user']) && !empty($_POST['user']) ) {
     add_relations($username, $triples);
   }
 }
-// $rez = array("added" => );
-// echo json_encode($rez);
 
-// $triples[] = ' usewod:'.$genid.' prov:atTime "'.time()->format(DateTime::ISO8601).'"^^xsd:dateTime ';
+// $triples[] = ' usewod:'.$derid.' prov:atTime "'.time()->format(DateTime::ISO8601).'"^^xsd:dateTime ';
 function make_triples($source, $relations) {
   $triples = [];
   $s = "";
@@ -27,53 +25,47 @@ function make_triples($source, $relations) {
       if ( array_key_exists('pub', $relations) ) {
         foreach ( $relations['pub'] as $rel ) {
           if ( !empty($rel['objects']) ) {
-            $genid = uniqid("prov/generation/");
-            $triples[] = ' usewod:'.$genid.' a  prov:Generation, usewod:Citation ';
-            $actid = uniqid("prov/activity/");
-            $triples[] = ' usewod:'.$actid.' a  prov:Activity ';
-            $triples[] = ' usewod:'.$genid.' prov:activity usewod:'.$actid.' ';
+            $derid = uniqid("prov/");
+            $triples[] = ' usewod:'.$derid.' a  prov:Derivation, usewod:Citation ';
             foreach ($rel['objects'] as $object) {
               if (array_key_exists('id', $object) ) {
                 $o = $object['id'];
-                $triples[] = ' usewod:'.$actid.' prov:used <'.$o.'> ';
+                $triples[] = ' usewod:'.$derid.' prov:entity <'.$o.'> ';
               }
             }
-            $triples[] = ' <'.$s.'> prov:qualifiedGeneration usewod:'.$genid.' ';
+            $triples[] = ' <'.$s.'> prov:qualifiedDerivation usewod:'.$derid.' ';
           }
         }
       }
       if ( array_key_exists('ds', $relations) ) {
         foreach ( $relations['ds'] as $rel ) {
           if ( !empty($rel['objects']) ) {
-            $genid = uniqid("prov/generation/");
-            $triples[] = ' usewod:'.$genid.' a  prov:Generation ';
+            $derid = uniqid("prov/");
+            $triples[] = ' usewod:'.$derid.' a  prov:Derivation ';
             switch ($rel['label']) {
               case 'mentions':
-                $triples[] = ' usewod:'.$genid.' a  usewod:Mention ';
+                $triples[] = ' usewod:'.$derid.' a  usewod:Mention ';
                 break;
               case 'describes':
-                $triples[] = ' usewod:'.$genid.' a  usewod:Description ';
+                $triples[] = ' usewod:'.$derid.' a  usewod:Description ';
                 break;
               case 'evaluates':
-                $triples[] = ' usewod:'.$genid.' a  usewod:Evaluation ';
+                $triples[] = ' usewod:'.$derid.' a  usewod:Evaluation ';
                 break;
               case 'analyses':
-                $triples[] = ' usewod:'.$genid.' a  usewod:Analysis ';
+                $triples[] = ' usewod:'.$derid.' a  usewod:Analysis ';
                 break;
               case 'compares':
-                $triples[] = ' usewod:'.$genid.' a  usewod:Comparison ';
+                $triples[] = ' usewod:'.$derid.' a  usewod:Comparison ';
                 break;
             }
-            $actid = uniqid("prov/activity/");
-            $triples[] = ' usewod:'.$actid.' a  prov:Activity ';
-            $triples[] = ' usewod:'.$genid.' prov:activity usewod:'.$actid.' ';
             foreach ($rel['objects'] as $object) {
               if (array_key_exists('id', $object) ) {
                 $o = $object['id'];
-                $triples[] = ' usewod:'.$actid.' prov:used <'.$o.'> ';
+                $triples[] = ' usewod:'.$derid.' prov:entity <'.$o.'> ';
               }
             }
-            $triples[] = ' <'.$s.'> prov:qualifiedGeneration usewod:'.$genid.' ';
+            $triples[] = ' <'.$s.'> prov:qualifiedDerivation usewod:'.$derid.' ';
           }
         }
       }
@@ -84,30 +76,27 @@ function make_triples($source, $relations) {
             foreach ($rel['objects'] as $object) {
               if (array_key_exists('id', $object) ) {
                 $o = $object['id'];
-                $genid = uniqid("prov/generation/");
-                $triples[] = ' usewod:'.$genid.' a  prov:Generation ';
+                $derid = uniqid("prov/");
+                $triples[] = ' usewod:'.$derid.' a  prov:Derivation ';
                 switch ($rel['label']) {
                   case 'is mentioned in':
-                    $triples[] = ' usewod:'.$genid.' a  usewod:Mention ';
+                    $triples[] = ' usewod:'.$derid.' a  usewod:Mention ';
                     break;
                   case 'is described in':
-                    $triples[] = ' usewod:'.$genid.' a  usewod:Description ';
+                    $triples[] = ' usewod:'.$derid.' a  usewod:Description ';
                     break;
                   case 'is evaluated in':
-                    $triples[] = ' usewod:'.$genid.' a  usewod:Evaluation ';
+                    $triples[] = ' usewod:'.$derid.' a  usewod:Evaluation ';
                     break;
                   case 'is analysed in':
-                    $triples[] = ' usewod:'.$genid.' a  usewod:Analysis ';
+                    $triples[] = ' usewod:'.$derid.' a  usewod:Analysis ';
                     break;
                   case 'is compared in':
-                    $triples[] = ' usewod:'.$genid.' a  usewod:Comparison ';
+                    $triples[] = ' usewod:'.$derid.' a  usewod:Comparison ';
                     break;
                 }
-                $actid = uniqid("prov/activity/");
-                $triples[] = ' usewod:'.$actid.' a  prov:Activity ';
-                $triples[] = ' usewod:'.$genid.' prov:activity usewod:'.$actid.' ';
-                $triples[] = ' usewod:'.$actid.' prov:used <'.$s.'> ';
-                $triples[] = ' <'.$o.'> prov:qualifiedGeneration usewod:'.$genid.' ';
+                $triples[] = ' usewod:'.$derid.' prov:entity <'.$s.'> ';
+                $triples[] = ' <'.$o.'> prov:qualifiedDerivation usewod:'.$derid.' ';
               }
             }
           }
@@ -141,7 +130,7 @@ function add_relations($username, $triples)
   }
 
   add_graph_info($gid, $username);
-  $rez = array("query" => $insert_q, "result" => $rs);
+  $rez = array("query" => $insert_q, "result" => $rs, "graph" => "usewod:".$gid);
   echo json_encode($rez);
 }
 
