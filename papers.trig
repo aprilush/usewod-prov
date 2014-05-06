@@ -1,0 +1,287 @@
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix schema: <http://schema.org/> .
+@prefix usewod: <http://data.usewod.org/resource/> .
+@prefix usewodds: <http://data.usewod.org/dataset/> .
+@prefix usewodpub: <http://data.usewod.org/publication/> .
+@prefix usewodp: <http://data.usewod.org/person/> .
+
+usewod:bundle_usewod2011_authors {
+    
+    usewodp:aprilush
+        a prov:Agent, schema:Person ;
+        schema:name "Laura Dragan" .
+    usewod:qgen_bundle_usewod2011_authors
+        a prov:Generation ;
+        prov:atTime "2014-05-05T16:02:00.000Z"^^xsd:dateTime . 
+    usewod:bundle_usewod2011_authors 
+        a prov:Entity, prov:Bundle ; 
+        prov:qualifiedGeneration usewod:qgen_bundle_usewod2011_authors ;
+        prov:wasAttributedTo usewod:aprilush .
+
+    usewodp:03b2a4f59b7dbdaa406d29f386c5d2a1 
+        a prov:Agent, schema:Person ;
+        schema:name "Blaz Fortuna" . 
+
+    usewodp:480e0ea2955283c9e6f1bfcc726cbc32
+        a prov:Agent, schema:Person ;
+        schema:name "Dunja Mladenic" . 
+
+    usewodp:17fa85e7f1b1ad5ea58206cabdf48ad1
+        a prov:Agent, schema:Person ;
+        schema:name "Marko Grobelnik" . 
+
+    usewodp:40ae85e583d5a369d88e627044de2d28
+        a prov:Agent, schema:Person ;
+        schema:name "Vera Hollink" . 
+
+    usewodp:37ccadfb0a30c29b1aaeac97659c7448
+        a prov:Agent, schema:Person ;
+        schema:name "Arjen De Vries" . 
+
+    usewodp:232374e281ab784edab6dea5584390cb
+        a prov:Agent, schema:Person ;
+        schema:name "Ashish Sureka" . 
+
+    usewodp:22395d17360e8fea7a12ea98835f5149
+        a prov:Agent, schema:Person ;
+        schema:name "Fabian Abel" . 
+
+    usewodp:89b022ebe4831dcdadad1c9896c7d933
+        a prov:Agent, schema:Person ;
+        schema:name "Ilknur Celik" . 
+
+    usewodp:b20e3f051cbf022bf0a80b05c1d8267a
+        a prov:Agent, schema:Person ;
+        schema:name "Claudia Hauff" . 
+
+    usewodp:f99a2cd25705a2fb9da78d9087523b50
+        a prov:Agent, schema:Person ;
+        schema:name "Laura Hollink" . 
+
+    usewodp:6bfab0f1d537e9900a89c8a474c2e0a3
+        a prov:Agent, schema:Person ;
+        schema:name "Geert-Jan Houben" . 
+
+    usewodp:a4bbd326358c2f5e76b8d595db026b48
+        a prov:Agent, schema:Person ;
+        schema:name "Markus Kirchberg" . 
+ 
+    usewodp:fa97ddfa616651512cbdbed1a3cb0060
+        a prov:Agent, schema:Person ;
+        schema:name "Ryan Ko" . 
+
+    usewodp:4a02b911a29457dc7691da454591360d
+        a prov:Agent, schema:Person ;
+        schema:name "Bu Sung Lee" . 
+
+    usewodp:8bb0ab82ff03e9a18231391ad7be208e
+        a prov:Agent, schema:Person ;
+        schema:name "Mario Arias Gallego" . 
+
+    usewodp:3ce30b9c8fb38d16abe7f7181f813f36
+        a prov:Agent, schema:Person ;
+        schema:name "Javier D. Fernández" . 
+
+    usewodp:1f560f19219ae4aac7ff4b013b5f5dab
+        a prov:Agent, schema:Person ;
+        schema:name "Miguel A. Martínez-Prieto" . 
+
+    usewodp:363d27137023d1db225396e8c65279a5
+        a prov:Agent, schema:Person ;
+        schema:name "Pablo De La Fuente" . 
+
+    usewodp:
+        a prov:Agent, schema:Person ;
+        schema:name "" . 
+}
+
+usewod:bundle_usewod2011_papers {
+    
+    usewod:qgen_bundle_usewod2011_papers
+        a prov:Generation ;
+        prov:atTime "2014-05-05T15:54:00.000Z"^^xsd:dateTime . 
+    usewod:bundle_usewod2011_papers 
+        a prov:Entity, prov:Bundle ; 
+        prov:qualifiedGeneration usewod:qgen_bundle_usewod2011_papers ;
+        prov:wasAttributedTo usewod:aprilush . 
+
+    usewodpub:usewod2011paper1
+        a prov:Entity , schema:ScholarlyArticle ; 
+        schema:name "User Modeling Combining Access Logs, Page Content and Semantics" ; 
+        schema:author usewodp:03b2a4f59b7dbdaa406d29f386c5d2a1, usewodp:480e0ea2955283c9e6f1bfcc726cbc32, usewodp:17fa85e7f1b1ad5ea58206cabdf48ad1 ;
+        schema:copyrightYear "2011" ; 
+        schema:url <http://arxiv.org/abs/1103.5002> ;
+        schema:image <.png> ;
+        prov:wasAttributedTo usewodp:03b2a4f59b7dbdaa406d29f386c5d2a1, usewodp:480e0ea2955283c9e6f1bfcc726cbc32, usewodp:17fa85e7f1b1ad5ea58206cabdf48ad1 .
+
+    usewodpub:usewod2011paper2
+        a prov:Entity , schema:ScholarlyArticle ; 
+        schema:name "Towards an Automated Query Modification Assistant" ; 
+        schema:author usewodp:40ae85e583d5a369d88e627044de2d28, usewodp:37ccadfb0a30c29b1aaeac97659c7448 ;
+        schema:copyrightYear "2011" ; 
+        schema:url <http://arxiv.org/abs/1104.0128> ;
+        schema:image <.png> ;
+        prov:wasAttributedTo usewodp:40ae85e583d5a369d88e627044de2d28, usewodp:37ccadfb0a30c29b1aaeac97659c7448 .
+
+    usewodpub:usewod2011paper3
+        a prov:Entity , schema:ScholarlyArticle ; 
+        schema:name "Mining User Comment Activity for Detecting Forum Spammers in YouTube" ; 
+        schema:author usewodp:232374e281ab784edab6dea5584390cb ;
+        schema:copyrightYear "2011" ; 
+        schema:url <http://arxiv.org/abs/1103.5044> ;
+        schema:image <.png> ;
+        prov:wasAttributedTo usewodp:232374e281ab784edab6dea5584390cb .
+
+    usewodpub:usewod2011paper4
+        a prov:Entity , schema:ScholarlyArticle ; 
+        schema:name "U-Sem: Semantic Enrichment, User Modeling and Mining Usage Data on the Social Web" ; 
+        schema:author usewodp:22395d17360e8fea7a12ea98835f5149, usewodp:89b022ebe4831dcdadad1c9896c7d933, usewodp:b20e3f051cbf022bf0a80b05c1d8267a, usewodp:f99a2cd25705a2fb9da78d9087523b50, usewodp:6bfab0f1d537e9900a89c8a474c2e0a3 ;
+        schema:copyrightYear "2011" ; 
+        schema:url <http://arxiv.org/abs/1104.0126> ;
+        schema:image <.png> ;
+        prov:wasAttributedTo usewodp:22395d17360e8fea7a12ea98835f5149, usewodp:89b022ebe4831dcdadad1c9896c7d933, usewodp:b20e3f051cbf022bf0a80b05c1d8267a, usewodp:f99a2cd25705a2fb9da78d9087523b50, usewodp:6bfab0f1d537e9900a89c8a474c2e0a3 .
+
+    usewodpub:usewod2011paper5
+        a prov:Entity , schema:ScholarlyArticle ; 
+        schema:name "From Linked Data to Relevant Data - Time is the Essence" ; 
+        schema:author usewodp:a4bbd326358c2f5e76b8d595db026b48, usewodp:fa97ddfa616651512cbdbed1a3cb0060, usewodp:4a02b911a29457dc7691da454591360d ;
+        schema:copyrightYear "2011" ; 
+        schema:url <http://arxiv.org/abs/1103.5046> ;
+        schema:image <.png> ;
+        prov:wasAttributedTo usewodp:a4bbd326358c2f5e76b8d595db026b48, usewodp:fa97ddfa616651512cbdbed1a3cb0060, usewodp:4a02b911a29457dc7691da454591360d .
+
+    usewodpub:usewod2011paper6
+        a prov:Entity , schema:ScholarlyArticle ; 
+        schema:name "An Empirical Study of Real-World SPARQL Queries" ; 
+        schema:author usewodp:8bb0ab82ff03e9a18231391ad7be208e, usewodp:3ce30b9c8fb38d16abe7f7181f813f36, usewodp:1f560f19219ae4aac7ff4b013b5f5dab, usewod:363d27137023d1db225396e8c65279a5 ;
+        schema:copyrightYear "2011" ; 
+        schema:url <http://arxiv.org/abs/1103.5043> ;
+        schema:image <.png> ;
+        prov:wasAttributedTo usewodp:8bb0ab82ff03e9a18231391ad7be208e, usewodp:3ce30b9c8fb38d16abe7f7181f813f36, usewodp:1f560f19219ae4aac7ff4b013b5f5dab, usewod:363d27137023d1db225396e8c65279a5 .       
+}
+
+usewod:bundle_usewod2012_authors {
+    
+    usewod:qgen_bundle_usewod2012_authors
+        a prov:Generation ;
+        prov:atTime "2014-05-05T16:02:00.000Z"^^xsd:dateTime . 
+    usewod:bundle_usewod2012_authors 
+        a prov:Entity, prov:Bundle ; 
+        prov:qualifiedGeneration usewod:qgen_bundle_usewod2012_authors ;
+        prov:wasAttributedTo usewod:aprilush .
+
+    usewodp:85f73b90ce533408429c5574cf55ee83
+        a prov:Agent, schema:Person ;
+        schema:name "Aravindan Raghuveer" . 
+
+    usewodp:903177d1f6e5588d94910245dd85103a 
+        a prov:Agent, schema:Person ;
+        schema:name "Sumio Fujita" . 
+
+    usewodp:ab4cb11c441da698c9e9af590c50773f 
+        a prov:Agent, schema:Person ;
+        schema:name "Georges Dupret" . 
+
+    usewodp:e4b8413f2ea37b0b67a6366df6b14491 
+        a prov:Agent, schema:Person ;
+        schema:name "Ricardo Baeza-Yates" . 
+
+    usewodp:1374a46b0e8e7f6d27c9ea81f44ddd8d 
+        a prov:Agent, schema:Person ;
+        schema:name "Julia Hoxha" . 
+
+    usewodp:70be92adccee8ae03ccd47322f78407f 
+        a prov:Agent, schema:Person ;
+        schema:name "Martin Junghans" . 
+
+    usewodp:b96bd3abb98cee4367b6c087b0bb2764 
+        a prov:Agent, schema:Person ;
+        schema:name "Sudhir Agarwal" . 
+
+    usewodp:a68d22fd7f6e9aa064284d4bd1e2436f 
+        a prov:Agent, schema:Person ;
+        schema:name "Magnus Knuth" . 
+
+    usewodp:1817f5ddec7baaf945fbb5e43f425f5a 
+        a prov:Agent, schema:Person ;
+        schema:name "Johannes Hercher" . 
+
+    usewodp:2d4dbd571a71934d1d8c989d9bb6b785 
+        a prov:Agent, schema:Person ;
+        schema:name "Harald Sack" . 
+
+    usewodp:e56322dc2746e3c314abe290318f173d 
+        a prov:Agent, schema:Person ;
+        schema:name "Andreas Thalhammer" . 
+
+    usewodp:f8fcd3431feb357be9896dbab035f1af 
+        a prov:Agent, schema:Person ;
+        schema:name "Ioan Toma" . 
+
+    usewodp:89907090f9c18d8737da57cffd4cf4c4 
+        a prov:Agent, schema:Person ;
+        schema:name "Antonio Roa-Valverde" . 
+
+    usewodp:bdd3e624d0619838c882ea4290c1fcf0 
+        a prov:Agent, schema:Person ;
+        schema:name "Dieter Fensel" . 
+}
+
+usewod:bundle_usewod2012_papers {
+    
+    usewod:qgen_bundle_usewod2012_papers
+        a prov:Generation ;
+        prov:atTime "2014-05-05T15:54:00.000Z"^^xsd:dateTime . 
+    usewod:bundle_usewod2012_papers 
+        a prov:Entity, prov:Bundle ; 
+        prov:qualifiedGeneration usewod:qgen_bundle_usewod2012_papers ;
+        prov:wasAttributedTo usewod:aprilush . 
+
+    usewodpub:usewod2012paper1
+        a prov:Entity , schema:ScholarlyArticle ; 
+        schema:name "Characterizing Machine Agent Behavior through SPARQL Query Mining" ; 
+        schema:author usewodp:85f73b90ce533408429c5574cf55ee83 ;
+        schema:copyrightYear "2012" ; 
+        schema:url <http://ir.ii.uam.es/usewod2012/usewod2012_raghuveer.pdf> ;
+        schema:image <.png> ;
+        prov:wasAttributedTo usewodp:85f73b90ce533408429c5574cf55ee83 .
+
+    usewodpub:usewod2012paper2
+        a prov:Entity , schema:ScholarlyArticle ; 
+        schema:name "Learning to Rank Query Recommendations by Semantic Similarities" ; 
+        schema:author usewodp:903177d1f6e5588d94910245dd85103a, usewodp:ab4cb11c441da698c9e9af590c50773f, usewodp:e4b8413f2ea37b0b67a6366df6b14491 ;
+        schema:copyrightYear "2012" ; 
+        schema:url <http://arxiv.org/abs/1204.2712> ;
+        schema:image <.png> ;
+        prov:wasAttributedTo usewodp:903177d1f6e5588d94910245dd85103a, usewodp:ab4cb11c441da698c9e9af590c50773f, usewodp:e4b8413f2ea37b0b67a6366df6b14491 .
+
+    usewodpub:usewod2012paper3
+        a prov:Entity , schema:ScholarlyArticle ; 
+        schema:name "Enabling Semantic Analysis of User Browsing Patterns in the Web of Data" ; 
+        schema:author usewodp:1374a46b0e8e7f6d27c9ea81f44ddd8d, usewodp:70be92adccee8ae03ccd47322f78407f, usewodp:b96bd3abb98cee4367b6c087b0bb2764 ;
+        schema:copyrightYear "2012" ; 
+        schema:url <http://arxiv.org/abs/1204.2713> ;
+        schema:image <.png> ;
+        prov:wasAttributedTo usewodp:1374a46b0e8e7f6d27c9ea81f44ddd8d, usewodp:70be92adccee8ae03ccd47322f78407f, usewodp:b96bd3abb98cee4367b6c087b0bb2764 .
+
+    usewodpub:usewod2012paper4
+        a prov:Entity , schema:ScholarlyArticle ; 
+        schema:name "Collaboratively Patching Linked Data" ; 
+        schema:author usewodp:a68d22fd7f6e9aa064284d4bd1e2436f, usewodp:1817f5ddec7baaf945fbb5e43f425f5a, usewodp:2d4dbd571a71934d1d8c989d9bb6b785 ;
+        schema:copyrightYear "2012" ; 
+        schema:url <http://arxiv.org/abs/1204.2715> ;
+        schema:image <.png> ;
+        prov:wasAttributedTo usewodp:a68d22fd7f6e9aa064284d4bd1e2436f, usewodp:1817f5ddec7baaf945fbb5e43f425f5a, usewodp:2d4dbd571a71934d1d8c989d9bb6b785 .
+
+    usewodpub:usewod2012paper5
+        a prov:Entity , schema:ScholarlyArticle ; 
+        schema:name "Leveraging Usage Data for Linked Data Movie Entity Summarization" ; 
+        schema:author usewodp:e56322dc2746e3c314abe290318f173d, usewodp:f8fcd3431feb357be9896dbab035f1af, usewodp:89907090f9c18d8737da57cffd4cf4c4, usewodp:bdd3e624d0619838c882ea4290c1fcf0 ;
+        schema:copyrightYear "2012" ; 
+        schema:url <http://arxiv.org/abs/1204.2718> ;
+        schema:image <.png> ;
+        prov:wasAttributedTo usewodp:e56322dc2746e3c314abe290318f173d, usewodp:f8fcd3431feb357be9896dbab035f1af, usewodp:89907090f9c18d8737da57cffd4cf4c4, usewodp:bdd3e624d0619838c882ea4290c1fcf0 .
+}
+
+
