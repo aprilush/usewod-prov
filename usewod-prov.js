@@ -27,15 +27,17 @@ usewodModule.directive('droppable', function() {
           drop:function(event,ui) {
             // console.log("dropped something");
             var obj = angular.fromJson(ui.draggable.attr("data"));
-            angular.forEach(scope.relationsToPub, function(val) {
-              if (val["label"]==rel["label"]) {
-                if (val["objects"].map(function(o){return o["id"]}).indexOf(obj["id"]) < 0) { 
-                  scope.$apply( function() {
-                    val["objects"].push(obj); // check first if it's already added
-                  });
-                }
-              } 
-            }); 
+            if (scope.sourceObject && obj["id"]!=scope.sourceObject.id ) {
+              angular.forEach(scope.relationsToPub, function(val) {
+                if (val["label"]==rel["label"]) {
+                  if (val["objects"].map(function(o){return o["id"]}).indexOf(obj["id"]) < 0) { 
+                    scope.$apply( function() {
+                      val["objects"].push(obj); 
+                    });
+                  }
+                } 
+              }); 
+            }
           }
         });        
       } else if (element.hasClass("dataset")) {
@@ -45,15 +47,17 @@ usewodModule.directive('droppable', function() {
           drop:function(event,ui) {
             // console.log("dropped something");
             var obj = angular.fromJson(ui.draggable.attr("data"));
-            angular.forEach(scope.relationsToDs, function(val) {
-              if (val["label"]==rel["label"]) {
-                if (val["objects"].map(function(o){return o["id"]}).indexOf(obj["id"]) < 0) {
-                  scope.$apply( function() {
-                    val["objects"].push(obj); // check first if it's already added
-                  });
-                }
-              } 
-            }); 
+            if (scope.sourceObject && obj["id"]!=scope.sourceObject.id ) {
+              angular.forEach(scope.relationsToDs, function(val) {
+                if (val["label"]==rel["label"]) {
+                  if (val["objects"].map(function(o){return o["id"]}).indexOf(obj["id"]) < 0) {
+                    scope.$apply( function() {
+                      val["objects"].push(obj); // check first if it's already added
+                    });
+                  }
+                } 
+              }); 
+            }
           }
         });        
       } 
@@ -64,7 +68,7 @@ usewodModule.controller('prov', function($scope, $sce) {
   var imgSearcher;
 
   $scope.username = getCookie("username");
-  if (!$scope.username || $scope.username != "") {
+  if ($scope.username && $scope.username != "") {
     $scope.loggedin = true;
   }
   
@@ -72,6 +76,12 @@ usewodModule.controller('prov', function($scope, $sce) {
     console.log($scope.username);
     setCookie("username", $scope.username, 14);
     $scope.loggedin = true;
+  }
+
+  $scope.removeUsername = function() {
+    $scope.username = "";
+    setCookie("username", $scope.username, 0);
+    $scope.loggedin = false;
   }
 
   function setCookie(cname,cvalue,exdays) {
