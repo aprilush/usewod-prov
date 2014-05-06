@@ -67,7 +67,7 @@
             <td width="50%">
               <div class='button'><input type="image" src="img/document-new.png" ng-click="toggleForm('pub')" /></div><h3>Publications</h3>
               <div class='spacer'>
-                <div ng-repeat="pub in publications" class="publication data" id="{{pub.id}}" ng-click="selectedSource(pub, 'p')" draggable data="{{pub}}"><img ng-src="{{pub.img}}" title="{{pub.title}}" /></div>
+                <div ng-repeat="pub in publications" class="publication data" id="{{pub.id}}" ng-click="selectedSource(pub, 'p')" draggable data="{{pub}}"><img ng-src="{{pub.img}}" title="{{pub.title}}" /><a href="{{pub.url}}">{{pub.title}}</a></div>
               </div>
               <div class='clear-both'></div>
               <div class="hidden" id="newpub">
@@ -75,7 +75,7 @@
                   <div class="button" ng-show="pubImg"><img name="pub-img" ng-src="{{pubImg}}" /></div>
                   <h3>Add a new publication</h3>
                   <label for="pub-title">Title</label><br/>
-                  <input type="text" name="pub-title" id="pub-title" ng-model="pubTitle" ng-blur="imgSearchForPaper()" /><br/>
+                  <inputsetUsername type="text" name="pub-title" id="pub-title" ng-model="pubTitle" ng-blur="imgSearchForPaper()" /><br/>
                   <label for="pub-author">Authors (each on a new line, "firstname lastname")</label></br>
                   <textarea rows="3" name="pub-author" id="pub-author" ng-model="pubAuthor"></textarea><br/>
                   <label for="pub-venue">Publication venue</label><br/>
@@ -89,7 +89,7 @@
             <td width="50%">
               <div class='button'><input type="image" src="img/edit-table-insert-row-big-plus.png" ng-click="toggleForm('ds')" /></div><h3>Datasets</h3>
               <div class='spacer'>
-								<div ng-repeat="ds in datasets" class="dataset data" id="{{ds.id}}" ng-click="selectedSource(ds, 'd')" draggable data="{{ds}}"><img ng-src="{{ds.img}}" title="{{ds.name}}" /></div> 
+								<div ng-repeat="ds in datasets" class="dataset data" id="{{ds.id}}" ng-click="selectedSource(ds, 'd')" draggable data="{{ds}}"><img ng-src="{{ds.img}}" title="{{ds.name}}" /><a href="{{ds.url}}">{{ds.name}}</a></div> 
               </div>
               <div class='clear-both'></div>
               <div class="hidden" id="newds">
@@ -133,7 +133,7 @@
       </div> <!-- content -->
 
 			<div id="footer">
-				<div style="text-align: center">
+				<div style="text-align: center">no one knows everything, everyone knows something
 					For questions and comments e-mail 
 					<a href="mailto:usewod2013-chairs@googlegroups.com">USEWOD Chairs</a><br/>
 					<p about="" resource="http://www.w3.org/TR/rdfa-syntax" rel="dct:conformsTo">
@@ -145,8 +145,10 @@
       </div> <!-- footer -->
 	  </div> <!-- container -->
 	
-		<script src="http://code.jquery.com/jquery-1.10.1.js"></script>
-    <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+<!--    <script src="http://code.jquery.com/jquery-1.10.1.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script> -->
+		<script src="js/jquery-1.10.2.js"></script>
+    <script src="js/jquery-ui.js"></script>
     <script src="https://www.google.com/jsapi"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular.min.js"></script>
     <script src="usewod-prov.js" type="text/javascript"></script>
