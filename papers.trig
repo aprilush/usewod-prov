@@ -284,4 +284,106 @@ usewod:bundle_usewod2012_papers {
         prov:wasAttributedTo usewodp:e56322dc2746e3c314abe290318f173d, usewodp:f8fcd3431feb357be9896dbab035f1af, usewodp:89907090f9c18d8737da57cffd4cf4c4, usewodp:bdd3e624d0619838c882ea4290c1fcf0 .
 }
 
+usewod:bundle_usewod2013_authors {
+    
+    usewod:qgen_bundle_usewod2013_authors
+        a prov:Generation ;
+        prov:atTime "2014-05-12T16:24:00.000Z"^^xsd:dateTime . 
+    usewod:bundle_usewod2013_authors 
+        a prov:Entity, prov:Bundle ; 
+        prov:qualifiedGeneration usewod:qgen_bundle_usewod2013_authors ;
+        prov:wasAttributedTo usewod:aprilush .
+
+    usewodp:e7fcb75408d4c0ff2ae132c84330ce5c 
+        a prov:Agent, schema:Person ;
+        schema:name "Johannes Lorey" . 
+
+    usewodp:1961dcf8fb4e7d545ef16693ef219482 
+        a prov:Agent, schema:Person ;
+        schema:name "Felix Naumann" . 
+}
+
+usewod:bundle_usewod2013_papers {
+    
+    usewod:qgen_bundle_usewod2013_papers
+        a prov:Generation ;
+        prov:atTime "2014-05-12T16:24:00.000Z"^^xsd:dateTime . 
+    usewod:bundle_usewod2013_papers 
+        a prov:Entity, prov:Bundle ; 
+        prov:qualifiedGeneration usewod:qgen_bundle_usewod2013_papers ;
+        prov:wasAttributedTo usewod:aprilush . 
+
+    usewodpub:usewod2013paper1
+        a prov:Entity , schema:ScholarlyArticle ; 
+        schema:name "Caching and Prefetching Strategies for SPARQL Queries" ; 
+        schema:author usewod:e7fcb75408d4c0ff2ae132c84330ce5c, usewodp:1961dcf8fb4e7d545ef16693ef219482 ;
+        schema:copyrightYear "2013" ; 
+        schema:url <http://ceur-ws.org/Vol-981/USEWOD2013paper1.pdf> ;
+        schema:image <.png> ;
+        prov:wasAttributedTo usewod:e7fcb75408d4c0ff2ae132c84330ce5c, usewodp:1961dcf8fb4e7d545ef16693ef219482 .
+}
+
+usewod:bundle_usewod2014_authors {
+    
+    usewod:qgen_bundle_usewod2014_authors
+        a prov:Generation ;
+        prov:atTime "2014-05-12T16:42:00.000Z"^^xsd:dateTime . 
+    usewod:bundle_usewod2014_authors 
+        a prov:Entity, prov:Bundle ; 
+        prov:qualifiedGeneration usewod:qgen_bundle_usewod2014_authors ;
+        prov:wasAttributedTo usewod:aprilush .
+
+    usewodp:22bc6a8631c768e88ec59b1407691282 
+        a prov:Agent, schema:Person ;
+        schema:name "Saud Aljaloud" . 
+
+    usewodp:35e1f0d98fdc02e30f098dc79c58efc4 
+        a prov:Agent, schema:Person ;
+        schema:name "Markus Luczak-Roesch" . 
+
+    usewodp:71599b19e627703bedac300a4d0ce7ac 
+        a prov:Agent, schema:Person ;
+        schema:name "Tim Chown" . 
+
+    usewodp:462a2b684eeb585e541aabb28a3f35d1 
+        a prov:Agent, schema:Person ;
+        schema:name "Nicholas Gibbins" . 
+
+    usewodp:a4a60a600cf8cb16393901c5fd48dd84 
+        a prov:Agent, schema:Person ;
+        schema:name "Laurens Rietveld" . 
+
+    usewodp:37115ad6e91fc92f5668533aab8de732 
+        a prov:Agent, schema:Person ;
+        schema:name "Rinke Hoekstra" . 
+}
+
+usewod:bundle_usewod2014_papers {
+    
+    usewod:qgen_bundle_usewod2014_papers
+        a prov:Generation ;
+        prov:atTime "2014-05-12T16:42:00.000Z"^^xsd:dateTime . 
+    usewod:bundle_usewod2014_papers 
+        a prov:Entity, prov:Bundle ; 
+        prov:qualifiedGeneration usewod:qgen_bundle_usewod2014_papers ;
+        prov:wasAttributedTo usewod:aprilush . 
+
+    usewodpub:usewod2014paper1
+        a prov:Entity , schema:ScholarlyArticle ; 
+        schema:name "Get All, Filter Details - On the Use of Regular Expressions in SPARQL Queries" ; 
+        schema:author usewodp:22bc6a8631c768e88ec59b1407691282, usewodp:35e1f0d98fdc02e30f098dc79c58efc4, usewodp:71599b19e627703bedac300a4d0ce7ac, usewodp:462a2b684eeb585e541aabb28a3f35d1 ;
+        schema:copyrightYear "2014" ; 
+        schema:url <> ;
+        schema:image <.png> ;
+        prov:wasAttributedTo usewodp:22bc6a8631c768e88ec59b1407691282, usewodp:35e1f0d98fdc02e30f098dc79c58efc4, usewodp:71599b19e627703bedac300a4d0ce7ac, usewodp:462a2b684eeb585e541aabb28a3f35d1 .
+
+    usewodpub:usewod2014paper2
+        a prov:Entity , schema:ScholarlyArticle ; 
+        schema:name "Man vs. Machine: Differences in SPARQL Queries" ; 
+        schema:author usewodp:a4a60a600cf8cb16393901c5fd48dd84, usewodp:37115ad6e91fc92f5668533aab8de732 ;
+        schema:copyrightYear "2014" ; 
+        schema:url <> ;
+        schema:image <.png> ;
+        prov:wasAttributedTo usewodp:a4a60a600cf8cb16393901c5fd48dd84, usewodp:37115ad6e91fc92f5668533aab8de732 .
+}
 
