@@ -373,7 +373,7 @@ usewod:bundle_usewod2014_papers {
         schema:name "Get All, Filter Details - On the Use of Regular Expressions in SPARQL Queries" ; 
         schema:author usewodp:22bc6a8631c768e88ec59b1407691282, usewodp:35e1f0d98fdc02e30f098dc79c58efc4, usewodp:71599b19e627703bedac300a4d0ce7ac, usewodp:462a2b684eeb585e541aabb28a3f35d1 ;
         schema:copyrightYear "2014" ; 
-        schema:url <> ;
+        schema:url <http://people.cs.kuleuven.be/~bettina.berendt/USEWOD2014/aljaloud_luczakrosch_chown_gibbins_usewod2014.pdf> ;
         schema:image <.png> ;
         prov:wasAttributedTo usewodp:22bc6a8631c768e88ec59b1407691282, usewodp:35e1f0d98fdc02e30f098dc79c58efc4, usewodp:71599b19e627703bedac300a4d0ce7ac, usewodp:462a2b684eeb585e541aabb28a3f35d1 .
 
@@ -382,7 +382,7 @@ usewod:bundle_usewod2014_papers {
         schema:name "Man vs. Machine: Differences in SPARQL Queries" ; 
         schema:author usewodp:a4a60a600cf8cb16393901c5fd48dd84, usewodp:37115ad6e91fc92f5668533aab8de732 ;
         schema:copyrightYear "2014" ; 
-        schema:url <> ;
+        schema:url <http://people.cs.kuleuven.be/~bettina.berendt/USEWOD2014/rietveld_hoekstra_usewod2014.pdf> ;
         schema:image <.png> ;
         prov:wasAttributedTo usewodp:a4a60a600cf8cb16393901c5fd48dd84, usewodp:37115ad6e91fc92f5668533aab8de732 .
 }
