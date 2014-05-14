@@ -6,6 +6,21 @@
 @prefix usewodpub: <http://data.usewod.org/publication/> .
 @prefix usewodp: <http://data.usewod.org/person/> .
 
+# usewod:bundle_usewod_papers 
+# {    
+#     usewodp:aprilush
+#         a prov:Agent, schema:Person ;
+#         schema:name "Laura Dragan" .
+#     usewod:qgen_bundle_usewod_papers
+#         a prov:Generation ;
+#         prov:atTime "2014-05-12T16:02:00.000Z"^^xsd:dateTime . 
+#     usewod:bundle_usewod_papers 
+#         a prov:Entity, prov:Bundle ; 
+#         prov:qualifiedGeneration usewod:qgen_bundle_usewod_papers ;
+#         prov:wasAttributedTo usewodp:aprilush .
+
+# usewod 2011 authors
+
 usewodp:03b2a4f59b7dbdaa406d29f386c5d2a1 
     a prov:Agent, schema:Person ;
     schema:name "Blaz Fortuna" . 
@@ -78,6 +93,8 @@ usewodp:363d27137023d1db225396e8c65279a5
     a prov:Agent, schema:Person ;
     schema:name "Pablo De La Fuente" . 
 
+# usewod 2011 papers
+
 usewodpub:usewod2011paper1
     a prov:Entity , schema:ScholarlyArticle ; 
     schema:name "User Modeling Combining Access Logs, Page Content and Semantics" ; 
@@ -131,6 +148,8 @@ usewodpub:usewod2011paper6
     schema:url <http://arxiv.org/abs/1103.5043> ;
     schema:image <.png> ;
     prov:wasAttributedTo usewodp:8bb0ab82ff03e9a18231391ad7be208e, usewodp:3ce30b9c8fb38d16abe7f7181f813f36, usewodp:1f560f19219ae4aac7ff4b013b5f5dab, usewodp:363d27137023d1db225396e8c65279a5 .       
+
+# usewod 2012 authors
 
 usewodp:85f73b90ce533408429c5574cf55ee83
     a prov:Agent, schema:Person ;
@@ -188,6 +207,8 @@ usewodp:bdd3e624d0619838c882ea4290c1fcf0
     a prov:Agent, schema:Person ;
     schema:name "Dieter Fensel" . 
 
+# usewod 2012 papers
+
 usewodpub:usewod2012paper1
     a prov:Entity , schema:ScholarlyArticle ; 
     schema:name "Characterizing Machine Agent Behavior through SPARQL Query Mining" ; 
@@ -233,6 +254,8 @@ usewodpub:usewod2012paper5
     schema:image <.png> ;
     prov:wasAttributedTo usewodp:e56322dc2746e3c314abe290318f173d, usewodp:f8fcd3431feb357be9896dbab035f1af, usewodp:89907090f9c18d8737da57cffd4cf4c4, usewodp:bdd3e624d0619838c882ea4290c1fcf0 .
 
+# usewod 2013 authors
+
 usewodp:e7fcb75408d4c0ff2ae132c84330ce5c 
     a prov:Agent, schema:Person ;
     schema:name "Johannes Lorey" . 
@@ -240,6 +263,8 @@ usewodp:e7fcb75408d4c0ff2ae132c84330ce5c
 usewodp:1961dcf8fb4e7d545ef16693ef219482 
     a prov:Agent, schema:Person ;
     schema:name "Felix Naumann" . 
+
+# usewod 2013 papers
 
 usewodpub:usewod2013paper1
     a prov:Entity , schema:ScholarlyArticle ; 
@@ -249,6 +274,8 @@ usewodpub:usewod2013paper1
     schema:url <http://ceur-ws.org/Vol-981/USEWOD2013paper1.pdf> ;
     schema:image <.png> ;
     prov:wasAttributedTo usewodp:e7fcb75408d4c0ff2ae132c84330ce5c, usewodp:1961dcf8fb4e7d545ef16693ef219482 .
+
+# usewod 2014 authors
 
 usewodp:22bc6a8631c768e88ec59b1407691282 
     a prov:Agent, schema:Person ;
@@ -274,6 +301,8 @@ usewodp:37115ad6e91fc92f5668533aab8de732
     a prov:Agent, schema:Person ;
     schema:name "Rinke Hoekstra" . 
 
+# usewod 2014 papers
+
 usewodpub:usewod2014paper1
     a prov:Entity , schema:ScholarlyArticle ; 
     schema:name "Get All, Filter Details - On the Use of Regular Expressions in SPARQL Queries" ; 
@@ -291,3 +320,5 @@ usewodpub:usewod2014paper2
     schema:url <http://people.cs.kuleuven.be/~bettina.berendt/USEWOD2014/rietveld_hoekstra_usewod2014.pdf> ;
     schema:image <.png> ;
     prov:wasAttributedTo usewodp:a4a60a600cf8cb16393901c5fd48dd84, usewodp:37115ad6e91fc92f5668533aab8de732 .
+
+# }

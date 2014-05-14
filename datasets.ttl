@@ -6,6 +6,19 @@
 @prefix usewodpub: <http://data.usewod.org/publication/> .
 @prefix usewodp: <http://data.usewod.org/person/> .
 
+# usewod:bundle_datasets {
+
+# 	usewodp:aprilush
+#         a prov:Agent, schema:Person ;
+#         schema:name "Laura Dragan" .
+#     usewod:qgen_bundle_datasets
+#         a prov:Generation ;
+#         prov:atTime "2014-05-14T13:52:00.000Z"^^xsd:dateTime . 
+#     usewod:bundle_datasets 
+#         a prov:Entity, prov:Bundle ; 
+#         prov:qualifiedGeneration usewod:qgen_bundle_datasets ;
+#         prov:wasAttributedTo usewod:aprilush .
+
 # actual datasets
 
 # dbpedia
@@ -450,3 +463,5 @@ usewod:der_usewod2014_linkedgeodata_2013_04_29 a prov:Derivation, usewod:Inclusi
 	prov:entity usewodds:linkedgeodata_2013_04_29_logs .
 usewod:der_usewod2014_bioportal a prov:Derivation, usewod:Inclusion ;
 	prov:entity usewodds:bioportal_logs .
+
+# }
