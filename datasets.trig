@@ -201,7 +201,80 @@ usewod:bundle_datasets {
 		schema:name "Bio2RDF" ;
 		schema:image <http://m.bio2rdf.org/image/bio2rdf.png> .
 
+	usewodds:bio2rdf_v1
+		a prov:Entity, schema:Dataset ;
+		schema:name "Bio2RDF 1" ;
+		schema:version "1" ;
+		schema:datePublished "" ;
+		prov:specializationOf usewodds:bio2rdf .
 	
+	usewodds:bio2rdf_v2
+		a prov:Entity, schema:Dataset ;
+		schema:name "Bio2RDF 2" ;
+		schema:version "2" ;
+		schema:datePublished "" ;
+		prov:specializationOf usewodds:bio2rdf .
+
+	usewodds:linkedgeodata 
+		a prov:Entity, schema:Dataset ;
+		schema:name "Linked Geo Data" ;
+		schema:image <http://linkedgeodata.org/files/lgdlogo.png> .
+
+	usewodds:linkedgeodata_2009_07_01 
+		a prov:Entity, schema:Dataset ;
+		schema:name "Linked Geo Data 2009-07-01" ;
+		schema:version "2009-07-01" ;
+		schema:datePublished "2009-07-01" ;
+		prov:specializationOf usewodds:linkedgeodata .		
+		schema:distribution usewodds:linkedgeodata_2009_07_01download ;
+		usewodds:linkedgeodata_2009_07_01download 
+			a schema:DataDownload ;
+			schema:url <http://downloads.linkedgeodata.org/releases/2009-07-01/> .
+
+	usewodds:linkedgeodata_2011_04_06 
+		a prov:Entity, schema:Dataset ;
+		schema:name "Linked Geo Data 2011-04-06" ;
+		schema:version "2011-04-06" ;
+		schema:datePublished "2011-04-06" ;
+		prov:specializationOf usewodds:linkedgeodata .		
+		schema:distribution usewodds:linkedgeodata_2011_04_06download ;
+		usewodds:linkedgeodata_2011_04_06download 
+			a schema:DataDownload ;
+			schema:url <http://downloads.linkedgeodata.org/releases/2011-04-06/> .
+
+	usewodds:linkedgeodata_2013_04_29 
+		a prov:Entity, schema:Dataset ;
+		schema:name "Linked Geo Data 2013-04-29" ;
+		schema:version "2013-04-29" ;
+		schema:datePublished "2013-04-29" ;
+		prov:specializationOf usewodds:linkedgeodata .		
+		schema:distribution usewodds:linkedgeodata_2013_04_29download ;
+		usewodds:linkedgeodata_2013_04_29download 
+			a schema:DataDownload ;
+			schema:url <http://downloads.linkedgeodata.org/releases/2013-04-29/> .
+
+	usewodds:linkedgeodata_2013_08_14 
+		a prov:Entity, schema:Dataset ;
+		schema:name "Linked Geo Data 2013-08-14" ;
+		schema:version "2013-08-14" ;
+		schema:datePublished "2013-08-14" ;
+		prov:specializationOf usewodds:linkedgeodata .		
+		schema:distribution usewodds:linkedgeodata_2013_08_14download ;
+		usewodds:linkedgeodata_2013_08_14download 
+			a schema:DataDownload ;
+			schema:url <http://downloads.linkedgeodata.org/releases/2013-08-14/> .
+
+    usewodds:openbiomed
+		a prov:Entity, schema:Dataset ;
+		schema:name "Open-BioMed.org.uk" ;
+		schema:image <http://open-biomed.org.uk/logo.png> .
+		
+    usewodds:bioportal
+		a prov:Entity, schema:Dataset ;
+		schema:name "BioPortal" ;
+		schema:image <https://pbs.twimg.com/profile_images/981569418/logo_bigger.jpg> .
+
+
 
     usewodds:usewod
 		a prov:Entity, schema:Dataset ;
@@ -222,7 +295,7 @@ usewod:bundle_datasets {
 v3.3 & v3.4
 - SWDF
 
-2012
+2012		
 - DBpedia
 v3.3 & v3.4 & v3.5.1 & v3.6 (the latter two were new, overlap with data set before for v3.3 & v3.4)
 - Linked Open Geo Data

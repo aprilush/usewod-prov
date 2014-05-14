@@ -1,0 +1,452 @@
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix schema: <http://schema.org/> .
+@prefix usewod: <http://data.usewod.org/resource/> .
+@prefix usewodds: <http://data.usewod.org/dataset/> .
+@prefix usewodpub: <http://data.usewod.org/publication/> .
+@prefix usewodp: <http://data.usewod.org/person/> .
+
+# actual datasets
+
+# dbpedia
+
+usewodds:dbpedia
+	a prov:Entity, schema:Dataset ;
+	schema:name "DBpedia" ;
+	schema:image <http://wiki.dbpedia.org/images/dbpedia_logo.png> .
+
+usewodds:dbpedia1_0
+	a prov:Entity, schema:Dataset ;
+	schema:name "DBpedia 1.0" ;
+	schema:version "1.0" ;
+	schema:distribution usewodds:dbpedia1_0download ;
+	prov:specializationOf usewodds:dbpedia .
+usewodds:dbpedia1_0download 
+	a schema:DataDownload ;
+	schema:url <http://downloads.dbpedia.org/1.0/> .
+
+usewodds:dbpedia2_0
+	a prov:Entity, schema:Dataset ;
+	schema:name "DBpedia 2.0" ;
+	schema:version "2.0" ;
+	schema:url <http://dbpedia.org/Downloads20> ;
+	schema:distribution usewodds:dbpedia2_0download ;
+	prov:specializationOf usewodds:dbpedia ;
+	prov:wasRevisionOf usewodds:dbpedia1_0 .
+usewodds:dbpedia2_0download 
+	a schema:DataDownload ;
+	schema:url <http://downloads.dbpedia.org/2.0/> .
+
+usewodds:dbpedia3_0RC
+	a prov:Entity, schema:Dataset ;
+	schema:name "DBpedia 3.0 Release Candidate" ;
+	schema:version "3.0RC" ;
+	schema:url <http://dbpedia.org/Downloads30RC> ;
+	schema:distribution usewodds:dbpedia3_0RCdownload ;
+	prov:specializationOf usewodds:dbpedia ;
+	prov:wasRevisionOf usewodds:dbpedia2_0 .
+usewodds:dbpedia3_0RCdownload 
+	a schema:DataDownload ;
+	schema:url <http://downloads.dbpedia.org/3.0rc/> .
+
+usewodds:dbpedia3_0
+	a prov:Entity, schema:Dataset ;
+	schema:name "DBpedia 3.0" ;
+	schema:version "3.0" ;
+	schema:url <http://dbpedia.org/Downloads30> ;
+	schema:distribution usewodds:dbpedia3_0download ;
+	prov:specializationOf usewodds:dbpedia ;
+	prov:wasRevisionOf usewodds:dbpedia3_0RC .
+usewodds:dbpedia3_0download 
+	a schema:DataDownload ;
+	schema:url <http://downloads.dbpedia.org/3.0/> .
+
+usewodds:dbpedia3_1
+	a prov:Entity, schema:Dataset ;
+	schema:name "DBpedia 3.1" ;
+	schema:version "3.1" ;
+	schema:url <http://dbpedia.org/Downloads31> ;
+	schema:distribution usewodds:dbpedia3_1download ;
+	prov:specializationOf usewodds:dbpedia ;
+	prov:wasRevisionOf usewodds:dbpedia3_0 .
+usewodds:dbpedia3_1download 
+	a schema:DataDownload ;
+	schema:url <http://downloads.dbpedia.org/3.1/> .
+
+usewodds:dbpedia3_2
+	a prov:Entity, schema:Dataset ;
+	schema:name "DBpedia 3.2" ;
+	schema:version "3.2" ;
+	schema:url <http://dbpedia.org/Downloads32> ;
+	schema:distribution usewodds:dbpedia3_2download ;
+	prov:specializationOf usewodds:dbpedia ;
+	prov:wasRevisionOf usewodds:dbpedia3_1 .
+usewodds:dbpedia3_2download 
+	a schema:DataDownload ;
+	schema:url <http://downloads.dbpedia.org/3.2/> .
+
+usewodds:dbpedia3_3
+	a prov:Entity, schema:Dataset ;
+	schema:name "DBpedia 3.3" ;
+	schema:version "3.3" ;
+	schema:url <http://dbpedia.org/Downloads33> ;
+	schema:distribution usewodds:dbpedia3_3download ;
+	prov:specializationOf usewodds:dbpedia ;
+	prov:wasRevisionOf usewodds:dbpedia3_2 .
+usewodds:dbpedia3_3download 
+	a schema:DataDownload ;
+	schema:url <http://downloads.dbpedia.org/3.3/> .
+
+usewodds:dbpedia3_4
+	a prov:Entity, schema:Dataset ;
+	schema:name "DBpedia 3.4" ;
+	schema:version "3.4" ;
+	schema:url <http://dbpedia.org/Downloads34> ;
+	schema:distribution usewodds:dbpedia3_4download ;
+	prov:specializationOf usewodds:dbpedia ;
+	prov:wasRevisionOf usewodds:dbpedia3_3 .
+usewodds:dbpedia3_4download 
+	a schema:DataDownload ;
+	schema:url <http://downloads.dbpedia.org/3.4/> .
+
+usewodds:dbpedia3_5
+	a prov:Entity, schema:Dataset ;
+	schema:name "DBpedia 3.5" ;
+	schema:version "3.5" ;
+	schema:url <http://dbpedia.org/Downloads35> ;
+	schema:distribution usewodds:dbpedia3_5download ;
+	prov:specializationOf usewodds:dbpedia ;
+	prov:wasRevisionOf usewodds:dbpedia3_4 .
+usewodds:dbpedia3_5download 
+	a schema:DataDownload ;
+	schema:url <http://downloads.dbpedia.org/3.5/> .
+
+usewodds:dbpedia3_5_1
+	a prov:Entity, schema:Dataset ;
+	schema:name "DBpedia 3.5.1" ;
+	schema:version "3.5.1" ;
+	schema:url <http://dbpedia.org/Downloads351> ;
+	schema:distribution usewodds:dbpedia3_5_1download ;
+	prov:specializationOf usewodds:dbpedia ;
+	prov:wasRevisionOf usewodds:dbpedia3_5 .
+usewodds:dbpedia3_5_1download 
+	a schema:DataDownload ;
+	schema:url <http://downloads.dbpedia.org/3.5.1/> .
+
+usewodds:dbpedia3_6
+	a prov:Entity, schema:Dataset ;
+	schema:name "DBpedia 3.6" ;
+	schema:version "3.6" ;
+	schema:url <http://dbpedia.org/Downloads36> ;
+	schema:distribution usewodds:dbpedia3_6download ;
+	prov:specializationOf usewodds:dbpedia ;
+	prov:wasRevisionOf usewodds:dbpedia3_5_1 .
+usewodds:dbpedia3_6download 
+	a schema:DataDownload ;
+	schema:url <http://downloads.dbpedia.org/3.6/> .
+
+usewodds:dbpedia3_7
+	a prov:Entity, schema:Dataset ;
+	schema:name "DBpedia 3.7" ;
+	schema:version "3.7" ;
+	schema:url <http://dbpedia.org/Downloads37> ;
+	schema:distribution usewodds:dbpedia3_7download ;
+	prov:specializationOf usewodds:dbpedia ;
+	prov:wasRevisionOf usewodds:dbpedia3_6 .
+usewodds:dbpedia3_7download 
+	a schema:DataDownload ;
+	schema:url <http://downloads.dbpedia.org/3.7/> .
+
+usewodds:dbpedia3_8
+	a prov:Entity, schema:Dataset ;
+	schema:name "DBpedia 3.8" ;
+	schema:version "3.8" ;
+	schema:url <http://dbpedia.org/Downloads38> ;
+	schema:distribution usewodds:dbpedia3_8download ;
+	prov:specializationOf usewodds:dbpedia ;
+	prov:wasRevisionOf usewodds:dbpedia3_7 .
+usewodds:dbpedia3_8download 
+	a schema:DataDownload ;
+	schema:url <http://downloads.dbpedia.org/3.8/> .
+
+usewodds:dbpedia3_9
+	a prov:Entity, schema:Dataset ;
+	schema:name "DBpedia 3.9" ;
+	schema:version "3.9" ;
+	schema:url <http://dbpedia.org/Downloads39> ;
+	schema:distribution usewodds:dbpedia3_9download ;
+	prov:specializationOf usewodds:dbpedia ;
+	prov:wasRevisionOf usewodds:dbpedia3_8 .
+usewodds:dbpedia3_9download 
+	a schema:DataDownload ;
+	schema:url <http://downloads.dbpedia.org/3.9/> .
+
+# swdf
+
+usewodds:swdf
+	a prov:Entity, schema:Dataset ;
+	schema:name "Semantic Web Conference Corpus", "Semantic Web Dog Food" , "Semantic Web Dog Food Corpus" ;
+	schema:image <http://data.semanticweb.org/images/bones_small.png> .
+
+# bio2rdf
+
+usewodds:bio2rdf
+	a prov:Entity, schema:Dataset ;
+	schema:name "Bio2RDF" ;
+	schema:image <http://m.bio2rdf.org/image/bio2rdf.png> .
+
+usewodds:bio2rdf_1
+	a prov:Entity, schema:Dataset ;
+	schema:name "Bio2RDF 1" ;
+	schema:version "1" ;
+	schema:datePublished "2012-11-15" ;
+	prov:specializationOf usewodds:bio2rdf .
+
+usewodds:bio2rdf_2
+	a prov:Entity, schema:Dataset ;
+	schema:name "Bio2RDF 2" ;
+	schema:version "2" ;
+	schema:datePublished "2013-01-21" ;
+	prov:specializationOf usewodds:bio2rdf .
+
+# linked geo data
+
+usewodds:linkedgeodata 
+	a prov:Entity, schema:Dataset ;
+	schema:name "Linked Geo Data" ;
+	schema:image <http://linkedgeodata.org/files/lgdlogo.png> .
+
+usewodds:linkedgeodata_2009_07_01 
+	a prov:Entity, schema:Dataset ;
+	schema:name "Linked Geo Data 2009-07-01" ;
+	schema:version "2009-07-01" ;
+	schema:datePublished "2009-07-01" ;
+	prov:specializationOf usewodds:linkedgeodata ;		
+	schema:distribution usewodds:linkedgeodata_2009_07_01download .
+usewodds:linkedgeodata_2009_07_01download 
+	a schema:DataDownload ;
+	schema:url <http://downloads.linkedgeodata.org/releases/2009-07-01/> .
+
+usewodds:linkedgeodata_2011_04_06 
+	a prov:Entity, schema:Dataset ;
+	schema:name "Linked Geo Data 2011-04-06" ;
+	schema:version "2011-04-06" ;
+	schema:datePublished "2011-04-06" ;
+	prov:specializationOf usewodds:linkedgeodata ;		
+	schema:distribution usewodds:linkedgeodata_2011_04_06download .
+usewodds:linkedgeodata_2011_04_06download 
+	a schema:DataDownload ;
+	schema:url <http://downloads.linkedgeodata.org/releases/2011-04-06/> .
+
+usewodds:linkedgeodata_2013_04_29 
+	a prov:Entity, schema:Dataset ;
+	schema:name "Linked Geo Data 2013-04-29" ;
+	schema:version "2013-04-29" ;
+	schema:datePublished "2013-04-29" ;
+	prov:specializationOf usewodds:linkedgeodata ;		
+	schema:distribution usewodds:linkedgeodata_2013_04_29download .
+usewodds:linkedgeodata_2013_04_29download 
+	a schema:DataDownload ;
+	schema:url <http://downloads.linkedgeodata.org/releases/2013-04-29/> .
+
+usewodds:linkedgeodata_2013_08_14 
+	a prov:Entity, schema:Dataset ;
+	schema:name "Linked Geo Data 2013-08-14" ;
+	schema:version "2013-08-14" ;
+	schema:datePublished "2013-08-14" ;
+	prov:specializationOf usewodds:linkedgeodata ;		
+	schema:distribution usewodds:linkedgeodata_2013_08_14download .
+usewodds:linkedgeodata_2013_08_14download 
+	a schema:DataDownload ;
+	schema:url <http://downloads.linkedgeodata.org/releases/2013-08-14/> .
+
+# open biomed
+
+usewodds:openbiomed
+	a prov:Entity, schema:Dataset ;
+	schema:name "Open-BioMed.org.uk" ;
+	schema:image <http://open-biomed.org.uk/logo.png> .
+	
+# bioportal
+
+usewodds:bioportal
+	a prov:Entity, schema:Dataset ;
+	schema:name "BioPortal" ;
+	schema:image <https://pbs.twimg.com/profile_images/981569418/logo_bigger.jpg> .
+
+# Log datasets
+
+usewodds:dbpedia3_3_logs
+	a prov:Entity, schema:Dataset ;
+	schema:name "DBpedia 3.3 Logs" ;
+	prov:wasDerivedFrom usewodds:dbpedia3_3 .
+
+usewodds:dbpedia3_4_logs
+	a prov:Entity, schema:Dataset ;
+	schema:name "DBpedia 3.4 Logs" ;
+	prov:wasDerivedFrom usewodds:dbpedia3_4 .
+
+usewodds:dbpedia3_5_1_logs
+	a prov:Entity, schema:Dataset ;
+	schema:name "DBpedia 3.5.1 Logs" ;
+	prov:wasDerivedFrom usewodds:dbpedia3_5_1 .
+
+usewodds:dbpedia3_6_logs
+	a prov:Entity, schema:Dataset ;
+	schema:name "DBpedia 3.6 Logs" ;
+	prov:wasDerivedFrom usewodds:dbpedia3_6 .
+
+usewodds:dbpedia3_8_logs
+	a prov:Entity, schema:Dataset ;
+	schema:name "DBpedia 3.8 Logs" ;
+	prov:wasDerivedFrom usewodds:dbpedia3_8 .
+
+usewodds:dbpedia3_9_logs
+	a prov:Entity, schema:Dataset ;
+	schema:name "DBpedia 3.9 Logs" ;
+	prov:wasDerivedFrom usewodds:dbpedia3_9 .
+
+usewodds:swdf_logs
+	a prov:Entity, schema:Dataset ;
+	schema:name "Semantic Web Dog Food Server Logs" ;
+	prov:wasDerivedFrom usewodds:swdf .
+
+usewodds:linkedgeodata_2011_04_06_logs 
+	a prov:Entity, schema:Dataset ;
+	schema:name "Linked Geo Data 2011-04-06 Logs" ;
+	prov:wasDerivedFrom usewodds:linkedgeodata_2011_04_06 .		
+
+usewodds:linkedgeodata_2013_04_29_logs 
+	a prov:Entity, schema:Dataset ;
+	schema:name "Linked Geo Data 2013-04-29 Logs" ;
+	prov:wasDerivedFrom usewodds:linkedgeodata_2013_04_29 .		
+
+usewodds:bio2rdf_1_logs
+	a prov:Entity, schema:Dataset ;
+	schema:name "Bio2RDF 1 Logs" ;
+	prov:wasDerivedFrom usewodds:bio2rdf_1 .
+
+usewodds:bio2rdf_2_logs
+	a prov:Entity, schema:Dataset ;
+	schema:name "Bio2RDF 2 Logs" ;
+	prov:wasDerivedFrom usewodds:bio2rdf_2 .
+
+usewodds:openbiomed_logs
+	a prov:Entity, schema:Dataset ;
+	schema:name "Open-BioMed.org.uk Logs" ;
+	prov:wasDerivedFrom usewodds:openbiomed .
+	
+usewodds:bioportal_logs
+	a prov:Entity, schema:Dataset ;
+	schema:name "BioPortal Logs" ;
+	prov:wasDerivedFrom usewodds:bioportal .
+
+# usewod 
+
+usewodds:usewod
+	a prov:Entity, schema:Dataset ;
+	schema:name "USEWOD" .
+
+# 2011
+# - DBpedia
+# v3.3 & v3.4
+# - SWDF
+usewodds:usewod2011
+	a prov:Entity, schema:Dataset ;
+	schema:name "USEWOD2011" ;
+	schema:url <http://data.semanticweb.org/usewod/2011/challenge.html> ;
+	prov:specializationOf usewodds:usewod ;
+	prov:qualifiedDerivation usewod:der_usewod2011_dbpedia3_3, usewod:der_usewod2011_dbpedia3_4, usewod:der_usewod2011_swdf .
+usewod:der_usewod2011_dbpedia3_3 a prov:Derivation, usewod:Inclusion ;
+	prov:entity usewodds:dbpedia3_3_logs .
+usewod:der_usewod2011_dbpedia3_4 a prov:Derivation, usewod:Inclusion ;
+	prov:entity usewodds:dbpedia3_4_logs .
+usewod:der_usewod2011_swdf a prov:Derivation, usewod:Inclusion ;
+	prov:entity usewodds:swdf_logs .
+
+# 2012		
+# - DBpedia
+# v3.3 & v3.4 & v3.5.1 & v3.6 (the latter two were new, overlap with data set before for v3.3 & v3.4)
+# - Linked Open Geo Data
+# release 2011-04-06
+# - Bio2RDF
+# - SWDF
+usewodds:usewod2012
+	a prov:Entity, schema:Dataset ;
+	schema:name "USEWOD2012" ;
+	schema:url <http://data.semanticweb.org/usewod/2012/challenge.html> ;
+	prov:specializationOf usewodds:usewod ;
+	prov:wasRevisionOf usewodds:usewod2011 ;
+	prov:qualifiedDerivation usewod:der_usewod2012_dbpedia3_3, usewod:der_usewod2012_dbpedia3_4, usewod:der_usewod2012_dbpedia3_5_1, usewod:der_usewod2012_dbpedia3_6, usewod:der_usewod2012_swdf, usewod:der_usewod2012_linkedgeodata_2011_04_06, usewod:der_usewod2012_bio2rdf_1 .
+usewod:der_usewod2012_dbpedia3_3 a prov:Derivation, usewod:Inclusion ;
+	prov:entity usewodds:dbpedia3_3_logs .
+usewod:der_usewod2012_dbpedia3_4 a prov:Derivation, usewod:Inclusion ;
+	prov:entity usewodds:dbpedia3_4_logs .
+usewod:der_usewod2012_dbpedia3_5_1 a prov:Derivation, usewod:Inclusion ;
+	prov:entity usewodds:dbpedia3_5_1_logs .
+usewod:der_usewod2012_dbpedia3_6 a prov:Derivation, usewod:Inclusion ;
+	prov:entity usewodds:dbpedia3_6_logs .
+usewod:der_usewod2012_swdf a prov:Derivation, usewod:Inclusion ;
+	prov:entity usewodds:swdf_logs .
+usewod:der_usewod2012_linkedgeodata_2011_04_06 a prov:Derivation, usewod:Inclusion ;
+	prov:entity usewodds:linkedgeodata_2011_04_06_logs .
+usewod:der_usewod2012_bio2rdf_1 a prov:Derivation, usewod:Inclusion ;
+	prov:entity usewodds:bio2rdf_1_logs .
+
+# 2013
+# - DBpedia
+# v3.3 & v3.4 & v3.5.1 & v3.6 & v3.8 (the latter one is new, overlap with data set before for v3.3 & v3.4 & v3.5.1 & v3.6)
+# - Linked Open Geo Data
+# release 2011-04-06
+# - Bio2RDF
+# - SWDF
+# - Open-Biomed.org.uk
+# - BioPortal
+usewodds:usewod2013
+	a prov:Entity, schema:Dataset ;
+	schema:name "USEWOD2013" ;
+	schema:url <http://data.semanticweb.org/usewod/2013/challenge.html> ;
+	prov:specializationOf usewodds:usewod ;
+	prov:wasRevisionOf usewodds:usewod2012 ;
+	prov:qualifiedDerivation usewod:der_usewod2013_dbpedia3_3, usewod:der_usewod2013_dbpedia3_4, usewod:der_usewod2013_dbpedia3_5_1, usewod:der_usewod2013_dbpedia3_6, usewod:der_usewod2013_dbpedia3_8, usewod:der_usewod2013_swdf, usewod:der_usewod2013_linkedgeodata_2011_04_06, usewod:der_usewod2013_bio2rdf_1, usewod:der_usewod2013_openbiomed, usewod:der_usewod2013_bioportal .
+usewod:der_usewod2013_dbpedia3_3 a prov:Derivation, usewod:Inclusion ;
+	prov:entity usewodds:dbpedia3_3_logs .
+usewod:der_usewod2013_dbpedia3_4 a prov:Derivation, usewod:Inclusion ;
+	prov:entity usewodds:dbpedia3_4_logs .
+usewod:der_usewod2013_dbpedia3_5_1 a prov:Derivation, usewod:Inclusion ;
+	prov:entity usewodds:dbpedia3_5_1_logs .
+usewod:der_usewod2013_dbpedia3_6 a prov:Derivation, usewod:Inclusion ;
+	prov:entity usewodds:dbpedia3_6_logs .
+usewod:der_usewod2013_dbpedia3_8 a prov:Derivation, usewod:Inclusion ;
+	prov:entity usewodds:dbpedia3_8_logs .
+usewod:der_usewod2013_swdf a prov:Derivation, usewod:Inclusion ;
+	prov:entity usewodds:swdf_logs .
+usewod:der_usewod2013_linkedgeodata_2011_04_06 a prov:Derivation, usewod:Inclusion ;
+	prov:entity usewodds:linkedgeodata_2011_04_06_logs .
+usewod:der_usewod2013_bio2rdf_1 a prov:Derivation, usewod:Inclusion ;
+	prov:entity usewodds:bio2rdf_1_logs .
+usewod:der_usewod2013_openbiomed a prov:Derivation, usewod:Inclusion ;
+	prov:entity usewodds:openbiomed_logs .
+usewod:der_usewod2013_bioportal a prov:Derivation, usewod:Inclusion ;
+	prov:entity usewodds:bioportal_logs .
+
+# 2014
+# - DBpedia
+# v3.8 & v3.9 (only new data in this data set, old data is no more included)
+# - Linked Open Geo Data
+# release 2013-04-29
+# - BioPortal
+usewodds:usewod2014
+	a prov:Entity, schema:Dataset ;
+	schema:name "USEWOD2014" ;
+	schema:url <http://usewod.org/data-sets.html> ;
+	prov:specializationOf usewodds:usewod ;
+	prov:qualifiedDerivation usewod:der_usewod2014_dbpedia3_8, usewod:der_usewod2014_dbpedia3_9, usewod:der_usewod2014_linkedgeodata_2013_04_29, usewod:der_usewod2014_bioportal .
+usewod:der_usewod2014_dbpedia3_8 a prov:Derivation, usewod:Inclusion ;
+	prov:entity usewodds:dbpedia3_8_logs .
+usewod:der_usewod2014_dbpedia3_9 a prov:Derivation, usewod:Inclusion ;
+	prov:entity usewodds:dbpedia3_9_logs .
+usewod:der_usewod2014_linkedgeodata_2013_04_29 a prov:Derivation, usewod:Inclusion ;
+	prov:entity usewodds:linkedgeodata_2013_04_29_logs .
+usewod:der_usewod2014_bioportal a prov:Derivation, usewod:Inclusion ;
+	prov:entity usewodds:bioportal_logs .
