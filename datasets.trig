@@ -1,0 +1,248 @@
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix schema: <http://schema.org/> .
+@prefix usewod: <http://data.usewod.org/resource/> .
+@prefix usewodds: <http://data.usewod.org/dataset/> .
+@prefix usewodpub: <http://data.usewod.org/publication/> .
+@prefix usewodp: <http://data.usewod.org/person/> .
+
+
+usewod:bundle_datasets {
+
+	usewodp:aprilush
+        a prov:Agent, schema:Person ;
+        schema:name "Laura Dragan" .
+    usewod:qgen_bundle_datasets
+        a prov:Generation ;
+        prov:atTime "2014-05-14T13:52:00.000Z"^^xsd:dateTime . 
+    usewod:bundle_datasets 
+        a prov:Entity, prov:Bundle ; 
+        prov:qualifiedGeneration usewod:qgen_bundle_datasets ;
+        prov:wasAttributedTo usewod:aprilush .
+
+	usewodds:dbpedia
+		a prov:Entity, schema:Dataset ;
+		schema:name "DBpedia" ;
+		schema:image <http://wiki.dbpedia.org/images/dbpedia_logo.png> .
+
+	usewodds:dbpedia1_0
+		a prov:Entity, schema:Dataset ;
+		schema:name "DBpedia 1.0" ;
+		schema:version "1.0" ;
+		schema:distribution usewodds:dbpedia1_0download ;
+		prov:specializationOf usewodds:dbpedia .
+	usewodds:dbpedia1_0download 
+		a schema:DataDownload ;
+		schema:url <http://downloads.dbpedia.org/1.0/> .
+
+	usewodds:dbpedia2_0
+		a prov:Entity, schema:Dataset ;
+		schema:name "DBpedia 2.0" ;
+		schema:version "2.0" ;
+		schema:url <http://dbpedia.org/Downloads20> ;
+		schema:distribution usewodds:dbpedia2_0download ;
+		prov:specializationOf usewodds:dbpedia ;
+		prov:wasRevisionOf usewodds:dbpedia1_0 .
+	usewodds:dbpedia2_0download 
+		a schema:DataDownload ;
+		schema:url <http://downloads.dbpedia.org/2.0/> .
+
+	usewodds:dbpedia3_0RC
+		a prov:Entity, schema:Dataset ;
+		schema:name "DBpedia 3.0 Release Candidate" ;
+		schema:version "3.0RC" ;
+		schema:url <http://dbpedia.org/Downloads30RC> ;
+		schema:distribution usewodds:dbpedia3_0RCdownload ;
+		prov:specializationOf usewodds:dbpedia ;
+		prov:wasRevisionOf usewodds:dbpedia2_0 .
+	usewodds:dbpedia3_0RCdownload 
+		a schema:DataDownload ;
+		schema:url <http://downloads.dbpedia.org/3.0rc/> .
+
+	usewodds:dbpedia3_0
+		a prov:Entity, schema:Dataset ;
+		schema:name "DBpedia 3.0" ;
+		schema:version "3.0" ;
+		schema:url <http://dbpedia.org/Downloads30> ;
+		schema:distribution usewodds:dbpedia3_0download ;
+		prov:specializationOf usewodds:dbpedia ;
+		prov:wasRevisionOf usewodds:dbpedia3_0RC .
+	usewodds:dbpedia3_0download 
+		a schema:DataDownload ;
+		schema:url <http://downloads.dbpedia.org/3.0/> .
+
+	usewodds:dbpedia3_1
+		a prov:Entity, schema:Dataset ;
+		schema:name "DBpedia 3.1" ;
+		schema:version "3.1" ;
+		schema:url <http://dbpedia.org/Downloads31> ;
+		schema:distribution usewodds:dbpedia3_1download ;
+		prov:specializationOf usewodds:dbpedia ;
+		prov:wasRevisionOf usewodds:dbpedia3_0 .
+	usewodds:dbpedia3_1download 
+		a schema:DataDownload ;
+		schema:url <http://downloads.dbpedia.org/3.1/> .
+
+	usewodds:dbpedia3_2
+		a prov:Entity, schema:Dataset ;
+		schema:name "DBpedia 3.2" ;
+		schema:version "3.2" ;
+		schema:url <http://dbpedia.org/Downloads32> ;
+		schema:distribution usewodds:dbpedia3_2download ;
+		prov:specializationOf usewodds:dbpedia ;
+		prov:wasRevisionOf usewodds:dbpedia3_1 .
+	usewodds:dbpedia3_2download 
+		a schema:DataDownload ;
+		schema:url <http://downloads.dbpedia.org/3.2/> .
+
+	usewodds:dbpedia3_3
+		a prov:Entity, schema:Dataset ;
+		schema:name "DBpedia 3.3" ;
+		schema:version "3.3" ;
+		schema:url <http://dbpedia.org/Downloads33> ;
+		schema:distribution usewodds:dbpedia3_3download ;
+		prov:specializationOf usewodds:dbpedia ;
+		prov:wasRevisionOf usewodds:dbpedia3_2 .
+	usewodds:dbpedia3_3download 
+		a schema:DataDownload ;
+		schema:url <http://downloads.dbpedia.org/3.3/> .
+
+	usewodds:dbpedia3_4
+		a prov:Entity, schema:Dataset ;
+		schema:name "DBpedia 3.4" ;
+		schema:version "3.4" ;
+		schema:url <http://dbpedia.org/Downloads34> ;
+		schema:distribution usewodds:dbpedia3_4download ;
+		prov:specializationOf usewodds:dbpedia ;
+		prov:wasRevisionOf usewodds:dbpedia3_3 .
+	usewodds:dbpedia3_4download 
+		a schema:DataDownload ;
+		schema:url <http://downloads.dbpedia.org/3.4/> .
+
+	usewodds:dbpedia3_5
+		a prov:Entity, schema:Dataset ;
+		schema:name "DBpedia 3.5" ;
+		schema:version "3.5" ;
+		schema:url <http://dbpedia.org/Downloads35> ;
+		schema:distribution usewodds:dbpedia3_5download ;
+		prov:specializationOf usewodds:dbpedia ;
+		prov:wasRevisionOf usewodds:dbpedia3_4 .
+	usewodds:dbpedia3_5download 
+		a schema:DataDownload ;
+		schema:url <http://downloads.dbpedia.org/3.5/> .
+
+	usewodds:dbpedia3_5_1
+		a prov:Entity, schema:Dataset ;
+		schema:name "DBpedia 3.5.1" ;
+		schema:version "3.5.1" ;
+		schema:url <http://dbpedia.org/Downloads351> ;
+		schema:distribution usewodds:dbpedia3_5_1download ;
+		prov:specializationOf usewodds:dbpedia ;
+		prov:wasRevisionOf usewodds:dbpedia3_5 .
+	usewodds:dbpedia3_5_1download 
+		a schema:DataDownload ;
+		schema:url <http://downloads.dbpedia.org/3.5.1/> .
+
+	usewodds:dbpedia3_6
+		a prov:Entity, schema:Dataset ;
+		schema:name "DBpedia 3.6" ;
+		schema:version "3.6" ;
+		schema:url <http://dbpedia.org/Downloads36> ;
+		schema:distribution usewodds:dbpedia3_6download ;
+		prov:specializationOf usewodds:dbpedia ;
+		prov:wasRevisionOf usewodds:dbpedia3_5_1 .
+	usewodds:dbpedia3_6download 
+		a schema:DataDownload ;
+		schema:url <http://downloads.dbpedia.org/3.6/> .
+
+	usewodds:dbpedia3_7
+		a prov:Entity, schema:Dataset ;
+		schema:name "DBpedia 3.7" ;
+		schema:version "3.7" ;
+		schema:url <http://dbpedia.org/Downloads37> ;
+		schema:distribution usewodds:dbpedia3_7download ;
+		prov:specializationOf usewodds:dbpedia ;
+		prov:wasRevisionOf usewodds:dbpedia3_6 .
+	usewodds:dbpedia3_7download 
+		a schema:DataDownload ;
+		schema:url <http://downloads.dbpedia.org/3.7/> .
+
+	usewodds:dbpedia3_8
+		a prov:Entity, schema:Dataset ;
+		schema:name "DBpedia 3.8" ;
+		schema:version "3.8" ;
+		schema:url <http://dbpedia.org/Downloads38> ;
+		schema:distribution usewodds:dbpedia3_8download ;
+		prov:specializationOf usewodds:dbpedia ;
+		prov:wasRevisionOf usewodds:dbpedia3_7 .
+	usewodds:dbpedia3_8download 
+		a schema:DataDownload ;
+		schema:url <http://downloads.dbpedia.org/3.8/> .
+
+	usewodds:dbpedia3_9
+		a prov:Entity, schema:Dataset ;
+		schema:name "DBpedia 3.9" ;
+		schema:version "3.9" ;
+		schema:url <http://dbpedia.org/Downloads39> ;
+		schema:distribution usewodds:dbpedia3_9download ;
+		prov:specializationOf usewodds:dbpedia ;
+		prov:wasRevisionOf usewodds:dbpedia3_8 .
+	usewodds:dbpedia3_9download 
+		a schema:DataDownload ;
+		schema:url <http://downloads.dbpedia.org/3.9/> .
+
+	usewodds:swdf
+		a prov:Entity, schema:Dataset ;
+		schema:name "Semantic Web Conference Corpus", "Semantic Web Dog Food" , "Semantic Web Dog Food Corpus" ;
+		schema:image <http://data.semanticweb.org/images/bones_small.png> .
+
+	usewodds:bio2rdf
+		a prov:Entity, schema:Dataset ;
+		schema:name "Bio2RDF" ;
+		schema:image <http://m.bio2rdf.org/image/bio2rdf.png> .
+
+	
+
+    usewodds:usewod
+		a prov:Entity, schema:Dataset ;
+		schema:name "USEWOD" .
+
+	usewodds:usewod2011
+		a prov:Entity, schema:Dataset ;
+		schema:name "USEWOD2011" ;
+		schema:url <http://data.semanticweb.org/usewod/2011/challenge.html> ;
+		prov:specializationOf usewod:usewod .
+
+
+
+}
+
+2011
+- DBpedia
+v3.3 & v3.4
+- SWDF
+
+2012
+- DBpedia
+v3.3 & v3.4 & v3.5.1 & v3.6 (the latter two were new, overlap with data set before for v3.3 & v3.4)
+- Linked Open Geo Data
+release 2011-04-06
+- Bio2RDF
+- SWDF
+
+2013
+- DBpedia
+v3.3 & v3.4 & v3.5.1 & v3.6 & v3.8 (the latter one is new, overlap with data set before for v3.3 & v3.4 & v3.5.1 & v3.6)
+- Linked Open Geo Data
+release 2011-04-06
+- Bio2RDF
+- SWDF
+- Open-Biomed.org.uk
+- BioPortal
+
+2014
+- DBpedia
+v3.8 & v3.9 (only new data in this data set, old data is no more included)
+- Linked Open Geo Data
+release 2013-04-29
+- BioPortal
