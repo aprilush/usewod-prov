@@ -1,6 +1,6 @@
 <?php
 
-include_once("/var/www/html/usewod-prov/helper.php");
+include_once("helper.php");
 
 if ( isset($_POST['user']) && !empty($_POST['user']) ) {
   $username = $_POST['user'];
@@ -18,23 +18,23 @@ function add_dataset_from_fields($username, $name, $v, $url, $img, $about)
   $id = uniqid("dataset/");
   
   $newds = array("id" => $id, "name" => $name);
-  $triples = [' usewod:'.$id.' a schema:Dataset, prov:Entity ', 
-              ' usewod:'.$id.' schema:name '.'"'.$name.'" ' ];
+  $triples = array(' usewod:'.$id.' a schema:Dataset, prov:Entity ', 
+              ' usewod:'.$id.' schema:name '.'"'.$name.'" ' );
   if ( isset($v) && !empty($v) ) {
     $newdds["version"] = $v;  
-    $triples[] = ' usewod:'.$id.' schema:version '.'"'.$v.'" ';
+    array_push($triples,' usewod:'.$id.' schema:version '.'"'.$v.'" ');
   }
   if ( isset($url) && !empty($url) ) {
     $newds["url"] = $url;
-    $triples[] = ' usewod:'.$id.' schema:url <'.$url.'> ';
+    array_push($triples,' usewod:'.$id.' schema:url <'.$url.'> ');
   }
   if ( isset($img) && !empty($img) ) {
     $newds["img"] = $img;
-    $triples[] = ' usewod:'.$id.' schema:image <'.$img.'> ';
+    array_push($triples,' usewod:'.$id.' schema:image <'.$img.'> ');
   }
   if ( isset($about) && !empty($about) ) {
     $newds["about"] = $about;
-    $triples[] = ' usewod:'.$id.' schema:description '.'"'.$about.'" ';
+    array_push($triples,' usewod:'.$id.' schema:description '.'"'.$about.'" ');
   }
 
   $insert_q = prefix().'INSERT INTO usewod:'.$gid.' { '. implode(" . ", $triples) .'}';

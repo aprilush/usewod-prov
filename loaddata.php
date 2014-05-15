@@ -1,9 +1,9 @@
 <?php
 
-include_once("/var/www/html/usewod-prov/helper.php");
+include_once("helper.php");
 
 $who = "aprilush@gmail.com";
-$files = [ "datasets.ttl", "papers.ttl" ];
+$files = array("datasets.ttl","papers.ttl");
 
 foreach ( $files as $f ) {
   $triples_f = load_triples($f);
@@ -14,7 +14,7 @@ foreach ( $files as $f ) {
 }
 
 function load_triples($f) {
-  $triples_formatted = [];
+  $triples_formatted = array();
   $parser = ARC2::getTurtleParser();
   $parser->parse($f);
   $triples = $parser->getTriples();
@@ -22,10 +22,10 @@ function load_triples($f) {
     $o_type = $triple["o_type"];
     if ($o_type == "uri") {
       $triple_formatted = ' <'.$triple["s"].'> <'.$triple["p"].'> <'.$triple["o"].'> ';
-      $triples_formatted[] = $triple_formatted;
+      array_push($triples_formatted,$triple_formatted);
     } else if ($o_type == "literal") {
       $triple_formatted = ' <'.$triple["s"].'> <'.$triple["p"].'> "'.$triple["o"].'" ';
-      $triples_formatted[] = $triple_formatted;
+      array_push($triples_formatted,$triple_formatted);
     }
   }
   return $triples_formatted;
