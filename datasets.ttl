@@ -25,7 +25,7 @@
 
 usewodds:dbpedia
 	a prov:Entity, schema:Dataset ;
-	schema:name "DBpedia" ;
+	schema:name "DBpedia (Generic)" ;
 	schema:image <http://wiki.dbpedia.org/images/dbpedia_logo.png> .
 
 usewodds:dbpedia1_0
@@ -219,7 +219,7 @@ usewodds:swdf
 
 usewodds:bio2rdf
 	a prov:Entity, schema:Dataset ;
-	schema:name "Bio2RDF" ;
+	schema:name "Bio2RDF (Generic)" ;
 	schema:image <http://m.bio2rdf.org/image/bio2rdf.png> .
 
 usewodds:bio2rdf_1
@@ -242,7 +242,7 @@ usewodds:bio2rdf_2
 
 usewodds:linkedgeodata 
 	a prov:Entity, schema:Dataset ;
-	schema:name "Linked Geo Data" ;
+	schema:name "Linked Geo Data (Generic)" ;
 	schema:image <http://linkedgeodata.org/files/lgdlogo.png> .
 
 usewodds:linkedgeodata_2009_07_01 
@@ -385,7 +385,7 @@ usewodds:bioportal_logs
 
 usewodds:usewod
 	a prov:Entity, schema:Dataset ;
-	schema:name "USEWOD" ;
+	schema:name "USEWOD (Generic)" ;
 	schema:image <http://data.semanticweb.org/usewod/images/background.png> .
 
 # 2011

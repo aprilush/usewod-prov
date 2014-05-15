@@ -71,7 +71,7 @@
             <div class="workspace">
               <table>
                 <tr>
-                  <td id="source-obj" class="source"><a ng-href="{{sourceObject.url}}">{{sourceObject.name}}</a><br/><img ng-show="sourceObject.img" ng-src="{{sourceObject.img}}" /></td>
+                  <td id="source-obj" class="source"><a ng-show="sourceObject.url" ng-href="{{sourceObject.url}}">{{sourceObject.name}}</a><b ng-hide="sourceObject.url">{{sourceObject.name}}</b><br/><img ng-show="sourceObject.img" ng-src="{{sourceObject.img}}" /></td>
                   <td id="relations">
                     <div ng-repeat="relp in relationsToPub" droppable class="rel publication" data="{{relp}}">{{relp.label}}<span ng-repeat="obj in relp.objects" class="publication object" id="{{obj.id}}" data="{{obj}}"><img ng-src="{{obj.img}}" title="{{obj.title}}" /></span></div>
                     <br/>
@@ -86,7 +86,10 @@
             <td width="50%">
               <div class='button'><input type="image" src="img/document-new.png" ng-click="toggleForm('pub')" /></div><h3>Publications</h3>
               <div class='spacer'>
-                <div ng-repeat="pub in publications" class="publication data" id="{{pub.id}}" ng-click="selectedSource(pub, 'p')" draggable data="{{pub}}"><img ng-src="{{pub.img}}" title="{{pub.title}}" /><a href="{{pub.url}}">{{pub.title}}</a></div>
+                <div ng-repeat="pub in publications" class="publication data" id="{{pub.id}}" ng-click="selectedSource(pub, 'p')" draggable data="{{pub}}"><img ng-src="{{pub.img}}" title="{{pub.title}}" />
+                  <!-- <a href="{{pub.url}}">{{pub.title}}</a>  -->
+                  <b>{{pub.title}}</b> 
+                  by <span ng-repeat="author in pub.authors">{{author.name}}, </span> {{pub.year}}</div>
               </div>
               <div class='clear-both'></div>
               <div class="hidden" id="newpub">
@@ -108,7 +111,10 @@
             <td width="50%">
               <div class='button'><input type="image" src="img/edit-table-insert-row-big-plus.png" ng-click="toggleForm('ds')" /></div><h3>Datasets</h3>
               <div class='spacer'>
-                <div ng-repeat="ds in datasets" class="dataset data" id="{{ds.id}}" ng-click="selectedSource(ds, 'd')" draggable data="{{ds}}"><img ng-src="{{ds.img}}" title="{{ds.name}}" /><a href="{{ds.url}}">{{ds.name}}</a></div> 
+                <div ng-repeat="ds in datasets" class="dataset data" id="{{ds.id}}" ng-click="selectedSource(ds, 'd')" draggable data="{{ds}}"><img ng-src="{{ds.img}}" title="{{ds.name}}" />
+                  <!-- <a href="{{ds.url}}">{{ds.name}}</a> -->
+                  <div class="cell"><b>{{ds.name}}</b></div>
+                </div> 
               </div>
               <div class='clear-both'></div>
               <div class="hidden" id="newds">

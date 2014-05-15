@@ -110,7 +110,7 @@ usewodpub:usewod2011paper2
     schema:author usewodp:40ae85e583d5a369d88e627044de2d28, usewodp:37ccadfb0a30c29b1aaeac97659c7448 ;
     schema:copyrightYear "2011" ; 
     schema:url <http://arxiv.org/abs/1104.0128> ;
-    schema:image <http://i3.rgstatic.net/publication/50946661_Towards_an_automated_query_modification_assistant/fulltexts/5046352873bb88c0d7.pdf/smallpreview.png> ;
+    schema:image <http://i1.ytimg.com/vi/vLFCNBnn3Os/0.jpg> ;
     prov:wasAttributedTo usewodp:40ae85e583d5a369d88e627044de2d28, usewodp:37ccadfb0a30c29b1aaeac97659c7448 .
 
 usewodpub:usewod2011paper3

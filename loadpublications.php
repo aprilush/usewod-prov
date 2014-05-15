@@ -2,9 +2,9 @@
 
 include_once("helper.php");
 
-echo load_publications(get_ids());
+echo load_publications(get_pub_ids(), get_people());
 
-function get_ids() {
+function get_pub_ids() {
   global $store;
 
   $pub_q = prefix().'
@@ -23,7 +23,26 @@ function get_ids() {
   return $pub_ids;
 }
 
-function load_publications($pub_ids) {  
+function get_people() {
+  global $store;
+
+  $people_q = prefix().'
+    SELECT ?id ?name WHERE {
+      ?id a schema:Person . ?id schema:name ?name . 
+    }
+  ';
+  $people = array();
+  if ($rows = $store->query($people_q, 'rows')) 
+  {
+    foreach ($rows as $row) 
+    { 
+      $people[$row["id"]]=$row["name"];
+    }
+  }
+  return $people;
+}
+
+function load_publications($pub_ids, $authors) {  
   global $store;
   $publications = array();
 
@@ -38,12 +57,18 @@ function load_publications($pub_ids) {
   if ($rows = $store->query($pub_q)) 
   {
     foreach ($rows["result"] as $id => $row) 
-    {    
+    { 
+      $as = array();
+      foreach ($row["http://schema.org/author"] as $i => $value) {
+        array_push($as, array("id"=> $value["value"], "name"=>$authors[$value["value"]]));
+      }
       array_push($publications,array(
         "id" => $id, 
         "title" => $row["http://schema.org/name"][0]["value"],
         "url" => $row["http://schema.org/url"][0]["value"],
         "img" => $row["http://schema.org/image"][0]["value"], 
+        "year" => $row["http://schema.org/copyrightYear"][0]["value"], 
+        "authors" => $as,
         ));
     }
   }
