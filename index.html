@@ -28,7 +28,7 @@
 						<span property="swc:hasAcronym v:summary">USEWOD2014</span> - 
 						<span property="rdfs:label v:description">4th International Workshop on Usage Analysis and the Web of Data</span>
 					</h1>
-					<p style="text-align: center">
+				 	<!-- <p style="text-align: center">
 						<span rel="swc:isSubEventOf" href="http://data.semanticweb.org/conference/eswc/2014">
 							co-located with the <i property="rdfs:label">11th Extended Semantic Web Conference</i> 
 							(<a 
@@ -46,12 +46,12 @@
 						datatype="xsd:dateTime">May 25th, 2014</span>
 					</p>
 					<p style="text-align: center"><a href="http://people.cs.kuleuven.be/~bettina.berendt/USEWOD2014/">USEWOD2014</a> is part of the <a href="http://data.semanticweb.org/usewod/" title="USEWOD">USEWOD workshop series</a>.</p>
-					<span rel="ical:url" href="http://data.semanticweb.org/usewod/2014"/>
+					<span rel="ical:url" href="http://data.semanticweb.org/usewod/2014"/> -->
 			  </div>
 
-			  <h2><a id="overview"></a>Session overview and goals</h2>
+			  <!-- <h2><a id="overview"></a>Session overview and goals</h2>
         <p>Paragraph from the workshop proposal, or some text from Markus.</p>
-        <p>The special theme of the workshop: building a USEWOD Web Observatory to track the distribution of research based on the USEWOD data set.</p>
+        <p>The special theme of the workshop: building a USEWOD Web Observatory to track the distribution of research based on the USEWOD data set.</p> -->
 
         <div ng-app="usewod" ng-controller="prov">
 
@@ -60,9 +60,28 @@
         <form ng-submit="setUsername()"><p><input type="text" name="username" ng-model="username"/></p></form>
       	</div>
 
-      	<div ng-show="loggedin">
+        <div ng-show="loggedin">
         <h2>Workspace (using name: {{username}} <input type="image" src="img/list-remove.png" ng-click="removeUsername()" /> )<span class="status" ng-show="statusMessage">{{statusMessage}}</span></h2>
         <table width="100%">
+          <tr>
+            <td colspan="2">
+            <div class='button' id='reset'><input type="image" src="img/edit-clear.png" ng-click="resetWorkspace()" /></div>
+            <div class='button' id='link'><input type="image" src="img/insert-link.png" ng-click="saveLinks()" /></div>
+            <h3>Connections</h3>
+            <div class="workspace">
+              <table>
+                <tr>
+                  <td id="source-obj" class="source"><a ng-href="{{sourceObject.url}}">{{sourceObject.name}}</a><br/><img ng-show="sourceObject.img" ng-src="{{sourceObject.img}}" /></td>
+                  <td id="relations">
+                    <div ng-repeat="relp in relationsToPub" droppable class="rel publication" data="{{relp}}">{{relp.label}}<span ng-repeat="obj in relp.objects" class="publication object" id="{{obj.id}}" data="{{obj}}"><img ng-src="{{obj.img}}" title="{{obj.title}}" /></span></div>
+                    <br/>
+                    <div ng-repeat="reld in relationsToDs" droppable class="rel dataset" data="{{reld}}">{{reld.label}}<span ng-repeat="obj in reld.objects" class="dataset object" id="{{obj.id}}" data="{{obj}}"><img ng-src="{{obj.img}}" title="{{obj.name}}" /></span></div>
+                  </td>
+                </tr>
+              </table>
+            </div>
+            </td>
+          </tr>
           <tr>
             <td width="50%">
               <div class='button'><input type="image" src="img/document-new.png" ng-click="toggleForm('pub')" /></div><h3>Publications</h3>
@@ -89,7 +108,7 @@
             <td width="50%">
               <div class='button'><input type="image" src="img/edit-table-insert-row-big-plus.png" ng-click="toggleForm('ds')" /></div><h3>Datasets</h3>
               <div class='spacer'>
-								<div ng-repeat="ds in datasets" class="dataset data" id="{{ds.id}}" ng-click="selectedSource(ds, 'd')" draggable data="{{ds}}"><img ng-src="{{ds.img}}" title="{{ds.name}}" /><a href="{{ds.url}}">{{ds.name}}</a></div> 
+                <div ng-repeat="ds in datasets" class="dataset data" id="{{ds.id}}" ng-click="selectedSource(ds, 'd')" draggable data="{{ds}}"><img ng-src="{{ds.img}}" title="{{ds.name}}" /><a href="{{ds.url}}">{{ds.name}}</a></div> 
               </div>
               <div class='clear-both'></div>
               <div class="hidden" id="newds">
@@ -107,25 +126,6 @@
               </div>
             </td>
           <tr>
-          <tr>
-            <td colspan="2">
-            <div class='button' id='reset'><input type="image" src="img/edit-clear.png" ng-click="resetWorkspace()" /></div>
-            <div class='button' id='link'><input type="image" src="img/insert-link.png" ng-click="saveLinks()" /></div>
-            <h3>Connections</h3>
-            <div class="workspace">
-              <table>
-                <tr>
-                  <td id="source-obj" class="source"><a ng-href="{{sourceObject.url}}">{{sourceObject.name}}</a><br/><img ng-show="sourceObject.img" ng-src="{{sourceObject.img}}" /></td>
-                  <td id="relations">
-                    <div ng-repeat="relp in relationsToPub" droppable class="rel publication" data="{{relp}}">{{relp.label}}<span ng-repeat="obj in relp.objects" class="publication object" id="{{obj.id}}" data="{{obj}}"><img ng-src="{{obj.img}}" title="{{obj.title}}" /></span></div>
-                    <br/>
-                    <div ng-repeat="reld in relationsToDs" droppable class="rel dataset" data="{{reld}}">{{reld.label}}<span ng-repeat="obj in reld.objects" class="dataset object" id="{{obj.id}}" data="{{obj}}"><img ng-src="{{obj.img}}" title="{{obj.name}}" /></span></div>
-                  </td>
-                </tr>
-              </table>
-            </div>
-            </td>
-          </tr>
         </table>
     		</div>
     		</div>
