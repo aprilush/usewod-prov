@@ -1,6 +1,6 @@
 <?php
 
-include_once("/var/www/html/usewod-prov/helper.php");
+include_once("helper.php");
 if ( isset($_POST['user']) && !empty($_POST['user']) ) {
   $username = $_POST['user'];
   if ( isset($_POST['pub-title']) && !empty($_POST['pub-title']) && // title and author are mandatory
@@ -17,19 +17,19 @@ function add_paper_from_fields($username, $title, $authors, $venue, $year, $url,
   $id = uniqid("publication/");
 
   $newpub = array("id" => $usewod_url.$id, "title" => $title);
-  $triples = [' usewod:'.$id.' a schema:ScholarlyArticle, prov:Entity ', 
-              ' usewod:'.$id.' schema:name '.'"'.$title.'" ' ];
+  $triples = array(' usewod:'.$id.' a schema:ScholarlyArticle, prov:Entity ', 
+              ' usewod:'.$id.' schema:name '.'"'.$title.'" ' );
   if ( isset($year) && !empty($year) ) {
     $newpub["year"]=$year;
-    $triples[] = ' usewod:'.$id.' schema:copyrightYear '.'"'.$year.'" ';
+    array_push($triples,' usewod:'.$id.' schema:copyrightYear '.'"'.$year.'" ');
   }
   if ( isset($url) && !empty($url) ) {
     $newpub["url"] = $url;
-    $triples[] = ' usewod:'.$id.' schema:url <'.$url.'> ';
+    array_push($triples,' usewod:'.$id.' schema:url <'.$url.'> ');
   }
   if ( isset($img) && !empty($img) ) {
     $newpub["img"] = $img;
-    $triples[] = ' usewod:'.$id.' schema:image <'.$img.'> ';
+    array_push($triples,' usewod:'.$id.' schema:image <'.$img.'> ');
   }
 
   $authors = array();
@@ -40,15 +40,15 @@ function add_paper_from_fields($username, $title, $authors, $venue, $year, $url,
     if ( !$aid ) 
     {
       $aid = uniqid("person/");
-      $triples[] = ' usewod:'.$aid.' a schema:Person ';
-      $triples[] = ' usewod:'.$aid.' schema:name "'.$name. '" '; 
-      $triples[] = ' usewod:'.$id.' schema:author usewod:'.$aid.' '; 
+      array_push($triples,' usewod:'.$aid.' a schema:Person ');
+      array_push($triples,' usewod:'.$aid.' schema:name "'.$name. '" '); 
+      array_push($triples,' usewod:'.$id.' schema:author usewod:'.$aid.' '); 
     } 
     else 
     {
-      $triples[] = ' usewod:'.$id.' schema:author <'.$aid.'> '; 
+      array_push($triples,' usewod:'.$id.' schema:author <'.$aid.'> '); 
     }
-    $authors[] = array("id" => $aid, "name" => $name);
+    array_push($authors,array("id" => $aid, "name" => $name));
   }
   $newpub["authors"] = $authors;
 
