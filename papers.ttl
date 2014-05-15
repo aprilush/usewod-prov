@@ -101,7 +101,7 @@ usewodpub:usewod2011paper1
     schema:author usewodp:03b2a4f59b7dbdaa406d29f386c5d2a1, usewodp:480e0ea2955283c9e6f1bfcc726cbc32, usewodp:17fa85e7f1b1ad5ea58206cabdf48ad1 ;
     schema:copyrightYear "2011" ; 
     schema:url <http://arxiv.org/abs/1103.5002> ;
-#     schema:image <.png> ;
+    schema:image <http://www.ieee-tcdl.org/Bulletin/v3n3/souto/ECDL-DC-Patricia-Fig1-large.PNG> ;
     prov:wasAttributedTo usewodp:03b2a4f59b7dbdaa406d29f386c5d2a1, usewodp:480e0ea2955283c9e6f1bfcc726cbc32, usewodp:17fa85e7f1b1ad5ea58206cabdf48ad1 .
 
 usewodpub:usewod2011paper2
@@ -110,7 +110,7 @@ usewodpub:usewod2011paper2
     schema:author usewodp:40ae85e583d5a369d88e627044de2d28, usewodp:37ccadfb0a30c29b1aaeac97659c7448 ;
     schema:copyrightYear "2011" ; 
     schema:url <http://arxiv.org/abs/1104.0128> ;
-#     schema:image <.png> ;
+    schema:image <http://i3.rgstatic.net/publication/50946661_Towards_an_automated_query_modification_assistant/fulltexts/5046352873bb88c0d7.pdf/smallpreview.png> ;
     prov:wasAttributedTo usewodp:40ae85e583d5a369d88e627044de2d28, usewodp:37ccadfb0a30c29b1aaeac97659c7448 .
 
 usewodpub:usewod2011paper3
@@ -119,7 +119,7 @@ usewodpub:usewod2011paper3
     schema:author usewodp:232374e281ab784edab6dea5584390cb ;
     schema:copyrightYear "2011" ; 
     schema:url <http://arxiv.org/abs/1103.5044> ;
-#     schema:image <.png> ;
+    schema:image <http://cdn.ientry.com/sites/webpronews/pictures/newu2comments44_1311063_616.jpg> ;
     prov:wasAttributedTo usewodp:232374e281ab784edab6dea5584390cb .
 
 usewodpub:usewod2011paper4
@@ -128,7 +128,7 @@ usewodpub:usewod2011paper4
     schema:author usewodp:22395d17360e8fea7a12ea98835f5149, usewodp:89b022ebe4831dcdadad1c9896c7d933, usewodp:b20e3f051cbf022bf0a80b05c1d8267a, usewodp:f99a2cd25705a2fb9da78d9087523b50, usewodp:6bfab0f1d537e9900a89c8a474c2e0a3 ;
     schema:copyrightYear "2011" ; 
     schema:url <http://arxiv.org/abs/1104.0126> ;
-#     schema:image <.png> ;
+    schema:image <http://wis.ewi.tudelft.nl/imreal/u-sem/usem-architecture.png> ;
     prov:wasAttributedTo usewodp:22395d17360e8fea7a12ea98835f5149, usewodp:89b022ebe4831dcdadad1c9896c7d933, usewodp:b20e3f051cbf022bf0a80b05c1d8267a, usewodp:f99a2cd25705a2fb9da78d9087523b50, usewodp:6bfab0f1d537e9900a89c8a474c2e0a3 .
 
 usewodpub:usewod2011paper5
@@ -137,7 +137,7 @@ usewodpub:usewod2011paper5
     schema:author usewodp:a4bbd326358c2f5e76b8d595db026b48, usewodp:fa97ddfa616651512cbdbed1a3cb0060, usewodp:4a02b911a29457dc7691da454591360d ;
     schema:copyrightYear "2011" ; 
     schema:url <http://arxiv.org/abs/1103.5046> ;
-#     schema:image <.png> ;
+    schema:image <http://linkeddatabook.com/editions/1.0/images/LOD-Cloud-Growth.png> ;
     prov:wasAttributedTo usewodp:a4bbd326358c2f5e76b8d595db026b48, usewodp:fa97ddfa616651512cbdbed1a3cb0060, usewodp:4a02b911a29457dc7691da454591360d .
 
 usewodpub:usewod2011paper6
@@ -146,7 +146,7 @@ usewodpub:usewod2011paper6
     schema:author usewodp:8bb0ab82ff03e9a18231391ad7be208e, usewodp:3ce30b9c8fb38d16abe7f7181f813f36, usewodp:1f560f19219ae4aac7ff4b013b5f5dab, usewodp:363d27137023d1db225396e8c65279a5 ;
     schema:copyrightYear "2011" ; 
     schema:url <http://arxiv.org/abs/1103.5043> ;
-#     schema:image <.png> ;
+    schema:image <https://semanticweb.com/files/2011/03/apples-and-oranges.jpg> ;
     prov:wasAttributedTo usewodp:8bb0ab82ff03e9a18231391ad7be208e, usewodp:3ce30b9c8fb38d16abe7f7181f813f36, usewodp:1f560f19219ae4aac7ff4b013b5f5dab, usewodp:363d27137023d1db225396e8c65279a5 .       
 
 # usewod 2012 authors
@@ -215,7 +215,7 @@ usewodpub:usewod2012paper1
     schema:author usewodp:85f73b90ce533408429c5574cf55ee83 ;
     schema:copyrightYear "2012" ; 
     schema:url <http://ir.ii.uam.es/usewod2012/usewod2012_raghuveer.pdf> ;
-#     schema:image <.png> ;
+    schema:image <http://cdn.slidesharecdn.com/ss_thumbnails/agents-120502043323-phpapp01-thumbnail-4.jpg?cb=1335951295> ;
     prov:wasAttributedTo usewodp:85f73b90ce533408429c5574cf55ee83 .
 
 usewodpub:usewod2012paper2
@@ -224,7 +224,7 @@ usewodpub:usewod2012paper2
     schema:author usewodp:903177d1f6e5588d94910245dd85103a, usewodp:ab4cb11c441da698c9e9af590c50773f, usewodp:e4b8413f2ea37b0b67a6366df6b14491 ;
     schema:copyrightYear "2012" ; 
     schema:url <http://arxiv.org/abs/1204.2712> ;
-#     schema:image <.png> ;
+    schema:image <https://www.scienceopen.com/document_file/755b0e9d-a00c-4690-ae57-28908617f2a8/PubMedCentral/medium.png> ;
     prov:wasAttributedTo usewodp:903177d1f6e5588d94910245dd85103a, usewodp:ab4cb11c441da698c9e9af590c50773f, usewodp:e4b8413f2ea37b0b67a6366df6b14491 .
 
 usewodpub:usewod2012paper3
@@ -233,7 +233,7 @@ usewodpub:usewod2012paper3
     schema:author usewodp:1374a46b0e8e7f6d27c9ea81f44ddd8d, usewodp:70be92adccee8ae03ccd47322f78407f, usewodp:b96bd3abb98cee4367b6c087b0bb2764 ;
     schema:copyrightYear "2012" ; 
     schema:url <http://arxiv.org/abs/1204.2713> ;
-#     schema:image <.png> ;
+    schema:image <http://blog.aksw.org/wp-content/uploads/2014/01/workflow.jpg> ;
     prov:wasAttributedTo usewodp:1374a46b0e8e7f6d27c9ea81f44ddd8d, usewodp:70be92adccee8ae03ccd47322f78407f, usewodp:b96bd3abb98cee4367b6c087b0bb2764 .
 
 usewodpub:usewod2012paper4
@@ -242,7 +242,7 @@ usewodpub:usewod2012paper4
     schema:author usewodp:a68d22fd7f6e9aa064284d4bd1e2436f, usewodp:1817f5ddec7baaf945fbb5e43f425f5a, usewodp:2d4dbd571a71934d1d8c989d9bb6b785 ;
     schema:copyrightYear "2012" ; 
     schema:url <http://arxiv.org/abs/1204.2715> ;
-#     schema:image <.png> ;
+    schema:image <http://141.89.225.43/patchr/whoknows.png> ;
     prov:wasAttributedTo usewodp:a68d22fd7f6e9aa064284d4bd1e2436f, usewodp:1817f5ddec7baaf945fbb5e43f425f5a, usewodp:2d4dbd571a71934d1d8c989d9bb6b785 .
 
 usewodpub:usewod2012paper5
@@ -251,7 +251,7 @@ usewodpub:usewod2012paper5
     schema:author usewodp:e56322dc2746e3c314abe290318f173d, usewodp:f8fcd3431feb357be9896dbab035f1af, usewodp:89907090f9c18d8737da57cffd4cf4c4, usewodp:bdd3e624d0619838c882ea4290c1fcf0 ;
     schema:copyrightYear "2012" ; 
     schema:url <http://arxiv.org/abs/1204.2718> ;
-#     schema:image <.png> ;
+    schema:image <http://cdn.slidesharecdn.com/ss_thumbnails/usewodreduced-121113154305-phpapp01-thumbnail-4.jpg?cb=1352843543> ;
     prov:wasAttributedTo usewodp:e56322dc2746e3c314abe290318f173d, usewodp:f8fcd3431feb357be9896dbab035f1af, usewodp:89907090f9c18d8737da57cffd4cf4c4, usewodp:bdd3e624d0619838c882ea4290c1fcf0 .
 
 # usewod 2013 authors
@@ -272,7 +272,7 @@ usewodpub:usewod2013paper1
     schema:author usewodp:e7fcb75408d4c0ff2ae132c84330ce5c, usewodp:1961dcf8fb4e7d545ef16693ef219482 ;
     schema:copyrightYear "2013" ; 
     schema:url <http://ceur-ws.org/Vol-981/USEWOD2013paper1.pdf> ;
-#     schema:image <.png> ;
+    schema:image <http://link.springer.com/chapter/10.1007%2F978-3-642-41242-4_5/lookinside/000.png> ;
     prov:wasAttributedTo usewodp:e7fcb75408d4c0ff2ae132c84330ce5c, usewodp:1961dcf8fb4e7d545ef16693ef219482 .
 
 # usewod 2014 authors
@@ -309,7 +309,7 @@ usewodpub:usewod2014paper1
     schema:author usewodp:22bc6a8631c768e88ec59b1407691282, usewodp:35e1f0d98fdc02e30f098dc79c58efc4, usewodp:71599b19e627703bedac300a4d0ce7ac, usewodp:462a2b684eeb585e541aabb28a3f35d1 ;
     schema:copyrightYear "2014" ; 
     schema:url <http://people.cs.kuleuven.be/~bettina.berendt/USEWOD2014/aljaloud_luczakrosch_chown_gibbins_usewod2014.pdf> ;
-#     schema:image <.png> ;
+    schema:image <http://eprints.soton.ac.uk/364658/1.haspreviewThumbnailVersion/aljaloud_luczakrosch_chown_gibbins_usewod2014-2.pdf> ;
     prov:wasAttributedTo usewodp:22bc6a8631c768e88ec59b1407691282, usewodp:35e1f0d98fdc02e30f098dc79c58efc4, usewodp:71599b19e627703bedac300a4d0ce7ac, usewodp:462a2b684eeb585e541aabb28a3f35d1 .
 
 usewodpub:usewod2014paper2
@@ -318,7 +318,7 @@ usewodpub:usewod2014paper2
     schema:author usewodp:a4a60a600cf8cb16393901c5fd48dd84, usewodp:37115ad6e91fc92f5668533aab8de732 ;
     schema:copyrightYear "2014" ; 
     schema:url <http://people.cs.kuleuven.be/~bettina.berendt/USEWOD2014/rietveld_hoekstra_usewod2014.pdf> ;
-#     schema:image <.png> ;
+    schema:image <http://cdn.wccftech.com/wp-content/uploads/2012/01/metal.jpg> ;
     prov:wasAttributedTo usewodp:a4a60a600cf8cb16393901c5fd48dd84, usewodp:37115ad6e91fc92f5668533aab8de732 .
 
 # }
