@@ -79,7 +79,7 @@ document
 
 		activity(usewod:activity_2)
 		used(usewod:activity_2, usewodds:my_dataset, -)
-		wasGeneratedBy(usewodpub:my_other_paper, usewod:a  ctivity_2, -)
+		wasGeneratedBy(usewodpub:my_other_paper, usewod:activity_2, -)
 		wasDerivedFrom(usewodpub:my_other_paper, usewodds:my_dataset, -, -, -)
 
 		entity(usewod:bundle_aprilush_5, [prov:type='prov:Bundle'])

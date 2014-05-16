@@ -5,11 +5,11 @@ include_once("helper.php");
 if ( isset($_POST['user']) && !empty($_POST['user']) ) {
   $username = $_POST['user'];
   if ( isset($_POST['ds-name']) && !empty($_POST['ds-name']) ) { // only the name is mandatory
-    add_dataset_from_fields($username, $_POST['ds-name'], $_POST['ds-v'], $_POST['ds-url'], $_POST['ds-img'], $_POST['ds-size'], $_POST['ds-format'], $_POST['ds-about']);
+    add_dataset_from_fields($username, $_POST['ds-name'], $_POST['ds-v'], $_POST['ds-released'], $_POST['ds-url'], $_POST['ds-img'], $_POST['ds-size'], $_POST['ds-format']);
   }
 }
 
-function add_dataset_from_fields($username, $name, $v, $url, $img, $about)
+function add_dataset_from_fields($username, $name, $v, $released, $url, $img)
 {
   global $store;
   global $usewod_url;
@@ -32,9 +32,9 @@ function add_dataset_from_fields($username, $name, $v, $url, $img, $about)
     $newds["img"] = $img;
     array_push($triples,' usewod:'.$id.' schema:image <'.$img.'> ');
   }
-  if ( isset($about) && !empty($about) ) {
-    $newds["about"] = $about;
-    array_push($triples,' usewod:'.$id.' schema:description '.'"'.$about.'" ');
+  if ( isset($released) && !empty($released) ) {
+    $newds["released"] = $released;
+    array_push($triples,' usewod:'.$id.' schema:datePublished '.'"'.$released.'" ');
   }
 
   $insert_q = prefix().'INSERT INTO usewod:'.$gid.' { '. implode(" . ", $triples) .'}';

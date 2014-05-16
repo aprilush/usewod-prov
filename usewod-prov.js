@@ -176,7 +176,7 @@ usewodModule.controller('prov', function($scope, $sce) {
 
   $scope.addDataset = function() {
     console.log("Adding a new dataset! ");
-    var data = {"user":$scope.username,"ds-name":$scope.dsName, "ds-v":$scope.dsV, "ds-url":$scope.dsUrl, "ds-img":$scope.dsImg, "ds-about":$scope.dsAbout};
+    var data = {"user":$scope.username,"ds-name":$scope.dsName, "ds-v":$scope.dsV, "ds-released":$scope.dsReleased, "ds-url":$scope.dsUrl, "ds-img":$scope.dsImg};
     var suc = function(respData, status, jqXHR) {
       console.log("received: ", respData, status, jqXHR);
       $("#newds").toggleClass("hidden");
@@ -185,9 +185,10 @@ usewodModule.controller('prov', function($scope, $sce) {
         $scope.statusMessage = "Successfully saved dataset '"+$scope.dsName+"'.";
         $scope.dsName = undefined;
         $scope.dsV = undefined;
+        $scope.dsReleased = undefined;
         $scope.dsUrl = undefined;
         $scope.dsImg = undefined;
-        $scope.dsAbout = undefined;
+        // $scope.dsAbout = undefined;
         // console.log($scope.datasets);
       });
     };

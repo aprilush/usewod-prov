@@ -5,11 +5,11 @@ if ( isset($_POST['user']) && !empty($_POST['user']) ) {
   $username = $_POST['user'];
   if ( isset($_POST['pub-title']) && !empty($_POST['pub-title']) && // title and author are mandatory
       isset($_POST['pub-author']) && !empty($_POST['pub-author']) ) {
-    add_paper_from_fields($username, $_POST['pub-title'], $_POST['pub-author'], $_POST['pub-venue'], $_POST['pub-year'], $_POST['pub-url'], $_POST['pub-img']);
+    add_paper_from_fields($username, $_POST['pub-title'], $_POST['pub-author'], $_POST['pub-year'], $_POST['pub-url'], $_POST['pub-img']);
   }
 }
 
-function add_paper_from_fields($username, $title, $authors, $venue, $year, $url, $img) {
+function add_paper_from_fields($username, $title, $authors, $year, $url, $img) {
   global $store;
   global $usewod_url;
   $names = explode("\n",$authors);
@@ -39,14 +39,16 @@ function add_paper_from_fields($username, $title, $authors, $venue, $year, $url,
     $aid = find_author_id($name);
     if ( !$aid ) 
     {
-      $aid = uniqid("person/");
+      $aid = "person/".trim(md5($name));
       array_push($triples,' usewod:'.$aid.' a schema:Person ');
+      // array_push($triples,' usewod:'.$aid.' a prov:Agent ');
       array_push($triples,' usewod:'.$aid.' schema:name "'.$name. '" '); 
       array_push($triples,' usewod:'.$id.' schema:author usewod:'.$aid.' '); 
     } 
     else 
     {
       array_push($triples,' usewod:'.$id.' schema:author <'.$aid.'> '); 
+      // array_push($triples,' usewod:'.$id.' prov:wasAttributedTo <'.$aid.'> '); 
     }
     array_push($authors,array("id" => $aid, "name" => $name));
   }

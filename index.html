@@ -89,7 +89,7 @@
                 <div ng-repeat="pub in publications" class="publication data" id="{{pub.id}}" ng-click="selectedSource(pub, 'p')" draggable data="{{pub}}"><img ng-src="{{pub.img}}" title="{{pub.title}}" />
                   <!-- <a href="{{pub.url}}">{{pub.title}}</a>  -->
                   <b>{{pub.title}}</b> 
-                  by <span ng-repeat="author in pub.authors">{{author.name}}, </span> {{pub.year}}</div>
+                  by <span ng-repeat="author in pub.authors">{{author.name}}, </span> {{pub.year}}<span ng-show="pub.url">, <a href="{{pub.url}}">link</a></span></div>
               </div>
               <div class='clear-both'></div>
               <div class="hidden" id="newpub">
@@ -100,11 +100,11 @@
                   <input type="text" name="pub-title" id="pub-title" ng-model="pubTitle" ng-blur="imgSearchForPaper()" /><br/>
                   <label for="pub-author">Authors (each on a new line, "firstname lastname")</label></br>
                   <textarea rows="3" name="pub-author" id="pub-author" ng-model="pubAuthor"></textarea><br/>
-                  <label for="pub-venue">Publication venue</label><br/>
+<!--                   <label for="pub-venue">Publication venue</label><br/>
                   <input type="text" name="pub-venue" id="pub-venue" ng-model="pubVenue" /><br/>
-                  <label for="pub-year">Year</label><br/>
+ -->                  <label for="pub-year">Year</label><br/>
                   <input type="text" name="pub-year" id="pub-year" ng-model="pubYear" /><br/>
-                  <label for="pub-url">Link (url)</label><br/>
+                  <label for="pub-url">Link</label><br/>
                   <input type="text" name="pub-url" id="pub-url" ng-model="pubUrl" /><br/>
               </div>
             </td>
@@ -123,13 +123,15 @@
                   <h3>Add a new dataset</h3>
                   <label for="ds-name">Name</label><br/>
                   <input type="text" name="ds-name" id="ds-name" ng-model="dsName" ng-blur="imgSearchForDataset()" /><br/>
-                  <label for="ds-v">Version (or date)</label></br>
+                  <label for="ds-v">Version (number or name)</label></br>
                   <input type="text" name="ds-v" id="ds-v" ng-model="dsV" /><br/>
+                  <label for="ds-released">Release date</label></br>
+                  <input type="text" name="ds-released" id="ds-released" ng-model="dsReleased" /><br/>
                   <label for="ds-url">Link (url)</label><br/>
                   <input type="text" name="ds-url" id="ds-url" ng-model="dsUrl" /><br/>
-                  <label for="ds-about">Description</label><br/>
+<!--                   <label for="ds-about">Description</label><br/>
                   <textarea rows="3" name="ds-about" id="ds-about" ng-model="dsAbout" ></textarea><br/>
-              </div>
+ -->              </div>
             </td>
           <tr>
         </table>
