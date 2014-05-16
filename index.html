@@ -92,10 +92,11 @@
                   by <span ng-repeat="author in pub.authors">{{author.name}}, </span> {{pub.year}}<span ng-show="pub.url">, <a href="{{pub.url}}">link</a></span></div>
               </div>
               <div class='clear-both'></div>
-              <div class="hidden" id="newpub">
-                  <div class="button"><input type="image" src="img/list-add.png" ng-click="addPublication()"/></div>
-                  <div class="button" ng-show="pubImg"><img name="pub-img" ng-src="{{pubImg}}" /></div>
-                  <h3>Add a new publication</h3>
+              <div class="hidden form" id="newpub">
+                <div class="button"><input type="image" src="img/list-add.png" ng-click="addPublication()"/></div>
+                <div class="button" ng-show="pubImg"><img name="pub-img" ng-src="{{pubImg}}" /></div>
+                <h3>Add a new publication</h3>
+                <div class="bigspacer">
                   <label for="pub-title">Title</label><br/>
                   <input type="text" name="pub-title" id="pub-title" ng-model="pubTitle" ng-blur="imgSearchForPaper()" /><br/>
                   <label for="pub-author">Authors (each on a new line, "firstname lastname")</label></br>
@@ -106,6 +107,7 @@
                   <input type="text" name="pub-year" id="pub-year" ng-model="pubYear" /><br/>
                   <label for="pub-url">Link</label><br/>
                   <input type="text" name="pub-url" id="pub-url" ng-model="pubUrl" /><br/>
+                </div>
               </div>
             </td>
             <td width="50%">
@@ -117,10 +119,11 @@
                 </div> 
               </div>
               <div class='clear-both'></div>
-              <div class="hidden" id="newds">
-                  <div class="button" id=""><input type="image" src="img/list-add.png" ng-click="addDataset()"/></div>
-                  <div class="button" ng-show="dsImg"><img name="ds-img" ng-src="{{dsImg}}" /></div>
-                  <h3>Add a new dataset</h3>
+              <div class="hidden form" id="newds">
+                <div class="button" id=""><input type="image" src="img/list-add.png" ng-click="addDataset()"/></div>
+                <div class="button" ng-show="dsImg"><img name="ds-img" ng-src="{{dsImg}}" /></div>
+                <h3>Add a new dataset</h3>
+                <div class="bigspacer">
                   <label for="ds-name">Name</label><br/>
                   <input type="text" name="ds-name" id="ds-name" ng-model="dsName" ng-blur="imgSearchForDataset()" /><br/>
                   <label for="ds-v">Version (number or name)</label></br>
@@ -131,7 +134,8 @@
                   <input type="text" name="ds-url" id="ds-url" ng-model="dsUrl" /><br/>
 <!--                   <label for="ds-about">Description</label><br/>
                   <textarea rows="3" name="ds-about" id="ds-about" ng-model="dsAbout" ></textarea><br/>
- -->              </div>
+ -->            </div>
+              </div>
             </td>
           <tr>
         </table>

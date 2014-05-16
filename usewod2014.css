@@ -120,6 +120,10 @@ div.clear-both {
   display: None;
 }
 
+div.form input[type="text"], textarea {
+  width: 95%;
+}
+
 div.workspace table {
   margin-left: 5%;
   margin-right: 5%;
@@ -136,6 +140,9 @@ div.workspace td {
 
 div.spacer {
   margin-top: 20px;
+}
+div.bigspacer {
+  margin-top: 30px;
 }
 
 td.source {
