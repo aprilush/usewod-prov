@@ -1,10 +1,10 @@
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix schema: <http://schema.org/> .
-@prefix usewod: <http://data.usewod.org/resource/> .
-@prefix usewodds: <http://data.usewod.org/dataset/> .
-@prefix usewodpub: <http://data.usewod.org/publication/> .
-@prefix usewodp: <http://data.usewod.org/person/> .
+@prefix usewod: <http://data.usewod.org/prov/> .
+@prefix usewodds: <http://data.usewod.org/prov/dataset/> .
+@prefix usewodpub: <http://data.usewod.org/prov/publication/> .
+@prefix usewodp: <http://data.usewod.org/prov/person/> .
 
 # usewod:bundle_datasets {
 

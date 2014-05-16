@@ -41,14 +41,15 @@ function add_paper_from_fields($username, $title, $authors, $year, $url, $img) {
     {
       $aid = "person/".trim(md5($name));
       array_push($triples,' usewod:'.$aid.' a schema:Person ');
-      // array_push($triples,' usewod:'.$aid.' a prov:Agent ');
+      array_push($triples,' usewod:'.$aid.' a prov:Agent ');
       array_push($triples,' usewod:'.$aid.' schema:name "'.$name. '" '); 
       array_push($triples,' usewod:'.$id.' schema:author usewod:'.$aid.' '); 
+      array_push($triples,' usewod:'.$id.' prov:wasAttributedTo '.$aid.' '); 
     } 
     else 
     {
       array_push($triples,' usewod:'.$id.' schema:author <'.$aid.'> '); 
-      // array_push($triples,' usewod:'.$id.' prov:wasAttributedTo <'.$aid.'> '); 
+      array_push($triples,' usewod:'.$id.' prov:wasAttributedTo <'.$aid.'> '); 
     }
     array_push($authors,array("id" => $aid, "name" => $name));
   }

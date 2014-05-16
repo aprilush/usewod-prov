@@ -105,7 +105,7 @@ function make_triples($source, $relations) {
       if (array_key_exists('ds', $relations) ) {
         foreach ( $relations['ds'] as $rel ) {
           if ( !empty($rel['objects']) ) {
-            // to see what exact types of relations we support here 
+            //TODO see what exact types of relations we support here 
           }
         }
       }

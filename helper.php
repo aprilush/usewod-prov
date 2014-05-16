@@ -19,7 +19,7 @@ if (!$store->isSetUp()) {
   $store->setUp();
 }
 
-$usewod_url = "http://data.usewod.org/";
+$usewod_url = "http://data.usewod.org/prov/";
 
 function prefix() 
 {
