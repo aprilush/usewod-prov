@@ -97,16 +97,26 @@
                 <div class="button" ng-show="pubImg"><img name="pub-img" ng-src="{{pubImg}}" /></div>
                 <h3>Add a new publication</h3>
                 <div class="bigspacer">
-                  <label for="pub-title">Title</label><br/>
-                  <input type="text" name="pub-title" id="pub-title" ng-model="pubTitle" ng-blur="imgSearchForPaper()" /><br/>
-                  <label for="pub-author">Authors (each on a new line, "firstname lastname")</label></br>
-                  <textarea rows="3" name="pub-author" id="pub-author" ng-model="pubAuthor"></textarea><br/>
+                  <table width="100%">
+                    <tr>
+                      <td><label for="pub-title">Title</label></td>
+                      <td width="95%"><input type="text" name="pub-title" id="pub-title" ng-model="pubTitle" ng-blur="imgSearchForPaper()" /></td>
+                    </tr>
+                    <tr>
+                      <td><label for="pub-author">Authors</label></td>
+                      <td><textarea rows="3" name="pub-author" id="pub-author" ng-model="pubAuthor"></textarea><br/><small>(each on a new line, "firstname lastname")</small></td>
+                    </tr>
+                    <tr>
 <!--                   <label for="pub-venue">Publication venue</label><br/>
-                  <input type="text" name="pub-venue" id="pub-venue" ng-model="pubVenue" /><br/>
- -->                  <label for="pub-year">Year</label><br/>
-                  <input type="text" name="pub-year" id="pub-year" ng-model="pubYear" /><br/>
-                  <label for="pub-url">Link</label><br/>
-                  <input type="text" name="pub-url" id="pub-url" ng-model="pubUrl" /><br/>
+                      <input type="text" name="pub-venue" id="pub-venue" ng-model="pubVenue" /><br/> -->
+                      <td><label for="pub-year">Year</label></td>
+                      <td><input type="text" name="pub-year" id="pub-year" ng-model="pubYear" /></td>
+                    </tr>
+                    <tr>
+                      <td><label for="pub-url">Link</label></td>
+                      <td><input type="text" name="pub-url" id="pub-url" ng-model="pubUrl" /></td>
+                    </tr>
+                  </table>
                 </div>
               </div>
             </td>
@@ -124,14 +134,24 @@
                 <div class="button" ng-show="dsImg"><img name="ds-img" ng-src="{{dsImg}}" /></div>
                 <h3>Add a new dataset</h3>
                 <div class="bigspacer">
-                  <label for="ds-name">Name</label><br/>
-                  <input type="text" name="ds-name" id="ds-name" ng-model="dsName" ng-blur="imgSearchForDataset()" /><br/>
-                  <label for="ds-v">Version (number or name)</label></br>
-                  <input type="text" name="ds-v" id="ds-v" ng-model="dsV" /><br/>
-                  <label for="ds-released">Release date</label></br>
-                  <input type="text" name="ds-released" id="ds-released" ng-model="dsReleased" /><br/>
-                  <label for="ds-url">Link (url)</label><br/>
-                  <input type="text" name="ds-url" id="ds-url" ng-model="dsUrl" /><br/>
+                  <table width="100%">
+                    <tr>
+                      <td><label for="ds-name">Name</label></td>
+                      <td width="95%"><input type="text" name="ds-name" id="ds-name" ng-model="dsName" ng-blur="imgSearchForDataset()" /></td>
+                    </tr>
+                    <tr>
+                      <td><label for="ds-v">Version</label></td>
+                      <td><input type="text" name="ds-v" id="ds-v" ng-model="dsV" /></td>
+                    </tr>
+                    <tr>
+                      <td><label for="ds-released">Released</label></td>
+                      <td><input type="text" name="ds-released" id="ds-released" ng-model="dsReleased" /></td>
+                    </tr>
+                    <tr>
+                      <td><label for="ds-url">Link</label></td>
+                      <td><input type="text" name="ds-url" id="ds-url" ng-model="dsUrl" /></td>
+                    </tr>
+                  </table>
 <!--                   <label for="ds-about">Description</label><br/>
                   <textarea rows="3" name="ds-about" id="ds-about" ng-model="dsAbout" ></textarea><br/>
  -->            </div>

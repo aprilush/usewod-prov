@@ -123,6 +123,9 @@ div.clear-both {
 div.form input[type="text"], textarea {
   width: 95%;
 }
+div.form label {
+  float: right;
+}
 
 div.workspace table {
   margin-left: 5%;

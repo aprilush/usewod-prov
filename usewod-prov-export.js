@@ -3,30 +3,50 @@ var usewodModule = angular.module('usewod', []);
 
 usewodModule.controller('provexport', function($scope) {
 
+  $scope.ispublic = true;
+  $scope.participant = getCookie("username");
 
-  $scope.exportProv = function(data) {
-    console.log("username:", $scope.storeuser);
+  $scope.exportProv = function() {
+    console.log("store user:", $scope.storeuser);
     console.log("apikey:", $scope.storekey);
     console.log("document name:", $scope.docname);
+    console.log("participant name:", $scope.participant);
     console.log("public: ", $scope.ispublic)
-    console.log("data:", data);
 
-    $scope.storeuser = "aprilush";
-    $scope.storekey = "19823df34aa1bef67612a2f7c1d470d0a8860640";
+    if (!$scope.storeuser) {
+      $scope.storeuser = "usewod";
+    }
+    if (!$scope.storekey) {
+      $scope.storekey = "ce7e5bba68b5aa1f340efe43418fc4cfb26b5149";
+    }
     if (!$scope.docname) {
-      $scope.docname = "usewod_export_"+Date.now();
+      if ($scope.participant) {
+        $scope.docname = "usewod_by_"+$scope.participant+"_export_"+Date.now();
+      } else {
+        $scope.docname = "usewod_export_"+Date.now();
+      }
     }
 
     var provstore = new $.provStoreApi({username: $scope.storeuser, key: $scope.storekey});
 
-    provstore.submitDocument($scope.docname, createPrefixes(), $scope.ispublic,
-      function(id) {
-        console.log("Created document with id: ", id); 
-        addBundles(provstore, id, data);
-      },
-      function(error) {
-        console.error("Error creating new document: ", error); 
-      });
+    $.ajax({  type: "POST", 
+              url:"provexportdata.php", 
+              data:{participant: $scope.participant}, 
+              success:function(d) {
+                console.log("received data: ", d);
+                provstore.submitDocument($scope.docname, createPrefixes(), $scope.ispublic,
+                  function(id) {
+                    console.log("Created document with id: ", id); 
+                    addBundles(provstore, id, d);
+                    $scope.$apply(function() {$scope.docid = id;});
+                    console.log();
+                  },
+                  function(error) {
+                    console.error("Error creating new document: ", error); 
+                  });
+              }, 
+              dataType:"json" });
+
   }
 
   var createPrefixes = function() {
@@ -42,6 +62,17 @@ usewodModule.controller('provexport', function($scope) {
     return  prefixes;
   }
 
+  function getCookie(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0; i<ca.length; i++) 
+      {
+      var c = ca[i].trim();
+      if (c.indexOf(name)==0) return c.substring(name.length,c.length);
+    }
+    return "";
+  }
+
   var addBundles = function(provstore, docid, data) {
     for (i in data) {
       bundle = data[i];
@@ -52,7 +83,7 @@ usewodModule.controller('provexport', function($scope) {
         function(error) {
           console.error("Error creating new bundle with id: ", bundle['meta']['id'], error);
         });
-      setTimeout(function() {console.log("slept");}, 5000);
+      // setTimeout(function() {console.log("slept");}, 5000);
     }
   }
 

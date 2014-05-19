@@ -2,18 +2,31 @@
 
 include_once("helper.php");
 
-// if ( isset($_POST['provonly']) ) 
-// {
-//   $provonly = True;
-// }
-
-$data = array();
-foreach (get_graph_ids() as $gid) {
-  $meta = get_graph_meta($gid);
-  $content = get_graph_content($gid);
-  array_push($data, array("meta"=>$meta, "content"=>$content));
+if ( isset($_POST['participant']) && !empty($_POST['participant'])) {
+  export_user_prov($_POST['participant']);
+} else {
+  export_all_prov();
 }
-$jsondata = json_encode($data);
+
+function export_user_prov($user) {
+  $data = array();
+  foreach (get_graph_ids_by_user($user) as $gid) {
+    $meta = get_graph_meta($gid);
+    $content = get_graph_content($gid);
+    array_push($data, array("meta"=>$meta, "content"=>$content));
+  }
+  echo json_encode($data);
+}
+
+function export_all_prov() {
+  $data = array();
+  foreach (get_graph_ids() as $gid) {
+    $meta = get_graph_meta($gid);
+    $content = get_graph_content($gid);
+    array_push($data, array("meta"=>$meta, "content"=>$content));
+  }
+  echo json_encode($data);
+}
 
 function get_graph_ids() {
   global $store;
@@ -23,6 +36,31 @@ function get_graph_ids() {
     FROM usewod:graph 
     WHERE {
       ?gid ?p ?o . 
+    }
+  ';
+  $gids = array();
+  if ($rows = $store->query($graph_q, 'rows')) 
+  {
+    foreach ($rows as $row) 
+    {
+      array_push($gids,$row['gid']);
+    }
+  }
+  if ($errs = $store->getErrors()) {
+    echo "{ 'error' : 'Error in get_graph_ids', 'returned':".var_dump($errs)." }";
+    return;
+  }
+  return $gids;
+}
+
+function get_graph_ids_by_user($user) {
+  global $store;
+
+  $graph_q = prefix().'
+    SELECT DISTINCT $gid 
+    FROM usewod:graph 
+    WHERE {
+      ?gid ?p ?o . ?gid dcterms:creator "'.$user.'" .  
     }
   ';
   $gids = array();
@@ -302,62 +340,5 @@ function get_graph_attributions($gid) {
 //   return array();
 // }
 
+
 ?>
-
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN" "http://www.w3.org/MarkUp/DTD/xhtml-rdfa-1.dtd">
-<html>
-  <head>
-    <title property="rdfs:label">USEWOD2014 - 4th International Workshop on Usage Analysis and the Web of Data</title>
-    <link rel="stylesheet" href="usewodStyle.css"/>
-    <link rel="stylesheet" href="usewod2014.css"/>
-    <link rel="dct:creator" href="http://aprilush.ro/card#laura" />
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
-  </head>
-  <body typeof="sioc:Site" about="">
-    <div id="container" ng-app="usewod" ng-controller="provexport">
-      <span rel="foaf:primaryTopic" resource="http://data.semanticweb.org/workshop/usewod/2014" />
-      <div id="content">
-        <div typeof="swc:WorkshopEvent v:Event" about="http://data.semanticweb.org/workshop/usewod/2014">
-          <h1 style="text-align: center">
-            <span property="swc:hasAcronym v:summary">USEWOD2014</span> - 
-            <span property="rdfs:label v:description">4th International Workshop on Usage Analysis and the Web of Data</span>
-          </h1>
-        </div>
-        <h2>Export data to ProvStore</h2>
-<!--         <?php 
-          // echo "<input type='text' ng-model='data' name='data' id='data' value='".$jsondata."'/>"
-        ?> --> 
-        <label for="storeuser">Username</label>
-        <input type="text" name="storeuser" id="storeuser" ng-model="storeuser" /><br/>
-        <label for="apikey">API key</label>
-        <input type="text" name="apikey" id="apikey" ng-model="apikey" /><br/>
-        <label for="docname">Document name</label>
-        <input type="text" name="docname" id="docname" ng-model="docname" /><br/>
-        <label for="public">Make public</label>
-        <input type="checkbox" name="public" id="public" ng-model="ispublic" /><br/>
-
-        <?php 
-          echo "<input type='button' ng-click='exportProv(".$jsondata.")' />"
-        ?>
-      </div>
-      <div id="footer">
-        <div style="text-align: center">
-          For questions and comments e-mail 
-          <a href="mailto:usewod2013-chairs@googlegroups.com">USEWOD Chairs</a><br/>
-          <p about="" resource="http://www.w3.org/TR/rdfa-syntax" rel="dct:conformsTo">
-            <a href="http://validator.w3.org/check?uri=referer">XHTML</a>
-            <a href="http://www.w3.org/2007/08/pyRdfa/extract?uri=referer">with RDFa</a>
-          </p>
-          <br/>
-        </div>
-      </div> <!-- footer -->
-    </div> <!-- container -->
-    <script src="http://code.jquery.com/jquery-1.10.1.js"></script>
-    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
-    <script src="provstoreapi.js"></script>
-    <script src="http://www.myersdaily.org/joseph/javascript/md5.js"></script>
-    <script src="usewod-prov-export.js" type="text/javascript"></script>
-  </body>
-</html>
