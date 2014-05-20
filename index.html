@@ -74,9 +74,22 @@
                 <tr>
                   <td id="source-obj" class="source"><a ng-show="sourceObject.url" ng-href="{{sourceObject.url}}">{{sourceObject.name}}</a><b ng-hide="sourceObject.url">{{sourceObject.name}}</b><br/><img ng-show="sourceObject.img" ng-src="{{sourceObject.img}}" /></td>
                   <td id="relations">
-                    <div ng-repeat="relp in relationsToPub" droppable class="rel publication" data="{{relp}}">{{relp.label}}<span ng-repeat="obj in relp.objects" class="publication object" id="{{obj.id}}" data="{{obj}}"><img ng-src="{{obj.img}}" title="{{obj.title}}" /></span></div>
-                    <br/>
-                    <div ng-repeat="reld in relationsToDs" droppable class="rel dataset" data="{{reld}}">{{reld.label}}<span ng-repeat="obj in reld.objects" class="dataset object" id="{{obj.id}}" data="{{obj}}"><img ng-src="{{obj.img}}" title="{{obj.name}}" /></span></div>
+                    <table width="100%" class="baskets">
+                      <tr>
+                        <td ng-repeat="relp in relationsToPub">{{relp.label}}<br/>
+                          <div droppable class="rel publication" data="{{relp}}"><span ng-repeat="obj in relp.objects" class="publication object" id="{{obj.id}}" data="{{obj}}"><img ng-src="{{obj.img}}" title="{{obj.title}}" /></span>
+                          </div>
+                        </td>
+                      </tr>
+                    </table>
+                    <table width="100%" class="baskets">
+                      <tr>
+                        <td ng-repeat="reld in relationsToDs">{{reld.label}}<br/>
+                          <div droppable class="rel dataset" data="{{reld}}"><span ng-repeat="obj in reld.objects" class="dataset object" id="{{obj.id}}" data="{{obj}}"><img ng-src="{{obj.img}}" title="{{obj.name}}" /></span>
+                          </div>
+                        </td>
+                      </tr>
+                    </table>
                   </td>
                 </tr>
               </table>

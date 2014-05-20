@@ -36,8 +36,11 @@ usewodModule.directive('draggable', function() {
     link: function(scope, element, attrs) {
       // console.log("data: ", attrs['data']);
       element.draggable({
-        revert:true, 
-        helper: 'clone',
+        revert: false, 
+        // helper: 'clone',
+        helper: function() {
+          return $("<div class='data'>").append($(element).find("img").clone());
+        }
       });
     }
   }

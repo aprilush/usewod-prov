@@ -161,13 +161,24 @@ td.source img {
 
 .rel {
   vertical-align: middle;
+  min-height: 55px;
+/*  border-style: solid;
+  border-width: 3px;
+  border-color: red;*/
+  background-color: #92AAC2;
 }
 
 .drop-hover {
-  height: 60px;
-  font-weight: bold;
+  /*height: 60px;*/
+  /*font-weight: bold;*/
+  /*border-color: green;*/
+  background-color: #D2D2D3;
 }
 
 span.status {
   float:right;
+}
+
+table.baskets td {
+  vertical-align: top;
 }
