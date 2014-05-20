@@ -3,12 +3,18 @@ google.load('search', '1');
 var usewodModule = angular.module('usewod', []);
 usewodModule.directive('autoComplete', function($timeout) {
   return function(scope, element, attrs) {
-    console.log("element", element, "attrs", attrs);
     element.autocomplete({
-      minLength: 1,
-      source: scope[attrs.uiItems],
+      minLength: 2,
+      source: function( request, response ) {
+        var terms = request.term.split("\n");
+        var lastTerm = terms[terms.length-1].trim();
+        var matcher = new RegExp( $.ui.autocomplete.escapeRegex( lastTerm ), "i" );
+        var suggestions = $.grep( JSON.parse(attrs.uiItems), function( item, i ){ return matcher.test( item ); }) ;
+        response(suggestions);
+      }, 
       select: function( event, ui ) {
         event.isDefaultPrevented = function() {return true;}
+        console.log("event", event, "ui", ui);
         $timeout(function() {
             var txt = element.val();
             var terms = txt.split("\n");
@@ -218,12 +224,11 @@ usewodModule.controller('prov', function($scope, $sce) {
   }
 
   var loadData = function() {
-    console.log("started loading data");
     $scope.publications = [];
     $scope.datasets = [];
     $scope.authornames = [];
     var sucpub = function(data) {
-      console.log("received publications : ", data);
+      console.log("loaded publications : ", data);
       $scope.$apply( function() {
         $scope.publications = data["publications"];
         $scope.authornames = data["authornames"];
@@ -231,13 +236,12 @@ usewodModule.controller('prov', function($scope, $sce) {
     };
     $.get("loadpublications.php", sucpub, "json");
     var sucds = function(data) {
-      console.log("received datasets : ", data);
+      console.log("loaded datasets : ", data);
       $scope.$apply( function() {
         $scope.datasets = data["datasets"];
       });
     };
     $.get("loaddatasets.php", sucds, "json");
-    console.log("finished loading data", $scope.publications, $scope.authornames, $scope.datasets);
   }
 
   $scope.toggleForm = function(which) {
@@ -246,6 +250,31 @@ usewodModule.controller('prov', function($scope, $sce) {
       $("#newpub").toggleClass("hidden");
     } else if (which == 'ds') {
       $("#newds").toggleClass("hidden");
+    }
+  }
+
+  $scope.filterDatasets = function() {
+    if ($scope.dsfilter) {
+      var matcher = new RegExp( $scope.dsfilter, "i" );
+      return $.grep($scope.datasets, function( item, i ){ return matcher.test( item["name"] ); });
+    } else {
+      return $scope.datasets;
+    }
+  }
+
+  $scope.filterPublications = function() {
+    if ($scope.pubfilter) {
+      var matcher = new RegExp( $scope.pubfilter, "i" );
+      return $.grep($scope.publications, function( item, i ) { 
+        var matchingAuthors = $.grep(item["authors"], function( auth, j ) { return matcher.test(auth["name"]); });
+        if (matchingAuthors.length > 0) {
+          return true;
+        } else {
+          return matcher.test( item["title"] );
+        } 
+      });
+    } else {
+      return $scope.publications;
     }
   }
 

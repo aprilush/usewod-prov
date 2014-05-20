@@ -18,6 +18,7 @@
 		<link rel="stylesheet" href="usewodStyle.css"/>
 		<link rel="stylesheet" href="usewod2014.css"/>
 		<link rel="dct:creator" href="http://aprilush.ro/card#laura" />
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
 	</head>
 	<body typeof="sioc:Site" about="">
 		<div id="container">
@@ -86,7 +87,8 @@
             <td width="50%">
               <div class='button'><input type="image" src="img/document-new.png" ng-click="toggleForm('pub')" /></div><h3>Publications</h3>
               <div class='spacer'>
-                <div ng-repeat="pub in publications" class="publication data" id="{{pub.id}}" ng-click="selectedSource(pub, 'p')" draggable data="{{pub}}"><img ng-src="{{pub.img}}" title="{{pub.title}}" />
+                <div class="form"><input type="text" ng-model="pubfilter" /></div>
+                <div ng-repeat="pub in filterPublications()" class="publication data" id="{{pub.id}}" ng-click="selectedSource(pub, 'p')" draggable data="{{pub}}"><img ng-src="{{pub.img}}" title="{{pub.title}}" />
                   <!-- <a href="{{pub.url}}">{{pub.title}}</a>  -->
                   <b>{{pub.title}}</b> 
                   by <span ng-repeat="author in pub.authors">{{author.name}}, </span> {{pub.year}}<span ng-show="pub.url">, <a href="{{pub.url}}">link</a></span></div>
@@ -104,7 +106,7 @@
                     </tr>
                     <tr>
                       <td><label for="pub-author">Authors</label></td>
-                      <td><textarea rows="3" name="pub-author" id="pub-author" ng-model="pubAuthor" auto-complete ui-items={{authornames}}></textarea><br/><small>(each on a new line, "firstname lastname")</small></td>
+                      <td><textarea rows="3" name="pub-author" id="pub-author" ng-model="pubAuthor" auto-complete ui-items="{{authornames}}"></textarea><br/><small>(each on a new line, "firstname lastname")</small></td>
                     </tr>
                     <tr>
 <!--                   <label for="pub-venue">Publication venue</label><br/>
@@ -123,7 +125,8 @@
             <td width="50%">
               <div class='button'><input type="image" src="img/edit-table-insert-row-big-plus.png" ng-click="toggleForm('ds')" /></div><h3>Datasets</h3>
               <div class='spacer'>
-                <div ng-repeat="ds in datasets" class="dataset data" id="{{ds.id}}" ng-click="selectedSource(ds, 'd')" draggable data="{{ds}}"><img ng-src="{{ds.img}}" title="{{ds.name}}" />
+                <div class="form"><input type="text" ng-model="dsfilter" /></div>
+                <div ng-repeat="ds in filterDatasets()" class="dataset data" id="{{ds.id}}" ng-click="selectedSource(ds, 'd')" draggable data="{{ds}}"><img ng-src="{{ds.img}}" title="{{ds.name}}" />
                   <!-- <a href="{{ds.url}}">{{ds.name}}</a> -->
                   <div class="cell"><b>{{ds.name}}</b></div>
                 </div> 
