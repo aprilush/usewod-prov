@@ -1,6 +1,28 @@
 google.load('search', '1');
 
 var usewodModule = angular.module('usewod', []);
+usewodModule.directive('autoComplete', function($timeout) {
+  return function(scope, element, attrs) {
+    console.log("element", element, "attrs", attrs);
+    element.autocomplete({
+      minLength: 1,
+      source: scope[attrs.uiItems],
+      select: function( event, ui ) {
+        event.isDefaultPrevented = function() {return true;}
+        $timeout(function() {
+            var txt = element.val();
+            var terms = txt.split("\n");
+            terms.pop();
+            terms.push(ui.item.value);
+            element.val(terms.join('\n'));
+        }, 0);
+      },
+      focus: function( event, ui ) {
+        event.isDefaultPrevented = function() {return true;}
+      }
+    });
+  };
+});
 usewodModule.directive('draggable', function() {
   return {
     restrict:'A', 
@@ -199,10 +221,12 @@ usewodModule.controller('prov', function($scope, $sce) {
     console.log("started loading data");
     $scope.publications = [];
     $scope.datasets = [];
+    $scope.authornames = [];
     var sucpub = function(data) {
       console.log("received publications : ", data);
       $scope.$apply( function() {
         $scope.publications = data["publications"];
+        $scope.authornames = data["authornames"];
       });
     };
     $.get("loadpublications.php", sucpub, "json");
@@ -213,7 +237,7 @@ usewodModule.controller('prov', function($scope, $sce) {
       });
     };
     $.get("loaddatasets.php", sucds, "json");
-    console.log("finished loading data", $scope.publications, $scope.datasets);
+    console.log("finished loading data", $scope.publications, $scope.authornames, $scope.datasets);
   }
 
   $scope.toggleForm = function(which) {

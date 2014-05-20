@@ -104,7 +104,7 @@
                     </tr>
                     <tr>
                       <td><label for="pub-author">Authors</label></td>
-                      <td><textarea rows="3" name="pub-author" id="pub-author" ng-model="pubAuthor"></textarea><br/><small>(each on a new line, "firstname lastname")</small></td>
+                      <td><textarea rows="3" name="pub-author" id="pub-author" ng-model="pubAuthor" auto-complete ui-items={{authornames}}></textarea><br/><small>(each on a new line, "firstname lastname")</small></td>
                     </tr>
                     <tr>
 <!--                   <label for="pub-venue">Publication venue</label><br/>

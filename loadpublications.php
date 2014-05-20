@@ -2,7 +2,10 @@
 
 include_once("helper.php");
 
-echo load_publications(get_pub_ids(), get_people());
+$author_data = get_people();
+$publications = load_publications(get_pub_ids(), $author_data[0]);
+$rez = array("publications" => $publications, "authornames" => $author_data[1]);
+echo json_encode($rez);
 
 function get_pub_ids() {
   global $store;
@@ -32,14 +35,16 @@ function get_people() {
     }
   ';
   $people = array();
+  $peoplenames = array();
   if ($rows = $store->query($people_q, 'rows')) 
   {
     foreach ($rows as $row) 
     { 
       $people[$row["id"]]=$row["name"];
+      array_push($peoplenames, $row["name"]);
     }
   }
-  return $people;
+  return [$people, $peoplenames];
 }
 
 function load_publications($pub_ids, $authors) {  
@@ -77,8 +82,7 @@ function load_publications($pub_ids, $authors) {
     return;
   }
 
-  $rez = array("publications" => $publications);
-  return json_encode($rez);
+  return $publications;
 }
 
 ?>
