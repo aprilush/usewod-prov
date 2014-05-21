@@ -77,15 +77,20 @@
                     <table width="100%" class="baskets">
                       <tr>
                         <td ng-repeat="relp in relationsToPub">{{relp.label}}<br/>
-                          <div droppable class="rel publication" data="{{relp}}"><span ng-repeat="obj in relp.objects" class="publication object" id="{{obj.id}}" data="{{obj}}"><img ng-src="{{obj.img}}" title="{{obj.title}}" /></span>
-                          </div>
+                          <div droppable class="baskets publication" data="{{relp}}"></div>
+                          <span ng-repeat="obj in relp.objects" class="publication object" id="{{obj.id}}" data="{{obj}}">
+                            <img ng-src="{{obj.img}}" title="{{obj.title}}" />
+                          </span>
                         </td>
                       </tr>
                     </table>
                     <table width="100%" class="baskets">
                       <tr>
                         <td ng-repeat="reld in relationsToDs">{{reld.label}}<br/>
-                          <div droppable class="rel dataset" data="{{reld}}"><span ng-repeat="obj in reld.objects" class="dataset object" id="{{obj.id}}" data="{{obj}}"><img ng-src="{{obj.img}}" title="{{obj.name}}" /></span>
+                          <div droppable class="baskets dataset" data="{{reld}}"></div>
+                          <span ng-repeat="obj in reld.objects" class="dataset object" id="{{obj.id}}" data="{{obj}}">
+                            <img ng-src="{{obj.img}}" title="{{obj.name}}" />
+                          </span>
                           </div>
                         </td>
                       </tr>

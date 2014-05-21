@@ -64,6 +64,7 @@ usewodModule.directive('droppable', function() {
                   if (val["objects"].map(function(o){return o["id"]}).indexOf(obj["id"]) < 0) { 
                     scope.$apply( function() {
                       val["objects"].push(obj); 
+                      console.log(val);
                     });
                   }
                 } 
@@ -290,8 +291,8 @@ usewodModule.controller('prov', function($scope, $sce) {
         $scope.relationsToPub = [{"label":"cites", "objects":[]}];
         $scope.relationsToDs = [{"label":"mentions", "objects":[]}, {"label":"describes", "objects":[]}, {"label":"evaluates", "objects":[]}, {"label":"analyses", "objects":[]}, {"label":"compares", "objects":[]}];
       } else if (objtype == "d") {
-        $scope.relationsToPub = [{"label":"is mentioned in", "objects":[]}, {"label":"is described in", "objects":[]}, {"label":"is evaluated in", "objects":[]}, {"label":"is analysed in", "objects":[]}, {"label":"is compared in", "objects":[]}];
-        $scope.relationsToDs = [{"label":"extends", "objects":[]}, {"label":"includes", "objects":[]}, {"label":"overlaps", "objects":[]}, {"label":"is transformation of", "objects":[]}];
+        $scope.relationsToPub = [{"label":"mentioned in", "objects":[]}, {"label":"described in", "objects":[]}, {"label":"evaluated in", "objects":[]}, {"label":"analysed in", "objects":[]}, {"label":"compared in", "objects":[]}];
+        $scope.relationsToDs = [{"label":"extends", "objects":[]}, {"label":"includes", "objects":[]}, {"label":"overlaps", "objects":[]}, {"label":"transformation of", "objects":[]}];
       }
     }
     $scope.statusMessage = undefined;
