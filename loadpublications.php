@@ -40,11 +40,11 @@ function get_people() {
   {
     foreach ($rows as $row) 
     { 
-      $people[$row["id"]]=$row["name"];
-      array_push($peoplenames, $row["name"]);
+      $people[$row['id']]=$row['name'];
+      array_push($peoplenames, $row['name']);
     }
   }
-  return [$people, $peoplenames];
+  return array($people, $peoplenames);
 }
 
 function load_publications($pub_ids, $authors) {  
