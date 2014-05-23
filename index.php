@@ -162,12 +162,13 @@ else {
                   <script>
                     var people = <?php echo $names; ?>;
                     $( "#pub-author" ).autocomplete({ minLength: 2,
-                        source: function( request, response ) {
-                          var terms = request.term.split("\n");
-                          var lastTerm = terms[terms.length-1].trim();
-                          var matcher = new RegExp( $.ui.autocomplete.escapeRegex( lastTerm ), "i" );
-                          response( $.grep( people, function( item ){ return matcher.test( item ); }) );
-                        }, 
+                        source: scope[attrs.uiItems], 
+                        //   function( request, response ) {
+                        //   var terms = request.term.split("\n");
+                        //   var lastTerm = terms[terms.length-1].trim();
+                        //   var matcher = new RegExp( $.ui.autocomplete.escapeRegex( lastTerm ), "i" );
+                        //   response( $.grep( people, function( item ){ return matcher.test( item ); }) );
+                        // }, 
                         select: function( event, ui ) {
                           event.isDefaultPrevented = function() {return true;}
                           var txt = $("#pub-author").val();

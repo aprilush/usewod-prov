@@ -21,7 +21,7 @@ function make_triples($source, $relations) {
   }
 
   if ( array_key_exists('type', $source) ) {
-    if ( $source['type']='p' ) { 
+    if ( $source['type']=='p' ) { 
       if ( array_key_exists('pub', $relations) ) {
         foreach ( $relations['pub'] as $rel ) {
           if ( !empty($rel['objects']) ) {
@@ -69,7 +69,7 @@ function make_triples($source, $relations) {
           }
         }
       }
-    } else if ($source['type']='d') {
+    } else if ($source['type']=='d') {
       if (array_key_exists('pub', $relations) ) {
         foreach ( $relations['pub'] as $rel ) {
           if ( !empty($rel['objects']) ) {
@@ -79,19 +79,19 @@ function make_triples($source, $relations) {
                 $derid = uniqid("prov/");
                 array_push($triples,' usewod:'.$derid.' a  prov:Derivation ');
                 switch ($rel['label']) {
-                  case 'is mentioned in':
+                  case 'mentioned in':
                     array_push($triples,' usewod:'.$derid.' a  usewod:Mention ');
                     break;
-                  case 'is described in':
+                  case 'described in':
                     array_push($triples,' usewod:'.$derid.' a  usewod:Description ');
                     break;
-                  case 'is evaluated in':
+                  case 'evaluated in':
                     array_push($triples,' usewod:'.$derid.' a  usewod:Evaluation ');
                     break;
-                  case 'is analysed in':
+                  case 'analysed in':
                     array_push($triples,' usewod:'.$derid.' a  usewod:Analysis ');
                     break;
-                  case 'is compared in':
+                  case 'compared in':
                     array_push($triples,' usewod:'.$derid.' a  usewod:Comparison ');
                     break;
                 }
@@ -105,7 +105,32 @@ function make_triples($source, $relations) {
       if (array_key_exists('ds', $relations) ) {
         foreach ( $relations['ds'] as $rel ) {
           if ( !empty($rel['objects']) ) {
-            //TODO see what exact types of relations we support here 
+            foreach ($rel['objects'] as $object) {
+              if (array_key_exists('id', $object) ) {
+                $o = $object['id'];
+                $derid = uniqid("prov/");
+                array_push($triples,' usewod:'.$derid.' a  prov:Derivation ');
+                switch ($rel['label']) {
+                  case 'extends':
+                    array_push($triples,' usewod:'.$derid.' a  usewod:Extension ');
+                    break;
+                  case 'includes':
+                    array_push($triples,' usewod:'.$derid.' a  usewod:Inclusion ');
+                    break;
+                  case 'overlaps':
+                    array_push($triples,' usewod:'.$derid.' a  usewod:Overlap ');
+                    break;
+                  case 'transformation of':
+                    array_push($triples,' usewod:'.$derid.' a  usewod:Transformation ');
+                    break;
+                  case 'generalisation of':
+                    array_push($triples,' usewod:'.$derid.' a  usewod:Generalisation ');
+                    break;
+                }
+                array_push($triples,' usewod:'.$derid.' prov:entity <'.$s.'> ');
+                array_push($triples,' <'.$o.'> prov:qualifiedDerivation usewod:'.$derid.' ');
+              }
+            }
           }
         }
       }

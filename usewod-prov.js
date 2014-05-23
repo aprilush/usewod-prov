@@ -292,7 +292,7 @@ usewodModule.controller('prov', function($scope, $sce) {
         $scope.relationsToDs = [{"label":"mentions", "objects":[]}, {"label":"describes", "objects":[]}, {"label":"evaluates", "objects":[]}, {"label":"analyses", "objects":[]}, {"label":"compares", "objects":[]}];
       } else if (objtype == "d") {
         $scope.relationsToPub = [{"label":"mentioned in", "objects":[]}, {"label":"described in", "objects":[]}, {"label":"evaluated in", "objects":[]}, {"label":"analysed in", "objects":[]}, {"label":"compared in", "objects":[]}];
-        $scope.relationsToDs = [{"label":"extends", "objects":[]}, {"label":"includes", "objects":[]}, {"label":"overlaps", "objects":[]}, {"label":"transformation of", "objects":[]}];
+        $scope.relationsToDs = [{"label":"extends", "objects":[]}, {"label":"includes", "objects":[]}, {"label":"overlaps", "objects":[]}, {"label":"transformation of", "objects":[]}, {"label":"generalisation of", "objects":[]}];
       }
     }
     $scope.statusMessage = undefined;
