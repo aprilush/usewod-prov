@@ -21,6 +21,10 @@ usewodModule.directive('autoComplete', function($timeout) {
             terms.pop();
             terms.push(ui.item.value);
             element.val(terms.join('\n'));
+            scope.$apply( function() {
+              scope.pubAuthor = element.val(); 
+              console.log(scope.pubAuthor);
+            });
         }, 0);
       },
       focus: function( event, ui ) {
